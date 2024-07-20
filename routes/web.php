@@ -16,6 +16,7 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/edit', [CategoryController::class, 'editCategory']);
     });
 
+    
     Route::group(['prefix' => 'comment'], function() {
         Route::get('/', [CommentController::class, 'getComment']);
     });
