@@ -11,4 +11,9 @@ class CommentController extends Controller
     {
         return view('backend.comment.comment');
     }
+
+    public function editComment()
+    {
+        return view('backend.comment.editcomment');
+    }
 }
