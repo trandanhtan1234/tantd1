@@ -9,7 +9,20 @@ use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\VariantController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\IndexController as Frontend;
+use App\Http\Controllers\frontend\CheckoutController;
 
+
+// FRONTEND
+Route::get('/', [Frontend::class, 'getIndex']);
+Route::get('/about-us', [Frontend::class, 'getAboutUs']);
+Route::get('/contact', [Frontend::class, 'getContact']);
+
+Route::group(['prefix' => 'checkout'], function() {
+    Route::get('/', [CheckoutController::class, 'getCheckout']);
+});
+
+// BACKEND
 Route::get('/login', [LoginController::class, 'getLogin']);
 
 Route::group(['prefix' => 'admin'], function() {
