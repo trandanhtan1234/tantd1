@@ -11,14 +11,11 @@
 						<div class="col-md-5">
 							<div class="product-entry">
 								<div class="product-img" style="background-image: url(images/item-6.jpg);">
-
 								</div>
-
 							</div>
 						</div>
 						<div class="col-md-7">
 							<form action="product/AddCart" method="post">
-
 								<div class="desc">
 									<h3>Áo khoác nam đẹp</h3>
 									<p class="price">
@@ -30,14 +27,12 @@
 											size:
 											<a class="size">M</a>
 											<a class="size">L</a>
-
 										</p>
 									</div>
 									<div class="size-wrap">
 										<p class="size-desc">
 											Màu sắc:
 											<a class="size">đen</a>
-
 										</p>
 									</div>
 									<h4>Lựa chọn</h4>
@@ -48,7 +43,6 @@
 												<select class="form-control " name="attr[size]" id="">
 													<option value="M"> M</option>
 													<option value="L"> L</option>
-
 												</select>
 											</div>
 										</div>
@@ -57,12 +51,9 @@
 												<label>Màu sắc:</label>
 												<select class="form-control " name="attr[Màu sắc]" id="">
 													<option value="đen"> đen</option>
-
 												</select>
 											</div>
 										</div>
-
-
 									</div>
 									<div class="row row-pb-sm">
 										<div class="col-md-4">
@@ -125,8 +116,6 @@
 							<p>
 								<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product/detail/3"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -144,8 +133,6 @@
 							<p>
 								<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product/detail/2"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>

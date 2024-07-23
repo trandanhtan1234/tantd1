@@ -45,9 +45,15 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/edit', [CategoryController::class, 'editCategory']);
     });
 
-    Route::group(['prefix' => 'comment'], function() {
-        Route::get('/', [CommentController::class, 'getComment']);
-        Route::get('/edit', [CommentController::class, 'editComment']);
+    Route::group(['prefix' => 'product'], function() {
+        Route::get('/', [ProductController::class, 'getListProducts']);
+        Route::get('/add', [ProductController::class, 'getAddProduct']);
+        Route::get('/edit', [ProductController::class, 'getEditProduct']);
+    });
+
+    Route::group(['prefix' => 'variant'], function() {
+        Route::get('/add', [VariantController::class, 'getAddVariant']);
+        Route::get('/edit', [VariantController::class, 'getEditVariant']);
     });
 
     Route::group(['prefix' => 'order'], function() {
@@ -56,20 +62,14 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/processed', [OrderController::class, 'getProcessed']);
     });
 
-    Route::group(['prefix' => 'product'], function() {
-        Route::get('/', [ProductController::class, 'getListProducts']);
-        Route::get('/add', [ProductController::class, 'getAddProduct']);
-        Route::get('/edit', [ProductController::class, 'getEditProduct']);
-    });
-
     Route::group(['prefix' => 'user'], function() {
         Route::get('/', [UserController::class, 'getListUsers']);
         Route::get('/add', [UserController::class, 'getAddUser']);
         Route::get('/edit', [UserController::class, 'getEditUser']);
     });
 
-    Route::group(['prefix' => 'variant'], function() {
-        Route::get('/add', [VariantController::class, 'getAddVariant']);
-        Route::get('/edit', [VariantController::class, 'getEditVariant']);
+    Route::group(['prefix' => 'comment'], function() {
+        Route::get('/', [CommentController::class, 'getComment']);
+        Route::get('/edit', [CommentController::class, 'editComment']);
     });
 });

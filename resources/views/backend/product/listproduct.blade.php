@@ -5,7 +5,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<ol class="breadcrumb">
-			<li><a href="#"><svg class="glyph stroked home">
+			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
 			<li class="active">Danh sách sản phẩm</li>
@@ -33,9 +33,8 @@
 									<use xlink:href="#stroked-checkmark"></use>
 								</svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>
-							<a href="addproduct.html" class="btn btn-primary">Thêm sản phẩm</a>
+							<a href="{{ url('admin/product/add') }}" class="btn btn-primary">Thêm sản phẩm</a>
 							<table class="table table-bordered" style="margin-top:20px;">
-
 								<thead>
 									<tr class="bg-primary">
 										<th>ID</th>
@@ -72,8 +71,8 @@
 										</td>
 										<td>Áo Khoác Nam</td>
 										<td>
-											<a href="#" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-											<a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+											<a href="{{ url('admin/product/edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
+											<a href="{{ url('admin/product/delete') }} class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
 										</td>
 									</tr>
 									<tr>

@@ -5,7 +5,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<ol class="breadcrumb">
-			<li><a href="#"><svg class="glyph stroked home">
+			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
 			<li class="active">Đơn hàng</li>
@@ -14,7 +14,6 @@
 	<!--/.row-->
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
-
 			<div class="panel panel-primary">
 				<div class="panel-heading">Danh sách đơn đặt hàng đã xử lý</div>
 				<div class="panel-body">
@@ -59,8 +58,6 @@
 		</div>
 	</div>
 	<!--/.row-->
-
-
 </div>
 <!--end main-->
 @endsection
