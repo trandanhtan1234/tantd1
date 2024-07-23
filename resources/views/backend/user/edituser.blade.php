@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>password</label>
+                                    <label>Password</label>
                                     <input type="text" name="password" class="form-control" value="123456">
                                 </div>
                                 <div class="form-group">

@@ -113,21 +113,18 @@
 						<div class="order-list">
 							<div class="list-row d-flex justify-content-between">
 								<div class="col-md-4">SẢN PHẨM</div>
-							
 								<div class="col-md-4 offset-md-4" align='right'>TỔNG CỘNG</div>
 							</div>
 							<div class="list-row d-flex justify-content-between">
 								<div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
 								<div class="col-md-4" align='right'>x 02</div>
 								<div class="col-md-4" align='right'>₫ 720.000</div>
-							
 							</div>
 							
 							<div class="list-row d-flex justify-content-between">
 									<div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
 									<div class="col-md-4" align='right'>x 02</div>
 									<div class="col-md-4" align='right'>₫ 720.000</div>
-								
 							</div>
 							
 							<div class="list-row border-bottom-0 d-flex justify-content-between">

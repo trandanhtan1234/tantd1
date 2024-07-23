@@ -76,7 +76,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<p><a href="order-complete.html" class="btn btn-primary">Thanh toán</a></p>
+						<p><a href="{{ url('checkout/complete') }}" class="btn btn-primary">Thanh toán</a></p>
 					</div>
 				</div>
 			</div>
