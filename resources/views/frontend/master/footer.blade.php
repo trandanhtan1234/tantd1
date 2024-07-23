@@ -33,7 +33,7 @@
 						<h4>Thông tin</h4>
 						<p>
 							<ul class="colorlib-footer-links">
-								<li><a href="#">Về chúng tôi</a></li>
+								<li><a href="{{ url('about') }}">Về chúng tôi</a></li>
 								<li><a href="#">Thông tin vận chuyển</a></li>
 								<li><a href="#">Chính sách bảo mật</a></li>
 								<li><a href="#">Hỗ trợ</a></li>
