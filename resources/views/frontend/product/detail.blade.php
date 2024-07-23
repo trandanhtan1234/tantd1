@@ -12,6 +12,7 @@
 							<div class="product-entry">
 								<div class="product-img" style="background-image: url(images/item-6.jpg);">
 								</div>
+								</div>
 							</div>
 						</div>
 						<div class="col-md-7">
@@ -51,6 +52,9 @@
 												<label>Màu sắc:</label>
 												<select class="form-control " name="attr[Màu sắc]" id="">
 													<option value="đen"> đen</option>
+												</select>
+											</div>
+										</div>
 												</select>
 											</div>
 										</div>
