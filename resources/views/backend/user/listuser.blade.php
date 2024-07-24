@@ -32,7 +32,7 @@
 									<use xlink:href="#stroked-checkmark"></use>
 								</svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>
-							<a href="adduser.html" class="btn btn-primary">Thêm Thành viên</a>
+							<a href="{{ url('admin/user/add') }}" class="btn btn-primary">Thêm Thành viên</a>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>
 									<tr class="bg-primary">
