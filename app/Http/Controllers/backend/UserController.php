@@ -4,12 +4,23 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\Users\UsersRepositoryInterface;
 
 class UserController extends Controller
 {
+    protected $userRepo;
+
+    public function __construct(
+        UsersRepositoryInterface $userRepo
+    ) {
+        $this->userRepo = $userRepo;
+    }
+
     public function getListUsers()
     {
-        return view('backend.user.listuser');
+        $data['users'] = $this->userRepo->getList();
+
+        return view('backend.user.listuser', $data);
     }
 
     public function getAddUser()
@@ -17,8 +28,10 @@ class UserController extends Controller
         return view('backend.user.adduser');
     }
 
-    public function getEditUser()
+    public function getEditUser($id)
     {
-        return view('backend.user.edituser');
+        $data['user'] = $this->userRepo->getUserInfo($id);
+
+        return view('backend.user.edituser', $data);
     }
 }
