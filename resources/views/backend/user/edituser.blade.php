@@ -20,33 +20,33 @@
                             
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" name="email" class="form-control" value="admin@gmail.com">
-                                    <div class="alert alert-danger" role="alert">
+                                    <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                                    <!-- <div class="alert alert-danger" role="alert">
                                         <strong>email đã tồn tại!</strong>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Password</label>
                                     <input type="text" name="password" class="form-control" value="123456">
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label>Full name</label>
-                                    <input type="full" name="full" class="form-control" value="Nguyễn thế phúc">
+                                    <input type="full" name="full" class="form-control" value="{{ $user->full }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="address" name="address" class="form-control" value="Thường tín">
+                                    <input type="address" name="address" class="form-control" value="{{ $user->address }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="phone" name="phone" class="form-control" value="0356653300">
+                                    <input type="phone" name="phone" class="form-control" value="{{ $user->phone }}">
                                 </div>
                             
                                 <div class="form-group">
                                     <label>Level</label>
                                     <select name="level" class="form-control" value="">
-                                        <option value="1">admin</option>
-                                        <option selected value="2">user</option>
+                                        <option @if($user->level==1) selected @endif value="1">Manager</option>
+                                        <option @if($user->level==2) selected @endif value="2">Staff</option>
                                     </select>
                                 </div>
                             </div>

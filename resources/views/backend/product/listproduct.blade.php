@@ -74,7 +74,7 @@
 										<td>Áo Khoác Nam</td>
 										<td>
 											<a href="{{ url('admin/product/edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-											<a href="{{ url('admin/product/delete') }} class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+											<a href="{{ url('admin/product/delete') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
 										</td>
 									</tr>
 									<tr>

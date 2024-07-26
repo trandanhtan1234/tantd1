@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin'], function() {
     
     Route::group(['prefix' => 'category'], function() {
         Route::get('/', [CategoryController::class, 'getCategory']);
-        Route::get('/edit', [CategoryController::class, 'editCategory']);
+        Route::get('/edit/{id}', [CategoryController::class, 'editCategory']);
     });
 
     Route::group(['prefix' => 'product'], function() {
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'user'], function() {
         Route::get('/', [UserController::class, 'getListUsers']);
         Route::get('/add', [UserController::class, 'getAddUser']);
-        Route::get('/edit', [UserController::class, 'getEditUser']);
+        Route::get('/edit/{id}', [UserController::class, 'getEditUser']);
     });
 
     Route::group(['prefix' => 'comment'], function() {
