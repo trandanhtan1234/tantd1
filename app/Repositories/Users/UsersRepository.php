@@ -4,6 +4,9 @@ namespace App\Repositories\Users;
 
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Models\models\users;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Exception;
 
 class UsersRepository implements UsersRepositoryInterface
 {
@@ -19,5 +22,37 @@ class UsersRepository implements UsersRepositoryInterface
         $userInfo = users::find($id);
 
         return $userInfo;
+    }
+
+    public function addUser($params)
+    {
+        try {
+            DB::beginTransaction();
+            $user = new users();
+            $user->email = $params['email'];
+            $user->password = Hash::make($params['password']);
+            $user->full = $params['full'];
+            $user->address = $params['address'];
+            $user->phone = $params['phone'];
+            $user->level = $params['level'];
+            $user->created_at = \Carbon\Carbon::now();
+            $user->updated_at = \Carbon\Carbon::now();
+            $user->save();
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Add User Successfully'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $result = [
+                'code' => 500,
+                'msg' => 'Add User Failed'
+            ];
+            return $result;
+        }
     }
 }

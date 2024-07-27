@@ -1101,8 +1101,19 @@ h1.page-header {
 	width: 400px;
 }
 
+.position-relative {
+	position: relative;
+}
 
+.position-absolute {
+	position: absolute;
+}
 
+.far.fa-eye {
+	top: 30px;
+	right: 10px;
+	font-size: 21px;
+}
 
 
 

@@ -7,4 +7,6 @@ interface UsersRepositoryInterface
     public function getList();
 
     public function getUserInfo($id);
+
+    public function addUser($params);
 }

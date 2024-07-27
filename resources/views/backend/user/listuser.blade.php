@@ -27,11 +27,19 @@
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
+							@if (session('success'))
 							<div class="alert bg-success" role="alert">
 								<svg class="glyph stroked checkmark">
 									<use xlink:href="#stroked-checkmark"></use>
-								</svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+								</svg>{{ session('success') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>
+							@elseif (session('failed'))
+							<div class="alert bg-danger" role="alert">
+								<svg class="glyph stroked checkmark">
+									<use xlink:href="#stroked-checkmark"></use>
+								</svg>{{ session('failed') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+							</div>
+							@endif
 							<a href="{{ url('admin/user/add') }}" class="btn btn-primary">Thêm Thành viên</a>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>

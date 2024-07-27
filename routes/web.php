@@ -65,6 +65,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'user'], function() {
         Route::get('/', [UserController::class, 'getListUsers']);
         Route::get('/add', [UserController::class, 'getAddUser']);
+        Route::post('/add', [UserController::class, 'postAddUser'])->name('user.postUser');
         Route::get('/edit/{id}', [UserController::class, 'getEditUser']);
     });
 
