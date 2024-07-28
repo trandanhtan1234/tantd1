@@ -69,3 +69,8 @@
 </div>
 <!--/.main-->
 @endsection
+@section('acitve')
+<script>
+	$('.category').addClass('active');
+</script>
+@endsection

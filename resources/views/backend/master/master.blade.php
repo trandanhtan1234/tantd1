@@ -36,6 +36,7 @@
     <script src="js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     @yield('user')
+    @yield('active')
     {{--<script src="js/chart-data.js"></script>--}}
 @show
 </body>

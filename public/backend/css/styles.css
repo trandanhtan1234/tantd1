@@ -1109,8 +1109,14 @@ h1.page-header {
 	position: absolute;
 }
 
-.far.fa-eye {
+.eye-user {
 	top: 30px;
+	right: 10px;
+	font-size: 21px;
+}
+
+.eye-login {
+	top: 5px;
 	right: 10px;
 	font-size: 21px;
 }

@@ -7,3 +7,7 @@ $('.see-password').on('click', function() {
         $(this).parents('.form-group').find('.hide-password').prop('type', 'password')
     }
 });
+
+function delUser(name) {
+    return confirm('Delete User: '+name+'?');
+}
