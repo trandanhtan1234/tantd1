@@ -40,18 +40,22 @@
 									<!-- <div class="alert bg-danger" role="alert">
 										<svg class="glyph stroked cancel">
 											<use xlink:href="#stroked-cancel"></use>
-										</svg>Tên danh mục đã tồn tại!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+										</svg>Category already exists!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 									</div> -->
 								</div>
 								<button type="submit" class="btn btn-primary">Add Category</button>
 							</div>
 						</form>
 						<div class="col-md-7">
-							<!-- <div class="alert bg-success" role="alert">
-								<svg class="glyph stroked checkmark">
-									<use xlink:href="#stroked-checkmark"></use>
-								</svg> Đã thêm danh mục thành công! <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-							</div> -->
+							@if (session('success'))
+								<div class="alert bg-success" role="alert">
+									<strong>{{ session('success') }}</strong>
+								</div>
+							@endif (session('failed'))
+								<div class="alert alert-danger">
+									<strong>{{ session('failed') }}</strong>
+								</div>
+							@endif
 							<h3 style="margin: 0;"><strong>Category Orders</strong></h3>
 							<div class="vertical-menu">
 								<div class="item-menu active">Category </div>

@@ -26,6 +26,12 @@ class CategoryController extends Controller
     public function postCategory(Request $r)
     {
         $addCate = $this->cateRepo->addCategory($r);
+
+        if ($addCate['code'] == 200) {
+            return redirect('/admin/category')->with('success', $addCate['msg']);
+        } else {
+            return redirect('/admin/category')->with('failed', $addCate['msg']);
+        }
     }
 
     public function editCategory($id)
