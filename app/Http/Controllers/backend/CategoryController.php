@@ -27,7 +27,6 @@ class CategoryController extends Controller
     public function postCategory(AddCategoryRequest $r)
     {
         $addCate = $this->cateRepo->addCategory($r);
-        // https://gaigoihanoivip3.vncns.com/threads/hoa-hau-vong-1-thuy-tien-thien-than-sexy-quyen-ru.170/
 
         if ($addCate['code'] == 200) {
             return redirect('/admin/category')->with('success', $addCate['msg']);
