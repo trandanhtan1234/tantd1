@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             ['id'=> 2, 'email'=> 'zimpro@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Nguyễn Thế Vũ', 'address'=>'Bắc Giang', 'phone'=>'0356654487','level'=> 2],
             ['id'=> 3, 'email'=> 'phucnguyenthe0809@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Nguyễn Thế Phúc', 'address'=>'Huế', 'phone'=>'0352264487','level'=> 1],
             ['id'=> 4, 'email'=> 'zimpro9x@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Nguyễn Văn Công', 'address'=>'Nghệ An', 'phone'=>'0357846659','level'=> 2],
-            ['id'=> 5, 'email'=> 'trandantan1234@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Trần Danh Tân', 'address'=>'Gia Lâm', 'phone'=>'0977892214','level'=> 2],
+            ['id'=> 5, 'email'=> 'trandanhtan1234@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Trần Danh Tân', 'address'=>'Gia Lâm', 'phone'=>'0977892214','level'=> 2],
             ['id'=> 6, 'email'=> 'tantd@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Trần Duy Tân', 'address'=>'Trâu Quỳ', 'phone'=>'0977892215','level'=> 2],
             ['id'=> 7, 'email'=> 'kenwayjedward@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Edward Kenway', 'address'=>'Thanh Xuân', 'phone'=>'0977892216','level'=> 1],
             ['id'=> 8, 'email'=> 'kenwayconnor@gmail.com','password'=> bcrypt('Ffca!2ed97'), 'full'=>'Connor Kenway', 'address'=>'Thanh Miện', 'phone'=>'0977892211','level'=> 2],
