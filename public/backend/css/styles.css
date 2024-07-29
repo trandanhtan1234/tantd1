@@ -1101,8 +1101,25 @@ h1.page-header {
 	width: 400px;
 }
 
+.position-relative {
+	position: relative;
+}
 
+.position-absolute {
+	position: absolute;
+}
 
+.eye-user {
+	top: 30px;
+	right: 10px;
+	font-size: 21px;
+}
+
+.eye-login {
+	top: 5px;
+	right: 10px;
+	font-size: 21px;
+}
 
 
 

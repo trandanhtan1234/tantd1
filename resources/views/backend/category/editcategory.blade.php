@@ -108,3 +108,8 @@
 </div>
 <!--/.main-->
 @endsection
+@section('active')
+<script>
+	$('.category').addClass('active');
+</script>
+@endsection

@@ -128,3 +128,8 @@
 </div>
 <!--end main-->
 @endsection
+@section('active')
+<script>
+	$('.orders').addClass('active');
+</script>
+@endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Users\UsersRepositoryInterface;
+use App\Http\Requests\{AddUserRequest,EditUserRequest};
 
 class UserController extends Controller
 {
@@ -28,10 +29,43 @@ class UserController extends Controller
         return view('backend.user.adduser');
     }
 
+    public function postAddUser(AddUserRequest $r, $id)
+    {
+        $addUser = $this->userRepo->addUser($r);
+
+        if ($addUser['code'] == 200) {
+            return redirect('/admin/user')->with('success', $addUser['msg']);
+        } else {
+            return redirect('/admin/user')->with('failed', $addUser['msg']);
+        }
+    }
+
     public function getEditUser($id)
     {
         $data['user'] = $this->userRepo->getUserInfo($id);
 
         return view('backend.user.edituser', $data);
+    }
+
+    public function postEditUser(EditUserRequest $r, $id)
+    {
+        $user = $this->userRepo->editUser($id, $r);
+
+        if ($user['code'] == 200) {
+            return redirect('/admin/user')->with('success', $user['msg']);
+        } else {
+            return redirect('/admin/user')->with('failed', $user['msg']);
+        }
+    }
+
+    public function getDeleteUser($id)
+    {
+        $delUser = $this->userRepo->delUser($id);
+        
+        if ($delUser['code'] == 200) {
+            return redirect()->back()->with('success', $delUser['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delUser['msg']);
+        }
     }
 }

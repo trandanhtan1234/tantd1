@@ -185,3 +185,8 @@
 </div>
 <!--end main-->
 @endsection
+@section('active')
+<script>
+    $('.products').addClass('active');
+</script>
+@endsection

@@ -85,3 +85,8 @@
 </div>
 <!--end main-->
 @endsection
+@section('active')
+<script>
+	$('.overview').addClass('active');
+</script>
+@endsection

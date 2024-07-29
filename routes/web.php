@@ -13,6 +13,7 @@ use App\Http\Controllers\frontend\IndexController as Frontend;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\ProductController as Product;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Middleware\CheckLogin;
 
 
 // FRONTEND
@@ -36,8 +37,9 @@ Route::group(['prefix' => 'cart'], function() {
 
 // BACKEND
 Route::get('/login', [LoginController::class, 'getLogin']);
+Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
     Route::get('/', [IndexController::class, 'Index']);
     
     Route::group(['prefix' => 'category'], function() {
@@ -65,7 +67,10 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'user'], function() {
         Route::get('/', [UserController::class, 'getListUsers']);
         Route::get('/add', [UserController::class, 'getAddUser']);
+        Route::post('/add', [UserController::class, 'postAddUser'])->name('user.postUser');
         Route::get('/edit/{id}', [UserController::class, 'getEditUser']);
+        Route::post('/edit/{id}', [UserController::class, 'postEditUser'])->name('user.editUser');
+        Route::get('/delete/{id}', [UserController::class, 'getDeleteUser']);
     });
 
     Route::group(['prefix' => 'comment'], function() {
