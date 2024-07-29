@@ -9,4 +9,8 @@ interface CategoryRepositoryInterface
     public function getCategory($id);
 
     public function addCategory($params);
+
+    public function editCategory($params, $id);
+
+    public function delCate($id);
 }

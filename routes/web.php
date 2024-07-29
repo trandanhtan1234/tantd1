@@ -35,8 +35,9 @@ Route::group(['prefix' => 'cart'], function() {
 });
 
 // BACKEND
-Route::get('/login', [LoginController::class, 'getLogin']);
+Route::get('/login', [LoginController::class, 'getLogin'])->middleware('CheckLogout');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
+Route::get('/logout', [LoginController::class, 'getLogout']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
     Route::get('/', [IndexController::class, 'Index']);
@@ -45,6 +46,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::get('/', [CategoryController::class, 'getCategory']);
         Route::post('/', [CategoryController::class, 'postCategory'])->name('category.add');
         Route::get('/edit/{id}', [CategoryController::class, 'editCategory']);
+        Route::post('/edit/{id}', [CategoryController::class, 'postEditCategory'])->name('category.edit');
+        Route::get('/delete/{id}', [CategoryController::class, 'deleteCategory']);
     });
 
     Route::group(['prefix' => 'product'], function() {
