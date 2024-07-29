@@ -23,6 +23,11 @@ class CategoryController extends Controller
         return view('backend.category.category', $data);
     }
 
+    public function postCategory(Request $r)
+    {
+        $addCate = $this->cateRepo->addCategory($r);
+    }
+
     public function editCategory($id)
     {
         $data['list'] = $this->cateRepo->getListCategory();

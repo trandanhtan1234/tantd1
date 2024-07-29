@@ -7,4 +7,6 @@ interface CategoryRepositoryInterface
     public function getListCategory();
 
     public function getCategory($id);
+
+    public function addCategory($params);
 }

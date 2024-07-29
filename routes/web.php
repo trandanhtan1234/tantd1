@@ -13,7 +13,6 @@ use App\Http\Controllers\frontend\IndexController as Frontend;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\ProductController as Product;
 use App\Http\Controllers\frontend\CartController;
-use App\Http\Middleware\CheckLogin;
 
 
 // FRONTEND
@@ -44,6 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
     
     Route::group(['prefix' => 'category'], function() {
         Route::get('/', [CategoryController::class, 'getCategory']);
+        Route::post('/', [CategoryController::class, 'postCategory'])->name('category.add');
         Route::get('/edit/{id}', [CategoryController::class, 'editCategory']);
     });
 
