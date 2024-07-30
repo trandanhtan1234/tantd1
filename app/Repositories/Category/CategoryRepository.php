@@ -86,7 +86,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             $cate = category::find($id);
 
             // Check if there are any child categories, set its parent as theirs first
-            $checkChildren = category::where('parent', $id)->update('parent', $cate->parent);
+            category::where('parent', $id)->update('parent', $cate->parent);
             $cate->delete();
             DB::commit();
             
