@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Http\Requests\{AddCategoryRequest,EditCategoryRequest};
 
 class CategoryController extends Controller
 {
@@ -23,7 +24,7 @@ class CategoryController extends Controller
         return view('backend.category.category', $data);
     }
 
-    public function postCategory(Request $r)
+    public function postCategory(AddCategoryRequest $r)
     {
         $addCate = $this->cateRepo->addCategory($r);
 
@@ -40,5 +41,21 @@ class CategoryController extends Controller
         $data['category'] = $this->cateRepo->getCategory($id);
 
         return view('backend.category.editcategory', $data);
+    }
+
+    public function postEditCategory(EditCategoryRequest $r, $id)
+    {
+        $editCate = $this->cateRepo->editCategory($r, $id);
+        
+        if ($editCate['code'] == 200) {
+            return redirect('/admin/category')->with('success', $editCate['msg']);
+        } else {
+            return redirect('/admin/category')->with('failed', $editCate['msg']);
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $delCate = $this->cateRepo->delCate($id);
     }
 }

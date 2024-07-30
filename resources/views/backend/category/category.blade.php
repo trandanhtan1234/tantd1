@@ -25,23 +25,25 @@
 				<div class="panel-body">
 					<div class="row">
 						<form action="{{ route('category.add') }}" method="post">
+							@csrf
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="">Category Parents:</label>
 									<select class="form-control" name="parent" id="parent">
-										<option>----ROOT----</option>
+										<option value="0">----ROOT----</option>
 										{{ getCategory($category, 0, '', 0) }}
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="">Category Name <span class="color-red">*</span></label>
-									<input type="text" class="form-control" name="name" id="" placeholder="New Category Name">
-
-									<!-- <div class="alert bg-danger" role="alert">
-										<svg class="glyph stroked cancel">
-											<use xlink:href="#stroked-cancel"></use>
-										</svg>Category already exists!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-									</div> -->
+									<input type="text" class="form-control" name="name" id="" placeholder="New Category Name" value="{{ old('name') }}">
+									@if ($errors->has('name'))
+										<div class="alert bg-danger" role="alert">
+											<svg class="glyph stroked cancel">
+												<use xlink:href="#stroked-cancel"></use>
+											</svg>{{ $errors->first('name') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+										</div>
+									@endif
 								</div>
 								<button type="submit" class="btn btn-primary">Add Category</button>
 							</div>
@@ -51,7 +53,7 @@
 								<div class="alert bg-success" role="alert">
 									<strong>{{ session('success') }}</strong>
 								</div>
-							@endif (session('failed'))
+							@elseif (session('failed'))
 								<div class="alert alert-danger">
 									<strong>{{ session('failed') }}</strong>
 								</div>
@@ -77,5 +79,9 @@
 @section('acitve')
 <script>
 	$('.category').addClass('active');
+
+	function delCategory(name) {
+		return confirm('Delete Category: '+name+'?');
+	}
 </script>
 @endsection

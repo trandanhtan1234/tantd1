@@ -8,14 +8,14 @@
 			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Icons</li>
+			<li class="active">Category</li>
 		</ol>
 	</div>
 	<!--/.row-->
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý danh mục</h1>
+			<h1 class="page-header">Manage Category</h1>
 		</div>
 	</div>
 	<!--/.row-->
@@ -26,71 +26,40 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-5">
-
-							<div class="form-group">
-								<label for="">Danh mục cha:</label>
-								<select class="form-control" name="" id="">
-									<option>----ROOT----</option>
-									{{ getCategory($list, 0, '', $category->id) }}
-								</select>
+						<form action="{{ route('category.edit', ['id' => $category->id]) }}" method="post">
+							@csrf
+							<div class="col-md-5">
+								<div class="form-group">
+									<label for="">Category Parents:</label>
+									<select class="form-control" name="parent" id="">
+										<option value="0">----ROOT----</option>
+										{{ getCategory($list, 0, '', $category->parent) }}
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="">CategoryName</label>
+									<input type="text" class="form-control" name="name" id="" placeholder="Tên danh mục mới" value="{{ old('name', $category->name) }}">
+									@if ($errors->has('name'))
+										<div class="alert bg-danger" role="alert">
+											<svg class="glyph stroked cancel">
+												<use xlink:href="#stroked-cancel"></use>
+											</svg>{{ $errors->first('name') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+										</div>
+									@endif
+								</div>
+								<button type="submit" class="btn btn-primary">Edit Category</button>
 							</div>
-							<div class="form-group">
-								<label for="">Tên Danh mục</label>
-								<input type="text" class="form-control" name="name" id="" placeholder="Tên danh mục mới" value="Áo khoác nữ">
-								<!-- <div class="alert bg-danger" role="alert">
-									<svg class="glyph stroked cancel">
-										<use xlink:href="#stroked-cancel"></use>
-									</svg>Tên danh mục đã tồn tại!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-								</div> -->
-							</div>
-							<button type="submit" class="btn btn-primary">Sửa danh mục</button>
-						</div>
+						</form>
 						<div class="col-md-7">
 							<!-- <div class="alert bg-success" role="alert">
 								<svg class="glyph stroked checkmark">
 									<use xlink:href="#stroked-checkmark"></use>
 								</svg> Đã sửa danh mục thành công! <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 							</div> -->
-							<h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
+							<h3 style="margin: 0;"><strong>Category Orders</strong></h3>
 							<div class="vertical-menu">
-								<div class="item-menu active">Danh mục </div>
-								<div class="item-menu"><span>Nam</span>
-									<div class="category-fix">
-										<a class="btn-category btn-primary" href="#"><i class="fa fa-edit"></i></a>
-										<a class="btn-category btn-danger" href="#"><i class="fa fa-close"></i></a>
-
-									</div>
-								</div>
-								<div class="item-menu"><span>---|Áo khoác Nam</span>
-									<div class="category-fix">
-										<a class="btn-category btn-primary" href="#"><i class="fa fa-edit"></i></a>
-										<a class="btn-category btn-danger" href="#"><i class="fa fa-close"></i></a>
-
-									</div>
-								</div>
-								<div class="item-menu"><span>---|---|Áo khoác Nam (Dành cho việc mở rộng)</span>
-									<div class="category-fix">
-										<a class="btn-category btn-primary" href="#"><i class="fa fa-edit"></i></a>
-										<a class="btn-category btn-danger" href="#"><i class="fa fa-close"></i></a>
-
-									</div>
-								</div>
-								<div class="item-menu"><span>Nữ</span>
-									<div class="category-fix">
-										<a class="btn-category btn-primary" href="#"><i class="fa fa-edit"></i></a>
-										<a class="btn-category btn-danger" href="#"><i class="fa fa-close"></i></a>
-
-									</div>
-								</div>
-								<div class="item-menu"><span>---|Áo khoác Nữ</span>
-									<div class="category-fix">
-										<a class="btn-category btn-primary" href="#"><i class="fa fa-edit"></i></a>
-										<a class="btn-category btn-danger" href="#"><i class="fa fa-close"></i></a>
-
-									</div>
-								</div>
-
+								<div class="item-menu active">Category </div>
+								{{ showCategory($list, 0, '') }}
 							</div>
 						</div>
 					</div>
