@@ -29,3 +29,18 @@ function showCategory($category, $parent, $shift)
         }
     }
 }
+
+function checkLevel($list, $parent, $count)
+{
+    foreach ($list as $cate) {
+        if ($cate->id == $parent) {
+            $count++;
+
+            if ($cate->parent == 0) {
+                return $count;
+            }
+
+            return checkLevel($list, $cate->parent, $count);
+        }
+    }
+}
