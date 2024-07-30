@@ -38,10 +38,8 @@
 									<label for="">Category Name <span class="color-red">*</span></label>
 									<input type="text" class="form-control" name="name" id="" placeholder="New Category Name" value="{{ old('name') }}">
 									@if ($errors->has('name'))
-										<div class="alert bg-danger" role="alert">
-											<svg class="glyph stroked cancel">
-												<use xlink:href="#stroked-cancel"></use>
-											</svg>{{ $errors->first('name') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+										<div class="alert alert-danger" role="alert">
+											<strong>{{ $errors->first('name') }}</strong>
 										</div>
 									@endif
 								</div>
@@ -80,8 +78,8 @@
 <script>
 	$('.category').addClass('active');
 
-	function delCategory(name) {
-		return confirm('Delete Category: '+name+'?');
-	}
+	// function delCategory(name) {
+	// 	return confirm('Delete Category: '+name+'?');
+	// }
 </script>
 @endsection
