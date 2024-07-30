@@ -30,6 +30,15 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         try {
             DB::beginTransaction();
+            $list = category::get();
+            if (checkLevel($list, $params->parent, 1) > 3) {
+                DB::commit();
+                $result = [
+                    'code' => 413,
+                    'msg' => 'Cannot add category that is beyond level 3'
+                ];
+                return $result;
+            }
             $cate = new category();
             $cate->name = $params['name'];
             $cate->slug = Str::slug($params['name'], '-');
@@ -57,6 +66,15 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         try {
             DB::beginTransaction();
+            $list = category::get();
+            if (checkLevel($list, $params->parent, 1) > 3) {
+                DB::commit();
+                $result = [
+                    'code' => 413,
+                    'msg' => 'Cannot add category that is beyond level 3'
+                ];
+                return $result;
+            }
             $cate = category::find($id);
             $cate->name = $params['name'];
             $cate->slug = Str::slug($params['name'], '-');
@@ -86,8 +104,9 @@ class CategoryRepository implements CategoryRepositoryInterface
             $cate = category::find($id);
 
             // Check if there are any child categories, set its parent as theirs first
-            category::where('parent', $id)->update('parent', $cate->parent);
-            $cate->delete();
+            category::where('parent', $id)->update(['parent' => $cate->parent]);
+
+            category::destroy($id);
             DB::commit();
             
             $result = [
