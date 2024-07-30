@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class CategoryRepository implements CategoryRepositoryInterface
 {
     const failed_msg = 'Something went wrong, please try again later!';
+    
     public function getListCategory()
     {
         $category = category::get();
@@ -83,6 +84,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         try {
             DB::beginTransaction();
             $cate = category::find($id);
+
+            // Check if there are any child categories, set its parent as theirs first
+            category::where('parent', $id)->update('parent', $cate->parent);
             $cate->delete();
             DB::commit();
             
