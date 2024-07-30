@@ -83,6 +83,13 @@ class CategoryRepository implements CategoryRepositoryInterface
         try {
             DB::beginTransaction();
             $cate = category::find($id);
+            $checkChildren = category::where('parent', $id)->get();
+            if ($checkChildren) {
+                foreach ($checkChildren as $child) {
+                    $child->parent = $cate->parent;
+                    $child->save();
+                }
+            }
             $cate->delete();
             DB::commit();
             

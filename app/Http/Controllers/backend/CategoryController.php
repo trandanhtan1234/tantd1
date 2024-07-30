@@ -48,14 +48,20 @@ class CategoryController extends Controller
         $editCate = $this->cateRepo->editCategory($r, $id);
         
         if ($editCate['code'] == 200) {
-            return redirect('/admin/category')->with('success', $editCate['msg']);
+            return redirect()->back()->with('success', $editCate['msg']);
         } else {
-            return redirect('/admin/category')->with('failed', $editCate['msg']);
+            return redirect()->back()->with('failed', $editCate['msg']);
         }
     }
 
     public function deleteCategory($id)
     {
         $delCate = $this->cateRepo->delCate($id);
+
+        if ($delCate['code'] == 200) {
+            return redirect()->back()->with('success', $delCate['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delCate['msg']);
+        }
     }
 }

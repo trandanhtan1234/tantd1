@@ -51,11 +51,15 @@
 							</div>
 						</form>
 						<div class="col-md-7">
-							<!-- <div class="alert bg-success" role="alert">
-								<svg class="glyph stroked checkmark">
-									<use xlink:href="#stroked-checkmark"></use>
-								</svg> Đã sửa danh mục thành công! <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-							</div> -->
+							@if (session('success'))
+								<div class="alert alert-success" role="alert">
+									<strong>{{ session('success') }}</strong>
+								</div>
+							@elseif (session('failed'))
+								<div class="alert alert-danger">
+									<strong>{{ session('failed') }}</strong>
+								</div>
+							@endif
 							<h3 style="margin: 0;"><strong>Category Orders</strong></h3>
 							<div class="vertical-menu">
 								<div class="item-menu active">Category </div>
