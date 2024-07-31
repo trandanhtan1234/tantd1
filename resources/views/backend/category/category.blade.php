@@ -74,12 +74,12 @@
 </div>
 <!--/.main-->
 @endsection
-@section('acitve')
+@section('active')
 <script>
 	$('.category').addClass('active');
 
-	// function delCategory(name) {
-	// 	return confirm('Delete Category: '+name+'?');
-	// }
+	function delCategory(name) {
+		return confirm('Delete Category: '+name+'?');
+	}
 </script>
 @endsection
