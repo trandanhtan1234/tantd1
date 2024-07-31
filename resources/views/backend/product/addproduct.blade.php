@@ -39,7 +39,13 @@
                                         <label>Giá sản phẩm (Giá chung)</label>
                                         <input required type="number" name="product_price" class="form-control">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Sản phẩm có nổi bật</label>
+                                        <select name="featured" class="form-control">
+                                            <option value="0">Không</option>
+                                            <option value="1">Có</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <select required name="product_state" class="form-control">
