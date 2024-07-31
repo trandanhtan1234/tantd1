@@ -44,7 +44,13 @@
                                         <input required type="number" name="product_price" class="form-control"
                                             value="150000">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Sản phẩm có nổi bật</label>
+                                        <select name="featured" class="form-control">
+                                            <option value="0">Không</option>
+                                            <option value="1">Có</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <select required name="product_state" class="form-control">
@@ -67,72 +73,72 @@
                                 <textarea required name="info" style="width: 100%;height: 100px;">thông tin</textarea>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-body tabs">
-                    <label>Các thuộc Tính</label>
-                    <ul class="nav nav-tabs">
-                        <li class='active'><a href="#tab17" data-toggle="tab">size</a></li>
-                        <li><a href="#tab18" data-toggle="tab">Màu sắc</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade  active  in" id="tab17">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>S</th>
-                                        <th>M</th>
-                                        <th>L</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][60]"
-                                                value="60"> </td>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][61]"
-                                                value="61" checked> </td>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][64]"
-                                                value="64" checked> </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <hr>
-                        </div>
+                        <div class="col-xs-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body tabs">
+                                    <label>Các thuộc Tính</label>
+                                    <ul class="nav nav-tabs">
+                                        <li class='active'><a href="#tab17" data-toggle="tab">size</a></li>
+                                        <li><a href="#tab18" data-toggle="tab">Màu sắc</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade  active  in" id="tab17">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S</th>
+                                                        <th>M</th>
+                                                        <th>L</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][60]"
+                                                                value="60"> </td>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][61]"
+                                                                value="61" checked> </td>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][64]"
+                                                                value="64" checked> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                        </div>
 
-                        <div class="tab-pane fade  in" id="tab18">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Đỏ</th>
-                                        <th>đen</th>
-                                        <th>xám</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][62]"
-                                                value="62"> </td>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][63]"
-                                                value="63" checked> </td>
-                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][65]"
-                                                value="65"> </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <hr>
+                                        <div class="tab-pane fade  in" id="tab18">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Đỏ</th>
+                                                        <th>đen</th>
+                                                        <th>xám</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][62]"
+                                                                value="62"> </td>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][63]"
+                                                                value="63" checked> </td>
+                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][65]"
+                                                                value="65"> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <p></p>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <p></p>
-                    </label>
                 </div>
             </div>
         </div>
