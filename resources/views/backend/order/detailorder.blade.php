@@ -8,7 +8,7 @@
 			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Đơn hàng / Chi tiết đặt hàng</li>
+			<li class="active">Orders / Detail Order</li>
 		</ol>
 	</div>
 	<!--/.row-->
@@ -16,7 +16,7 @@
 		<div class="col-xs-12 col-md-12 col-lg-12">
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">Chi tiết đặt hàng</div>
+				<div class="panel-heading">Detail Order</div>
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
@@ -24,10 +24,10 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="panel panel-blue">
-											<div class="panel-heading dark-overlay">Thông tin khách hàng</div>
+											<div class="panel-heading dark-overlay">Customer Infomation</div>
 											<div class="panel-body">
 												<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : Nguyễn thế phúc</strong> <br>
-												<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: 0356653300</strong>
+												<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Phone: 0356653300</strong>
 												<br>
 												<strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : Thường tín</strong>
 											</div>
@@ -41,10 +41,10 @@
 								<thead>
 									<tr class="bg-primary">
 										<th>ID</th>
-										<th>Thông tin Sản phẩm</th>
-										<th>Số lượng</th>
-										<th>Giá sản phẩm</th>
-										<th>Thành tiền</th>
+										<th>Product Info</th>
+										<th>Quantity</th>
+										<th>Price</th>
+										<th>Amount</th>
 
 									</tr>
 								</thead>
@@ -57,8 +57,8 @@
 													<img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
 												</div>
 												<div class="col-md-8">
-													<p>Mã sản phẩm: Sp01</p>
-													<p>Tên Sản phẩm: <strong>Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</strong></p>
+													<p>Product Code: Sp01</p>
+													<p>Product Name: <strong>Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</strong></p>
 													<div class="group-color">Color:
 														<div class="product-color" style="background-color: brown;"></div>
 													</div>
@@ -101,7 +101,7 @@
 								<thead>
 									<tr>
 										<th width='70%'>
-											<h4 align='right'>Tổng Tiền :</h4>
+											<h4 align='right'>Total :</h4>
 										</th>
 										<th>
 											<h4 align='right' style="color: brown;">1.500.000 VNĐ</h4>
@@ -113,7 +113,7 @@
 								</tbody>
 							</table>
 							<div class="alert alert-primary" role="alert" align='right'>
-								<a name="" id="" class="btn btn-success" href="#" role="button">Đã xử lý</a>
+								<a name="" id="" class="btn btn-success" href="#" role="button">Approved</a>
 							</div>
 						</div>
 					</div>

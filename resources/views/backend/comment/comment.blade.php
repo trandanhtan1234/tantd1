@@ -8,19 +8,19 @@
             <li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
                         <use xlink:href="#stroked-home"></use>
                     </svg></a></li>
-            <li class="active">Quản lý bình luận</li>
+            <li class="active">Manage Comments</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Bình luận</h1>
+            <h1 class="page-header">Comments</h1>
         </div>
     </div>
     <!--/.row-->
     <div class="panel panel-default">
-        <div class="panel-heading">Bình luận cần phê duyệt</div>
+        <div class="panel-heading">Comments require approval</div>
         <div class="panel-body">
             <div class="bootstrap-table">
                 <div class="fixed-table-toolbar"></div>
@@ -29,7 +29,7 @@
                         <div class="alert bg-success" role="alert">
                             <svg class="glyph stroked checkmark">
                                 <use xlink:href="#stroked-checkmark"></use>
-                            </svg> comment đã được phê duyệt !<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                            </svg> Approved comment!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
                         </div>
                     </div>
                     <div class="fixed-table-body">
@@ -38,10 +38,10 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Sản phẩm</th>
-                                    <th>Tên</th>
+                                    <th>Product</th>
+                                    <th>Name</th>
                                     <th>Comment</th>
-                                    <th>Tuỳ chỉnh</th>
+                                    <th>Options</th>
 
                                 </tr>
                             </thead>
@@ -53,7 +53,7 @@
                                             <div class="Popovers-info">
                                                 <div class="panel panel-info product-info">
                                                     <div class="panel-heading" align='center'>
-                                                        Thông tin
+                                                        Infomation
                                                     </div>
                                                     <div class="panel-body">
                                                         <div class="row">
@@ -61,12 +61,11 @@
                                                                 <img width="100%" src="img/ao-khoac.jpg" class="thumbnail">
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <p><strong>Mã sản phẩm : SP01</strong></p>
-                                                                <p>Tên sản phẩm :Áo Khoác Bomber Nỉ Xanh Lá Cây
-                                                                    AK179</p>
-                                                                <p>Danh mục:Áo khoác nam</p>
-                                                                <p>size:xl,xxl</p>
-                                                                <div class="group-color">Màu tuỳ chọn:
+                                                                <p><strong>Product Code : SP01</strong></p>
+                                                                <p>Product Name: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
+                                                                <p>Category: Áo khoác nam</p>
+                                                                <p>Size: xl,xxl</p>
+                                                                <div class="group-color">Color Options:
                                                                     <div class="product-color" style="background-color: blueviolet;"></div>
                                                                     <div class="product-color" style="background-color: brown;"></div>
                                                                     <div class="product-color" style="background-color: darkorange;"></div>
@@ -85,11 +84,11 @@
                                     <td>Tôi muốn đặt sản phẩm này .... </td>
                                     <td>
                                         <a name="" id="" class="btn btn-success" href="#" role="button"><span class="glyphicon glyphicon-ok"
-                                                aria-hidden="true"></span> Xác nhận</a>
+                                                aria-hidden="true"></span> Confirm</a>
                                         <a name="" id="" class="btn btn-warning" href="editcomment.html" role="button"><span
-                                                class="glyphicon glyphicon-edit" aria-hidden="true"></span>Sửa</a>
+                                                class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a>
                                         <a name="" id="" class="btn btn-danger" href="#" role="button"><span class="glyphicon glyphicon-remove"
-                                                aria-hidden="true"></span>Xoá</a>
+                                                aria-hidden="true"></span>Delete</a>
 
                                     </td>
                                 </tr>
