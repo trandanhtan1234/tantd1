@@ -1,15 +1,19 @@
 <?php
 
-function getCategory($category, $parent, $shift, $active)
+function getCategory($category, $parent, $editId, $shift, $active)
 {
     foreach ($category as $row) {
         if ($row->parent == $parent) {
-            if ($row->id == $active) {
-                echo '<option selected value="'.$row->id.'">'.$shift.' '.$row->name.'</option>';
+            if ($row->id == $editId) {
+                echo '<option value="'.$row->id.'" disabled>'.$shift.' '.$row->name.'</option>';
             } else {
-                echo '<option value="'.$row->id.'">'.$shift.' '.$row->name.'</option>';
+                if ($row->id == $active) {
+                    echo '<option selected value="'.$row->id.'">'.$shift.' '.$row->name.'</option>';
+                } else {
+                    echo '<option value="'.$row->id.'">'.$shift.' '.$row->name.'</option>';
+                }
             }
-            getCategory($category,$row->id,$shift.'---|',$active);
+            getCategory($category,$row->id, $editId,$shift.'---|',$active);
         }
     }
 }
