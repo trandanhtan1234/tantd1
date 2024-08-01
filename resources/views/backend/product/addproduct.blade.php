@@ -5,21 +5,21 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Thêm sản phẩm</h1>
+            <h1 class="page-header">Add Product</h1>
         </div>
     </div>
     <!--/.row-->
     <div class="row">
         <div class="col-xs-6 col-md-12 col-lg-12">
             <div class="panel panel-primary">
-                <div class="panel-heading">Thêm sản phẩm</div>
+                <div class="panel-heading">Add Product</div>
                 <div class="panel-body">
                     <div class="row" style="margin-bottom:40px">
                         <div class="col-xs-8">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="form-group">
-                                        <label>Danh mục</label>
+                                        <label>Category</label>
                                         <select name="category" class="form-control">
                                             <option value='1' selected>Nam</option>
                                             <option value='3'>---|Áo khoác nam</option>
@@ -28,56 +28,46 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Mã sản phẩm</label>
-                                        <input required type="text" name="product_code" class="form-control">
+                                        <label>Product Name</label>
+                                        <input required type="text" name="name" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên sản phẩm</label>
-                                        <input required type="text" name="product_name" class="form-control">
+                                        <label>Price</label>
+                                        <input required type="number" name="price" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá sản phẩm (Giá chung)</label>
-                                        <input required type="number" name="product_price" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Sản phẩm có nổi bật</label>
+                                        <label>Featured Product</label>
                                         <select name="featured" class="form-control">
-                                            <option value="0">Không</option>
-                                            <option value="1">Có</option>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Trạng thái</label>
-                                        <select required name="product_state" class="form-control">
-                                            <option value="1">Còn hàng</option>
-                                            <option value="0">Hết hàng</option>
+                                        <label>State</label>
+                                        <select required name="state" class="form-control">
+                                            <option value="1">In stock</option>
+                                            <option value="0">Out of Stock</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Ảnh sản phẩm</label>
+                                        <label>Product Image</label>
                                         <input id="img" type="file" name="product_img" class="form-control hidden"
                                             onchange="changeImg(this)">
                                         <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Thông tin</label>
-                                <textarea required name="info" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-
                         </div>
                         <div class="col-xs-4">
-
                             <div class="panel panel-default">
                                 <div class="panel-body tabs">
-                                    <label>Các thuộc Tính <a href="#"><span class="glyphicon glyphicon-cog"></span>
-                                            Tuỳ chọn</a></label>
+                                    <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
+                                            Options</a></label>
                                     <ul class="nav nav-tabs">
-                                        <li class='active'><a href="#tab17" data-toggle="tab">size</a></li>
-                                        <li><a href="#tab18" data-toggle="tab">Màu sắc</a></li>
+                                        <li class='active'><a href="#tab17" data-toggle="tab">Size</a></li>
+                                        <li><a href="#tab18" data-toggle="tab">Colors</a></li>
                                         <li><a href="#tab-add" data-toggle="tab">+</a></li>
                                     </ul>
                                     <div class="tab-content">
@@ -105,20 +95,20 @@
                                             </table>
                                             <hr>
                                             <div class="form-group">
-                                                <label for="">Thêm biến thể cho thuộc tính</label>
+                                                <label for="">Add variant for attribute</label>
                                                 <input type="hidden" name="id_pro" value="17">
                                                 <input name="var_name" type="text" class="form-control"
                                                     aria-describedby="helpId" placeholder="">
-                                                <div> <button name="add_val" type="submit">Thêm</button></div>
+                                                <div> <button name="add_val" type="submit">Add</button></div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade  in" id="tab18">
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Đỏ</th>
-                                                        <th>đen</th>
-                                                        <th>xám</th>
+                                                        <th>Red</th>
+                                                        <th>Black</th>
+                                                        <th>Gray</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -134,11 +124,11 @@
                                             </table>
                                             <hr>
                                             <div class="form-group">
-                                                <label for="">Thêm biến thể cho thuộc tính</label>
+                                                <label for="">Add variant for attribute</label>
                                                 <input type="hidden" name="id_pro" value="18">
                                                 <input name="var_name" type="text" class="form-control"
                                                     aria-describedby="helpId" placeholder="">
-                                                <div> <button name="add_val" type="submit">Thêm</button></div>
+                                                <div> <button name="add_val" type="submit">Add</button></div>
 
                                             </div>
                                         </div>
@@ -147,14 +137,14 @@
                                         <div class="tab-pane fade" id="tab-add">
 
                                             <div class="form-group">
-                                                <label for="">Tên thuộc tính mới</label>
+                                                <label for="">Add New Attribute</label>
                                                 <input type="text" class="form-control" name="pro_name"
                                                     aria-describedby="helpId" placeholder="">
                                             </div>
 
                                             <button type="submit" name="add_pro" class="btn btn-success"> <span
                                                     class="glyphicon glyphicon-plus"></span>
-                                                Thêm thuộc tính</button>
+                                                Add Attribute</button>
                                         </div>
                                     </div>
                                 </div>
@@ -173,11 +163,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Miêu tả</label>
+                                    <label>Description</label>
                                     <textarea id="editor" required name="description" style="width: 100%;height: 100px;"></textarea>
                                 </div>
-                                <button class="btn btn-success" name="add-product" type="submit">Thêm sản phẩm</button>
-                                <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
+                                <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
+                                <a href="{{ url('/admin/product }}" class="btn btn-danger" type="reset">Cancel</a>
                             </div>
                         </div>
                     <div class="clearfix"></div>
