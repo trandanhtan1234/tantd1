@@ -68,3 +68,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 >>>>>>> d92fb8695ae7d25496fa5c50a8c06b3922248edd
+
+https://www.sitepoint.com/community/t/help-me-create-product-code-using-php/65163
