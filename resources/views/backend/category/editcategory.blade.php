@@ -33,7 +33,7 @@
 									<label for="">Category Parents:</label>
 									<select class="form-control" name="parent" id="">
 										<option value="0">----ROOT----</option>
-										{{ getCategory($list, 0, '', $category->parent) }}
+										{{ getCategory($list, 0, '', $category->id, $category->parent) }}
 									</select>
 								</div>
 								<div class="form-group">

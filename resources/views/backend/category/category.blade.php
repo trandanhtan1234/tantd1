@@ -31,7 +31,7 @@
 									<label for="">Category Parents:</label>
 									<select class="form-control" name="parent" id="parent">
 										<option value="0">----ROOT----</option>
-										{{ getCategory($category, 0, '', 0) }}
+										{{ getCategory($category, 0, 0, '', 0) }}
 									</select>
 								</div>
 								<div class="form-group">
