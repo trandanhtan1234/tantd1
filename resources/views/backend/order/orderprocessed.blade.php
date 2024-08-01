@@ -8,27 +8,27 @@
 			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Đơn hàng</li>
+			<li class="active">Orders</li>
 		</ol>
 	</div>
 	<!--/.row-->
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Danh sách đơn đặt hàng đã xử lý</div>
+				<div class="panel-heading">List of Approved Products</div>
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
-							<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Đơn Chưa xử lý</a>
+							<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Pending Products</a>
 							<table class="table table-bordered" style="margin-top:20px;">				
 								<thead>
 									<tr class="bg-primary">
 										<th>ID</th>
-										<th>Tên khách hàng</th>
+										<th>Customer Name</th>
 										<th>Email</th>
-										<th>Sđt</th>
-										<th>Địa chỉ</th>
-										<th>Thời gian</th>
+										<th>Phone</th>
+										<th>Address</th>
+										<th>Date</th>
 									</tr>
 								</thead>
 								<tbody>
