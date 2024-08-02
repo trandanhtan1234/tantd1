@@ -13,165 +13,155 @@
         <div class="col-xs-6 col-md-12 col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">Add Product</div>
-                <div class="panel-body">
-                    <div class="row" style="margin-bottom:40px">
-                        <div class="col-xs-8">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <div class="form-group">
-                                        <label>Category</label>
-                                        <select name="category" class="form-control">
-                                            <option value='1' selected>Nam</option>
-                                            <option value='3'>---|Áo khoác nam</option>
-                                            <option value='2'>Nữ</option>
-                                            <option value='4'>---|Áo khoác nữ</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Product Name</label>
-                                        <input required type="text" name="name" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Price</label>
-                                        <input required type="number" name="price" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Featured Product</label>
-                                        <select name="featured" class="form-control">
-                                            <option value="0">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>State</label>
-                                        <select required name="state" class="form-control">
-                                            <option value="1">In stock</option>
-                                            <option value="0">Out of Stock</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>Product Image</label>
-                                        <input id="img" type="file" name="product_img" class="form-control hidden"
-                                            onchange="changeImg(this)">
-                                        <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body tabs">
-                                    <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
-                                            Options</a></label>
-                                    <ul class="nav nav-tabs">
-                                        <li class='active'><a href="#tab17" data-toggle="tab">Size</a></li>
-                                        <li><a href="#tab18" data-toggle="tab">Colors</a></li>
-                                        <li><a href="#tab-add" data-toggle="tab">+</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade  active  in" id="tab17">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>S</th>
-                                                        <th>M</th>
-                                                        <th>L</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][60]"
-                                                                value="60"> </td>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][61]"
-                                                                value="61"> </td>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[17][64]"
-                                                                value="64"> </td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr>
-                                            <div class="form-group">
-                                                <label for="">Add variant for attribute</label>
-                                                <input type="hidden" name="id_pro" value="17">
-                                                <input name="var_name" type="text" class="form-control"
-                                                    aria-describedby="helpId" placeholder="">
-                                                <div> <button name="add_val" type="submit">Add</button></div>
-                                            </div>
+                <form action="{{ route('addProduct') }}" method="post">
+                    <div class="panel-body">
+                        <div class="row" style="margin-bottom:40px">
+                            <div class="col-xs-8">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select name="category" class="form-control">
+                                                {{ getCategory($category,0,0,'',0) }}
+                                            </select>
                                         </div>
-                                        <div class="tab-pane fade  in" id="tab18">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Red</th>
-                                                        <th>Black</th>
-                                                        <th>Gray</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][62]"
-                                                                value="62"> </td>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][63]"
-                                                                value="63"> </td>
-                                                        <td> <input class="form-check-input" type="checkbox" name="attr[18][65]"
-                                                                value="65"> </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr>
-                                            <div class="form-group">
-                                                <label for="">Add variant for attribute</label>
-                                                <input type="hidden" name="id_pro" value="18">
-                                                <input name="var_name" type="text" class="form-control"
-                                                    aria-describedby="helpId" placeholder="">
-                                                <div> <button name="add_val" type="submit">Add</button></div>
-
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Product Name</label>
+                                            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                         </div>
-
-
-                                        <div class="tab-pane fade" id="tab-add">
-
-                                            <div class="form-group">
-                                                <label for="">Add New Attribute</label>
-                                                <input type="text" class="form-control" name="pro_name"
-                                                    aria-describedby="helpId" placeholder="">
-                                            </div>
-
-                                            <button type="submit" name="add_pro" class="btn btn-success"> <span
-                                                    class="glyphicon glyphicon-plus"></span>
-                                                Add Attribute</button>
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="number" name="price" class="form-control" value="{{ old('price') }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Featured Product</label>
+                                            <select name="featured" class="form-control">
+                                                <option @if(old('featured')==0) selected @endif value="0">No</option>
+                                                <option @if(old('featured')==1) selected @endif value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select name="status" class="form-control">
+                                                <option @if(old('status')==1) selected @endif value="1">In stock</option>
+                                                <option @if(old('status')==0) selected @endif value="0">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Product Image</label>
+                                            <input id="img" type="file" name="product_img" class="form-control hidden"
+                                                onchange="changeImg(this)">
+                                            <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <p></p>
-
-                                    </label>
+                            <div class="col-xs-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-body tabs">
+                                        <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
+                                                Options</a></label>
+                                        <ul class="nav nav-tabs">
+                                            <li class='active'><a href="#tab17" data-toggle="tab">Size</a></li>
+                                            <li><a href="#tab18" data-toggle="tab">Colors</a></li>
+                                            <li><a href="#tab-add" data-toggle="tab">+</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade  active  in" id="tab17">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S</th>
+                                                            <th>M</th>
+                                                            <th>L</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][60]"
+                                                                    value="60"></td>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][61]"
+                                                                    value="61"></td>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][64]"
+                                                                    value="64"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label for="">Add variant for attribute</label>
+                                                    <input type="hidden" name="id_pro" value="17">
+                                                    <input name="var_name" type="text" class="form-control"
+                                                        aria-describedby="helpId" placeholder="">
+                                                    <div> <button name="add_val" type="submit">Add</button></div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade  in" id="tab18">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Red</th>
+                                                            <th>Black</th>
+                                                            <th>Gray</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][62]"
+                                                                    value="62"></td>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][63]"
+                                                                    value="63"></td>
+                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][65]"
+                                                                    value="65"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label for="">Add variant for attribute</label>
+                                                    <input type="hidden" name="id_pro" value="18">
+                                                    <input name="var_name" type="text" class="form-control"
+                                                        aria-describedby="helpId" placeholder="">
+                                                    <div> <button name="add_val" type="submit">Add</button></div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="tab-add">
+                                                <div class="form-group">
+                                                    <label for="">Add New Attribute</label>
+                                                    <input type="text" class="form-control" name="pro_name"
+                                                        aria-describedby="helpId" placeholder="">
+                                                </div>
+                                                <button type="submit" name="add_pro" class="btn btn-success"> <span
+                                                        class="glyphicon glyphicon-plus"></span>
+                                                    Add Attribute</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea id="editor" required name="description" style="width: 100%;height: 100px;"></textarea>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <p></p>
+                                        </label>
+                                    </div>
                                 </div>
-                                <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
-                                <a href="{{ url('/admin/product') }}" class="btn btn-danger" type="reset">Cancel</a>
                             </div>
                         </div>
-                    <div class="clearfix"></div>
-                </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="editor" name="description" style="width: 100%;height: 100px;"></textarea>
+                                    </div>
+                                    <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
+                                    <a href="{{ url('/admin/product') }}" class="btn btn-danger" type="reset">Cancel</a>
+                                </div>
+                            </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
             </div>
 
         </div>

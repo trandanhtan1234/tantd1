@@ -48,15 +48,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($list as $product)
+									@foreach ($list as $row)
 									<tr>
-										<td>{{ $product->id }}</td>
+										<td>{{ $row->id }}</td>
 										<td> 
 											<div class="row">
 												<div class="col-md-3"><img src="img/ao-khoac.jpg" alt="Áo đẹp" width="100px" class="thumbnail"></div>
 												<div class="col-md-9">
-													<p><strong>Product Code : {{ $product->code }}</strong></p>
-													<p>Product Name :{{ $product->name }}</p>
+													<p><strong>Product Code : {{ $row->code }}</strong></p>
+													<p>Product Name :{{ $row->name }}</p>
 													<p>Size:xl,xxl,</p>
 													<div class="group-color">Color:
 														<div class="product-color" style="background-color: blueviolet;"></div>
@@ -66,14 +66,14 @@
 												</div>
 											</div>
 										</td>
-										<td>500.000 VND</td>
+										<td>{{ number_format($row->price,0,'.','.') }} VND</td>
 										<td>
-											<a name="" id="" class="btn btn-success" href="#" role="button">In Stock</a>
+											<a name="" id="" class="btn btn-success" href="#" role="button">{{ productStatus($row->status) }}</a>
 										</td>
 										<td>Female Jacket</td>
 										<td>
-											<a href="{{ url('admin/product/edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-											<a href="{{ url('admin/product/delete') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+											<a href="{{ url('admin/product/edit/'.$row->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+											<a href="{{ url('admin/product/delete') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</td>
 									</tr>
 									@endforeach

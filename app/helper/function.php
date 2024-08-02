@@ -48,3 +48,12 @@ function checkLevel($list, $parent, $count)
         }
     }
 }
+
+function productStatus($status)
+{
+    if ($status == 1) {
+        return 'In stock';
+    } else {
+        return 'Out of Stock';
+    }
+}
