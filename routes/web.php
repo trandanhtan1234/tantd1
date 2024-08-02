@@ -53,7 +53,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
     Route::group(['prefix' => 'product'], function() {
         Route::get('/', [ProductController::class, 'getListProducts']);
         Route::get('/add', [ProductController::class, 'getAddProduct']);
-        Route::get('/edit', [ProductController::class, 'getEditProduct']);
+        Route::post('/add/', [ProductController::class, 'postAddProduct'])->name('addProduct');
+        Route::get('/edit/{id}', [ProductController::class, 'getEditProduct']);
+        Route::post('/edit/{id}', [ProductController::class, 'postEditProduct'])->name('editProduct');
     });
 
     Route::group(['prefix' => 'variant'], function() {

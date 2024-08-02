@@ -16,4 +16,11 @@ class ProductsRepository implements ProductsRepositoryInterface
         
         return $products;
     }
+
+    public function getProduct($id)
+    {
+        $product = product::find($id);
+
+        return $product;
+    }
 }
