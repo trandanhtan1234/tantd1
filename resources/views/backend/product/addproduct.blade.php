@@ -167,7 +167,7 @@
                                     <textarea id="editor" required name="description" style="width: 100%;height: 100px;"></textarea>
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
-                                <a href="{{ url('/admin/product }}" class="btn btn-danger" type="reset">Cancel</a>
+                                <a href="{{ url('/admin/product') }}" class="btn btn-danger" type="reset">Cancel</a>
                             </div>
                         </div>
                     <div class="clearfix"></div>

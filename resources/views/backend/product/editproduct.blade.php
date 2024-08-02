@@ -33,7 +33,7 @@
                                             value="Áo khoác nam đẹp">
                                     </div>
                                     <div class="form-group">
-                                        <label>Price</label> <a href="admin/product/edit-variant/1"><span
+                                        <label>Price</label> <a href="{{ url('admin/variant/editvariant') }}"><span
                                                 class="glyphicon glyphicon-chevron-right"></span>
                                             Price By Variants</a>
                                         <input required type="number" name="product_price" class="form-control"

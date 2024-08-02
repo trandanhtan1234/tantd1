@@ -48,14 +48,15 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach ($list as $product)
 									<tr>
-										<td>1</td>
-										<td>
+										<td>{{ $product->id }}</td>
+										<td> 
 											<div class="row">
 												<div class="col-md-3"><img src="img/ao-khoac.jpg" alt="Áo đẹp" width="100px" class="thumbnail"></div>
 												<div class="col-md-9">
-													<p><strong>Product Code : SP01</strong></p>
-													<p>Product Name :Default Shirt</p>
+													<p><strong>Product Code : {{ $product->code }}</strong></p>
+													<p>Product Name :{{ $product->name }}</p>
 													<p>Size:xl,xxl,</p>
 													<div class="group-color">Color:
 														<div class="product-color" style="background-color: blueviolet;"></div>
@@ -75,16 +76,11 @@
 											<a href="{{ url('admin/product/delete') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
 										</td>
 									</tr>
+									@endforeach
 								</tbody>
 							</table>
 							<div align='right'>
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-								</ul>
+								{{ $list->links() }}
 							</div>
 						</div>
 						<div class="clearfix"></div>
