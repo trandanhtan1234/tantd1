@@ -47,4 +47,15 @@ class ProductController extends Controller
     {
         $test = $r;
     }
+
+    public function deleteProduct($id)
+    {
+        $delPrd = $this->productRepo->deleteProduct($id);
+
+        if ($delPrd['code'] == 200) {
+            return redirect()->back()->with('success', $delPrd['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delPrd['msg']);
+        }
+    }
 }

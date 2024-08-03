@@ -23,4 +23,36 @@ class ProductsRepository implements ProductsRepositoryInterface
 
         return $product;
     }
+    public function addProduct($params)
+    {
+
+    }
+
+    public function editProduct($params, $id)
+    {
+
+    }
+
+    public function deleteProduct($id)
+    {
+        try {
+            DB::beginTransaction();
+            product::destroy($id);
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Delete Product successfully!'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $result = [
+                'code' => 500,
+                'msg' => 'Something went wrong. Please try again later!'
+            ];
+            return $result;
+        }
+    }
 }

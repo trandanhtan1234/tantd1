@@ -73,7 +73,7 @@
 										<td>Female Jacket</td>
 										<td>
 											<a href="{{ url('admin/product/edit/'.$row->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-											<a href="{{ url('admin/product/delete') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+											<a href="{{ url('admin/product/delete/'.$row->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</td>
 									</tr>
 									@endforeach
