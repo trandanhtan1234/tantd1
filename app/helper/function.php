@@ -1,6 +1,6 @@
 <?php
 
-function getCategory($category, $parent, $editId, $shift, $active)
+function getCategory($category,$parent,$editId,$shift,$active)
 {
     foreach ($category as $row) {
         if ($row->parent == $parent) {
@@ -13,12 +13,12 @@ function getCategory($category, $parent, $editId, $shift, $active)
                     echo '<option value="'.$row->id.'">'.$shift.' '.$row->name.'</option>';
                 }
             }
-            getCategory($category,$row->id, $editId,$shift.'---|',$active);
+            getCategory($category,$row->id,$editId,$shift.'---|',$active);
         }
     }
 }
 
-function showCategory($category, $parent, $shift)
+function showCategory($category,$parent,$shift)
 {
     foreach ($category as $row) {
         if ($row->parent == $parent) {
@@ -29,12 +29,12 @@ function showCategory($category, $parent, $shift)
 
                     </div>
                 </div>';
-                showCategory($category, $row->id, $shift.'---|');
+                showCategory($category,$row->id,$shift.'---|');
         }
     }
 }
 
-function checkLevel($list, $parent, $count)
+function checkLevel($list,$parent,$count)
 {
     foreach ($list as $cate) {
         if ($cate->id == $parent) {
@@ -44,7 +44,7 @@ function checkLevel($list, $parent, $count)
                 return $count;
             }
 
-            return checkLevel($list, $cate->parent, $count);
+            return checkLevel($list,$cate->parent,$count);
         }
     }
 }
@@ -56,4 +56,14 @@ function productStatus($status)
     } else {
         return 'Out of Stock';
     }
+}
+
+function attr_values($array)
+{
+    $result = [];
+    foreach ($array as $value) {
+        $attr = $value->attribute->name;
+        $result[$attr][] = $value->value;
+    }
+    return $result;
 }
