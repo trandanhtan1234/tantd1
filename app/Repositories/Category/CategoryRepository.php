@@ -56,7 +56,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
             $result = [
                 'code' => 500,
-                'msg' => 'Add Category failed!'
+                'msg' => static::failed_msg
             ];
             return $result;
         }

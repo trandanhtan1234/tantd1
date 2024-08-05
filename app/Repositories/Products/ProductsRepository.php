@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 
 class ProductsRepository implements ProductsRepositoryInterface
 {
+    const failed_msg = 'Something went wrong, please try again later!';
+
     public function getList()
     {
         $products = product::paginate(5);
@@ -25,7 +27,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     }
     public function addProduct($params)
     {
-
+        dd(123);
     }
 
     public function editProduct($params, $id)
@@ -50,7 +52,7 @@ class ProductsRepository implements ProductsRepositoryInterface
 
             $result = [
                 'code' => 500,
-                'msg' => 'Something went wrong. Please try again later!'
+                'msg' => static::failed_msg
             ];
             return $result;
         }

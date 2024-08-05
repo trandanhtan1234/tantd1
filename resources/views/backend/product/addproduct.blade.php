@@ -14,6 +14,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Add Product</div>
                 <form action="{{ route('addProduct') }}" method="post">
+                    @csrf
                     <div class="panel-body">
                         <div class="row" style="margin-bottom:40px">
                             <div class="col-xs-8">
@@ -26,12 +27,22 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Product Name</label>
+                                            <label>Product Name <span class="color-red">*</span></label>
                                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                                            @if ($errors->has('name'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
-                                            <label>Price</label>
-                                            <input type="number" name="price" class="form-control" value="{{ old('price') }}">
+                                            <label>Price <span class="color-red">*</span></label>
+                                            <input type="text" name="price" class="form-control" value="{{ old('price') }}">
+                                            @if ($errors->has('price'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $errors->first('price') }}</strong>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label>Featured Product</label>
@@ -52,7 +63,7 @@
                                         <div class="form-group">
                                             <label>Product Image</label>
                                             <input id="img" type="file" name="product_img" class="form-control hidden"
-                                                onchange="changeImg(this)">
+                                                onchange="changeImg(this)" value="{{ old('product_img') }}" accept="image/jpg">
                                             <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
                                         </div>
                                     </div>
@@ -98,7 +109,7 @@
                                                     <div> <button name="add_val" type="submit">Add</button></div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade  in" id="tab18">
+                                            <div class="tab-pane fade in" id="tab18">
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
@@ -174,5 +185,19 @@
 @section('active')
 <script>
     $('.products').addClass('active');
+
+    $('#avatar').on('click', function() {
+        $('#img').click();
+    });
+
+    function changeImg(event) {
+        if (event.files && event.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(img) {
+                var output = $('#avatar').attr('src', img.target.result);
+            }
+            reader.readAsDataURL(event.files[0]);
+        }
+    }
 </script>
 @endsection
