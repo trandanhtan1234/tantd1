@@ -13,4 +13,8 @@ interface ProductsRepositoryInterface
     public function editProduct($params, $id);
 
     public function deleteProduct($id);
+
+    public function getFeatured();
+
+    public function getNewProducts();
 }

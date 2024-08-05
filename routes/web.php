@@ -11,7 +11,7 @@ use App\Http\Controllers\backend\VariantController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\IndexController as Frontend;
 use App\Http\Controllers\frontend\CheckoutController;
-use App\Http\Controllers\frontend\ProductController as Product;
+use App\Http\Controllers\frontend\ProductController as ProductFrontend;
 use App\Http\Controllers\frontend\CartController;
 
 
@@ -26,8 +26,8 @@ Route::group(['prefix' => 'checkout'], function() {
 });
 
 Route::group(['prefix' => 'product'], function() {
-    Route::get('/', [Product::class, 'getListProducts']);
-    Route::get('/detail', [Product::class, 'getDetailProduct']);
+    Route::get('/', [ProductFrontend::class, 'getListProducts']);
+    Route::get('/detail', [ProductFrontend::class, 'getDetailProduct']);
 });
 
 Route::group(['prefix' => 'cart'], function() {

@@ -31,8 +31,13 @@
 					<div class="bootstrap-table">
 						<div class="table-responsive">
 							@if (session('success'))
-							<div class="alert alert-success" role="alert">
-								{{ session('success') }}
+							<div class="alert alert-success">
+								<strong>{{ session('success') }}</strong>
+							</div>
+							@endif
+							@if (session('failed'))
+							<div class="alert alert-success">
+								<strong>{{ session('success') }}</strong>
 							</div>
 							@endif
 							<a href="{{ url('admin/product/add') }}" class="btn btn-primary">Add New Produt</a>
@@ -64,7 +69,7 @@
 													@foreach (attr_values($row->values) as $key=>$value)
 														<div class="@if($key == 'Color') group-color @endif">{{ $key }}:
 															@foreach ($value as $name)
-															<span class="@if($key == 'Color') product-color @else product-value @endif" @if($key == 'Color') style="background-color: <?= $name ?>" @endif>{{ $key!='Color'?$name:'' }}</span>
+																<span class="@if($key == 'Color') product-color @else product-value @endif" @if($key == 'Color') style="background-color: <?= $name ?>" @endif>{{ $key!='Color'?$name:'' }}</span>
 															@endforeach
 														</div>
 													@endforeach
