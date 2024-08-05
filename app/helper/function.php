@@ -67,3 +67,15 @@ function attr_values($array)
     }
     return $result;
 }
+
+function codeName($name, $id) {
+    $prdCode = '';
+    $name = iconv('utf-8', 'ascii//TRANSLIT', $name);
+    $id = sprintf('%06d', $id);
+    $codeName = explode(' ', $name);
+    foreach ($codeName as $code) {
+        $prdCode .= strtoupper(substr($code,0,1));
+    }
+
+    return $prdCode.$id;
+}

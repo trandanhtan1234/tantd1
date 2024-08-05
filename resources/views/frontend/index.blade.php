@@ -8,7 +8,7 @@
 			<div class="col-md-6">
 				<a href="shop.html" class="f-product-1" style="background-image: url(images/item-1.jpg);">
 					<div class="desc">
-						<h2>Mẫu <br>cho <br>Nam</h2>
+						<h2>Products <br>for <br>Male</h2>
 					</div>
 				</a>
 			</div>
@@ -17,7 +17,7 @@
 					<div class="col-md-6">
 						<a href="" class="f-product-2" style="background-image: url(images/item-2.jpg);">
 							<div class="desc">
-								<h2> <br>Váy <br> Mới</h2>
+								<h2> <br>New <br> Dress</h2>
 							</div>
 						</a>
 					</div>
@@ -31,7 +31,7 @@
 					<div class="col-md-12">
 						<a href="" class="f-product-2" style="background-image: url(images/item-3.jpg);">
 							<div class="desc">
-								<h2>Giầy <br>cho <br>Nam</h2>
+								<h2>Shoes <br>for <br>Male</h2>
 							</div>
 						</a>
 					</div>
@@ -60,10 +60,9 @@
 							</div>
 						</div>
 						<div class="text-rights">
-							<h3 class="title">Dặt hàng hôm nay,nhận ngay khuyến mãi!</h3>
-							<p>Đã có hơn 1000 đơn hàng được gửi đi ở khắp quốc gia.</p>
-							<p><a href="shop.html" class="btn btn-primary">Mua ngay</a> <a href="#" class="btn btn-primary btn-outline">Đọc
-									thêm</a></p>
+							<h3 class="title">Order now to get voucher!</h3>
+							<p>There have been 1000 orders around the world.</p>
+							<p><a href="shop.html" class="btn btn-primary">Buy now</a> <a href="#" class="btn btn-primary btn-outline">Read more</a></p>
 						</div>
 					</div>
 				</div>
@@ -76,21 +75,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
-				<h2><span>Sản phẩm Nổi bật</span></h2>
-				<p>Đây là những sản phẩm được ưa chuộng nhất năm 2019</p>
+				<h2><span>Featured Products</span></h2>
+				<p>Favourite Products in 2024</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3 text-center">
 				<div class="product-entry">
 					<div class="product-img" style="background-image: url(images/item-9.jpg);">
-
 						<div class="cart">
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -127,8 +123,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -146,8 +140,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -163,23 +155,19 @@
 <div class="colorlib-shop">
 	<div class="container">
 		<div class="row">
-			
 			<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
-				<h2><span>Sản phẩm mới</span></h2>
-				<p>Đây là những sản phẩm mới của năm năm 2019</p>
+				<h2><span>New Products</span></h2>
+				<p>Newest Products in 2024</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3 text-center">
 				<div class="product-entry">
 					<div class="product-img" style="background-image: url(images/item-9.jpg);">
-
 						<div class="cart">
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -197,8 +185,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -216,8 +202,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -235,8 +219,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -254,8 +236,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -290,8 +270,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>
@@ -309,8 +287,6 @@
 							<p>
 								<span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
 								<span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
-
-
 							</p>
 						</div>
 					</div>

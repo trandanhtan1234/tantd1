@@ -14,17 +14,13 @@ class ProductController extends Controller
     protected $cateRepo;
 
     protected $productRepo;
-    
-    protected $attrRepo;
 
     public function __construct(
         CategoryRepositoryInterface $cateRepo,
-        ProductsRepositoryInterface $productRepo,
-        AttributeRepositoryInterface $attrRepo
+        ProductsRepositoryInterface $productRepo
     ) {
         $this->cateRepo = $cateRepo;
         $this->productRepo = $productRepo;
-        $this->attrRepo = $attrRepo;
     }
 
     public function getListProducts()
@@ -49,6 +45,14 @@ class ProductController extends Controller
         } else {
             dd(22);
         }
+
+        $addPrd = $this->productRepo->addProduct($r);
+
+        if ($addPrd['code'] == 200) {
+            return redirect('admin/product')->with('success', $addPrd['msg']);
+        } else {
+            return redirect('admin/product')->with('failed', $addPrd['msg']);
+        }
     }
 
     public function getEditProduct($id)
@@ -61,7 +65,7 @@ class ProductController extends Controller
 
     public function postEditProduct(Request $r, $id)
     {
-        $test = $r;
+        $editPrd = $this->productRepo->editProduct($params, $id);
     }
 
     public function deleteProduct($id)
