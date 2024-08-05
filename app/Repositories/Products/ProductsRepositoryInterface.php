@@ -7,6 +7,8 @@ interface ProductsRepositoryInterface
     public function getList();
 
     public function getProduct($id);
+    
+    public function getAttributes();
 
     public function addProduct($params);
 

@@ -33,19 +33,13 @@ class ProductController extends Controller
     public function getAddProduct()
     {
         $data['category'] = $this->cateRepo->getListCategory();
+        $data['attributes'] = $this->productRepo->getAttributes();
 
         return view('backend.product.addproduct', $data);
     }
 
     public function postAddProduct(AddProductRequest $r)
     {
-        dd($r->all());
-        if ($r->hasFile('product_img')) {
-            dd(11);
-        } else {
-            dd(22);
-        }
-
         $addPrd = $this->productRepo->addProduct($r);
 
         if ($addPrd['code'] == 200) {
@@ -65,7 +59,7 @@ class ProductController extends Controller
 
     public function postEditProduct(Request $r, $id)
     {
-        $editPrd = $this->productRepo->editProduct($params, $id);
+        $editPrd = $this->productRepo->editProduct($r, $id);
     }
 
     public function deleteProduct($id)
