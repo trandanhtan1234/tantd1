@@ -4,7 +4,7 @@ namespace App\Repositories\Products;
 
 use App\Repositories\Products\ProductsRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-use App\Models\models\{product,attributes};
+use App\Models\models\{product,attributes,variants};
 use Exception;
 use Illuminate\Support\Str;
 
@@ -70,6 +70,24 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->created_at = \Carbon\Carbon::now();
             $product->updated_at = \Carbon\Carbon::now();
             $product->save();
+
+            // Values Products
+            $arr = [];
+            foreach ($params['attr'] as $value) {
+                foreach ($value as $item) {
+                    $arr[] = $item;
+                }
+            }
+            $product->values()->attach($arr);
+
+            // Variants
+            $variants = getCombinations($params['attr']);
+            foreach ($variants as $var) {
+                $variant = new variants();
+                $variant->product_id = $product->id;
+                $variant->save();
+                $variant->values()->attach($var);
+            }
             DB::commit();
 
             $result = [

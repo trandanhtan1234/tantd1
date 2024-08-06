@@ -56,7 +56,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::post('/add/', [ProductController::class, 'postAddProduct'])->name('addProduct');
         Route::get('/edit/{id}', [ProductController::class, 'getEditProduct']);
         Route::post('/edit/{id}', [ProductController::class, 'postEditProduct'])->name('editProduct');
-        Route::get('delete/{id}', [ProductController::class, 'deleteProduct']);
+        Route::get('/delete/{id}', [ProductController::class, 'deleteProduct']);
+
+        Route::post('/add-value', [ProductController::class, 'addValue'])->name('addValue');
     });
 
     Route::group(['prefix' => 'variant'], function() {
