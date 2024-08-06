@@ -58,12 +58,16 @@
                                                 <option @if(old('status')==0) selected @endif value="0">Out of Stock</option>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control">
+                                        </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label>Product Image</label>
-                                            <input id="img" type="file" name="product_img" class="form-control hidden"
-                                                onchange="changeImg(this)" value="{{ old('product_img') }}" accept="image/jpg">
+                                            <input id="img" type="file" name="img" class="form-control hidden"
+                                                onchange="changeImg(this)" value="{{ old('img') }}" accept="image/jpg">
                                             <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
                                         </div>
                                     </div>
@@ -76,12 +80,12 @@
                                                 Options</a></label>
                                         <ul class="nav nav-tabs">
                                             @php
-                                            $i = 0;
+                                                $i = 0;
                                             @endphp
                                             @foreach ($attributes as $attr)
-                                            <li @if ($i==0) class="active" @endif><a href="#tab{{ $attr->id }}" data-toggle="tab">{{ $attr->name }}</a></li>
+                                                <li @if ($i==0) class="active" @endif><a href="#tab{{ $attr->id }}" data-toggle="tab">{{ $attr->name }}</a></li>
                                             @php
-                                            $i=1;
+                                                $i=1;
                                             @endphp
                                             @endforeach
                                             <li><a href="#tab-add" data-toggle="tab">+</a></li>
@@ -93,20 +97,16 @@
                                                     <thead>
                                                         <tr>
                                                             @foreach ($attr->values as $item)
-                                                            <th><label for="{{ $item->value }}">{{ $item->value }}</label></th>
+                                                                <th><label for="{{ $item->value }}">{{ $item->value }}</label></th>
                                                             @endforeach
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             @foreach ($attr->values as $item)
-                                                            <td><input class="form-check-input" type="checkbox" id="{{ $item->value }}" name="attr[{{ $attr->id }}][]"
+                                                                <td><input class="form-check-input" type="checkbox" id="{{ $item->value }}" name="attr[{{ $attr->id }}][]"
                                                                     value="{{ $item->id }}"></td>
                                                             @endforeach
-                                                            <!-- <td><input class="form-check-input" type="checkbox" name="attr[17][61]"
-                                                                    value="61"></td>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][64]"
-                                                                    value="64"></td> -->
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -123,35 +123,6 @@
                                             $i=2;
                                             @endphp
                                             @endforeach
-                                            <!-- <div class="tab-pane fade in" id="tab18">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Red</th>
-                                                            <th>Black</th>
-                                                            <th>Gray</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][62]"
-                                                                    value="62"></td>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][63]"
-                                                                    value="63"></td>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[18][65]"
-                                                                    value="65"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <hr>
-                                                <div class="form-group">
-                                                    <label for="">Add variant for attribute</label>
-                                                    <input type="hidden" name="id_pro" value="18">
-                                                    <input name="var_name" type="text" class="form-control"
-                                                        aria-describedby="helpId" placeholder="">
-                                                    <div> <button name="add_val" type="submit">Add</button></div>
-                                                </div>
-                                            </div> -->
                                             <div class="tab-pane fade" id="tab-add">
                                                 <div class="form-group">
                                                     <label for="">Add New Attribute</label>

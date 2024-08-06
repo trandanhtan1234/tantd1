@@ -78,7 +78,7 @@
 										</td>
 										<td>{{ number_format($row->price,0,'.','.') }} VND</td>
 										<td>
-											<a name="" id="" class="btn btn-{{ $row->status==1?'success':'danger' }}" href="#" role="button">{{ productStatus($row->status) }}</a>
+											<p class="btn btn-{{ $row->status==1?'success':'danger' }}">{{ productStatus($row->status) }}</p>
 										</td>
 										<td>{{ $row->category->name }}</td>
 										<td>
