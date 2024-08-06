@@ -59,10 +59,10 @@
 										<td> 
 											<div class="row">
 												@php
-													$img = '../../base//img/'.$row->img;
+													$img = $row->img;
 													$no_img = '../../base/img/no-img.jpg';
 												@endphp
-												<div class="col-md-3"><img src="{{ file_exists(public_path('/base'.$img))?$img:$no_img }}" alt="Áo đẹp" width="100px" class="thumbnail"></div>
+												<div class="col-md-3"><img src="{{ file_exists(public_path('/'.$img))?'../../'.$img:$no_img }}" alt="{{ $row->name }}" width="100px" class="thumbnail"></div>
 												<div class="col-md-9">
 													<p><strong>Product Code : {{ $row->code }}</strong></p>
 													<p>Product Name :{{ $row->name }}</p>

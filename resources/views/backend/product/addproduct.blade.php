@@ -13,7 +13,7 @@
         <div class="col-xs-6 col-md-12 col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">Add Product</div>
-                <form action="{{ route('addProduct') }}" method="post">
+                <form action="{{ route('addProduct') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
                         <div class="row" style="margin-bottom:40px">
@@ -75,28 +75,38 @@
                                         <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
                                                 Options</a></label>
                                         <ul class="nav nav-tabs">
-                                            <li class='active'><a href="#tab17" data-toggle="tab">Size</a></li>
-                                            <li><a href="#tab18" data-toggle="tab">Colors</a></li>
+                                            @php
+                                            $i = 0;
+                                            @endphp
+                                            @foreach ($attributes as $attr)
+                                            <li @if ($i==0) class="active" @endif><a href="#tab{{ $attr->id }}" data-toggle="tab">{{ $attr->name }}</a></li>
+                                            @php
+                                            $i=1;
+                                            @endphp
+                                            @endforeach
                                             <li><a href="#tab-add" data-toggle="tab">+</a></li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade  active  in" id="tab17">
+                                            @foreach ($attributes as $attr)
+                                            <div class="tab-pane fade @if($i==1) active @endif in" id="tab{{ $attr->id }}">
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>S</th>
-                                                            <th>M</th>
-                                                            <th>L</th>
+                                                            @foreach ($attr->values as $item)
+                                                            <th><label for="{{ $item->value }}">{{ $item->value }}</label></th>
+                                                            @endforeach
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][60]"
-                                                                    value="60"></td>
-                                                            <td><input class="form-check-input" type="checkbox" name="attr[17][61]"
+                                                            @foreach ($attr->values as $item)
+                                                            <td><input class="form-check-input" type="checkbox" id="{{ $item->value }}" name="attr[{{ $attr->id }}][]"
+                                                                    value="{{ $item->id }}"></td>
+                                                            @endforeach
+                                                            <!-- <td><input class="form-check-input" type="checkbox" name="attr[17][61]"
                                                                     value="61"></td>
                                                             <td><input class="form-check-input" type="checkbox" name="attr[17][64]"
-                                                                    value="64"></td>
+                                                                    value="64"></td> -->
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -109,7 +119,11 @@
                                                     <div> <button name="add_val" type="submit">Add</button></div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade in" id="tab18">
+                                            @php
+                                            $i=2;
+                                            @endphp
+                                            @endforeach
+                                            <!-- <div class="tab-pane fade in" id="tab18">
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
@@ -137,7 +151,7 @@
                                                         aria-describedby="helpId" placeholder="">
                                                     <div> <button name="add_val" type="submit">Add</button></div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="tab-pane fade" id="tab-add">
                                                 <div class="form-group">
                                                     <label for="">Add New Attribute</label>

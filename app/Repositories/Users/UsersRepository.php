@@ -65,6 +65,7 @@ class UsersRepository implements UsersRepositoryInterface
             $user->address = $params['address'];
             $user->phone = $params['phone'];
             $user->level = $params['level'];
+            $user->updated_at = \Carbon\Carbon::now();
             $user->save();
             DB::commit();
 

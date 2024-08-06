@@ -4,7 +4,7 @@ namespace App\Repositories\Products;
 
 use App\Repositories\Products\ProductsRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-use App\Models\models\product;
+use App\Models\models\{product,attributes};
 use Exception;
 use Illuminate\Support\Str;
 
@@ -25,13 +25,22 @@ class ProductsRepository implements ProductsRepositoryInterface
 
         return $product;
     }
+
+    public function getAttributes()
+    {
+        $attributes = attributes::get();
+
+        return $attributes;
+    }
+
     public function addProduct($params)
     {
         try {
             DB::beginTransaction();
             // Save Product
+            $latestId = product::orderBy('id', 'DESC')->first()->id;
             $product = new product();
-            // $product->code = Str::slug($params['name'], '-');
+            $product->code = codeName($params['name'], $latestId+1);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
@@ -43,18 +52,22 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $letters = substr($params['name'],0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
-                if (!is_dir($path)) {
-                    mkdir($path);
-                }
-                if ($params['product_img'] != 'no-img.jpg') {
-                    unlink('backend/img/'.$path.'/'.$params['product_img']);
-                }
+                // if (!is_dir($path)) {
+                //     mkdir($path);
+                // }
+                // if ($params['product_img'] != 'no-img.jpg') {
+                //     unlink('backend/img/'.$path.'/'.$params['product_img']);
+                // }
                 $file = $params['product_img'];
-                $fileName = Str::slug($params['name'], '-').'-'.$file->getClientOriginalExtension();
+                $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
-                $product->img = $fileName;
+                $product->img = $path.'/'.$fileName;
+            } else {
+                $product->img = 'no-img.jpg';
             }
-            $product->category->id = $params['category_id'];
+            $product->category_id = $params['category'];
+            $product->created_at = \Carbon\Carbon::now();
+            $product->updated_at = \Carbon\Carbon::now();
             $product->save();
             DB::commit();
 
@@ -62,6 +75,7 @@ class ProductsRepository implements ProductsRepositoryInterface
                 'code' => 200,
                 'msg' => 'Add Product Successfully!'
             ];
+            return $result;
         } catch (Exception $e) {
             DB::rollback();
 
@@ -90,18 +104,22 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $letters = substr($params['name'],0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
-                if (!is_dir($path)) {
-                    mkdir($path);
-                }
+                // if (!is_dir($path)) {
+                //     mkdir($path);
+                // }
                 if ($product->img != 'no-img.jpg') {
                     unlink('backend/img/'.$path.'/'.$params['product_img']);
                 }
                 $file = $params['product_img'];
                 $fileName = Str::slug($params['name'], '-').'-'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
-                $product->img = $fileName;
+                $product->img = $path.'/'.$fileName;
+            } else {
+                $product->img = 'no-img.jpg';
             }
-            $product->category_id = $params['id'];
+            $product->category_id = $params['category'];
+            $product->updated_at = \Carbon\Carbon::now();
+            $product->save();
             DB::commit();
 
             $result = [
