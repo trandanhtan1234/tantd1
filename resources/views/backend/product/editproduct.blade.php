@@ -27,15 +27,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Product Name</label>
-                                            <input required type="text" name="product_name" class="form-control"
-                                                value="{{ $product->name }}">
+                                            <input required type="text" name="name" class="form-control"
+                                                value="{{ old('name', $product->name) }}">
                                         </div>
                                         <div class="form-group">
                                             <label>Price</label> <a href="{{ url('admin/variant/editvariant') }}"><span
                                                     class="glyphicon glyphicon-chevron-right"></span>
                                                 Price By Variants</a>
-                                            <input required type="number" name="product_price" class="form-control"
-                                                value="{{ number_format($product->price,0,'.','.' }}">
+                                            <input required type="number" name="price" class="form-control"
+                                                value="{{ old('price', $product->price) }}">
                                         </div>
                                         <div class="form-group">
                                             <label>Featured</label>
@@ -46,16 +46,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <select required name="product_state" class="form-control">
+                                            <select required name="state" class="form-control">
                                                 <option @if($product->status==0) selected @endif value="1">In Stock</option>
                                                 <option @if($product->status==1) selected @endif value="0">Out of Stock</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="text" name="quantity" value="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label>Product Image</label>
-                                            <input id="img" type="file" name="product_img" class="form-control hidden"
+                                            <input id="img" type="file" name="img" class="form-control hidden"
                                                 onchange="changeImg(this)">
                                             @php
                                                 $img = 'img/'.$product->img;

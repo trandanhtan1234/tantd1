@@ -46,19 +46,20 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->price = $params['price'];
             $product->featured = $params['featured'];
             $product->status = $params['status'];
+            $product->quantity = $params['quantity'];
             $product->description = $params['description'];
             // img
-            if ($params->hasFile('product_img')) {
+            if ($params->hasFile('img')) {
                 $letters = substr($params['name'],0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
                 // if (!is_dir($path)) {
                 //     mkdir($path);
                 // }
-                // if ($params['product_img'] != 'no-img.jpg') {
-                //     unlink('backend/img/'.$path.'/'.$params['product_img']);
+                // if ($params['img'] != 'no-img.jpg') {
+                //     unlink('backend/img/'.$path.'/'.$params['img']);
                 // }
-                $file = $params['product_img'];
+                $file = $params['img'];
                 $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
                 $product->img = $path.'/'.$fileName;
@@ -98,9 +99,10 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->price = $params['price'];
             $product->featured = $params['featured'];
             $product->status = $params['status'];
+            $product->quantity = $params['quantity'];
             $product->description = $params['description'];
             // img
-            if ($params->hasFile('product_img')) {
+            if ($params->hasFile('img')) {
                 $letters = substr($params['name'],0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
@@ -108,9 +110,9 @@ class ProductsRepository implements ProductsRepositoryInterface
                 //     mkdir($path);
                 // }
                 if ($product->img != 'no-img.jpg') {
-                    unlink('backend/img/'.$path.'/'.$params['product_img']);
+                    unlink('backend/img/'.$path.'/'.$params['img']);
                 }
-                $file = $params['product_img'];
+                $file = $params['img'];
                 $fileName = Str::slug($params['name'], '-').'-'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
                 $product->img = $path.'/'.$fileName;
