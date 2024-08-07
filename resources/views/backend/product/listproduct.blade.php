@@ -66,6 +66,7 @@
 												<div class="col-md-9">
 													<p><strong>Product Code : {{ $row->code }}</strong></p>
 													<p>Product Name :{{ $row->name }}</p>
+													<p>Quantity: {{ $row->quantity }}</p>
 													@foreach (attr_values($row->values) as $key=>$value)
 														<div class="@if($key == 'Color') group-color @endif">{{ $key }}:
 															@foreach ($value as $name)

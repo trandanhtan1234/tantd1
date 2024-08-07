@@ -117,3 +117,17 @@ function noSpecialCharacters() {
         "D"
     ];
 }
+
+function getCombinations($array) {
+    $result = [[]];
+    foreach ($array as $property => $property_values) {
+        $tmp = [];
+        foreach ($result as $item) {
+            foreach ($property_values as $value) {
+                $tmp[] = array_merge($item, [$property => $value]);
+            }
+        }
+        $result = $tmp;
+    }
+    return $result;
+}

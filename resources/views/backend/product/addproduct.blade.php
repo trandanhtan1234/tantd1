@@ -112,11 +112,14 @@
                                                 </table>
                                                 <hr>
                                                 <div class="form-group">
-                                                    <label for="">Add variant for attribute</label>
-                                                    <input type="hidden" name="id_pro" value="17">
-                                                    <input name="var_name" type="text" class="form-control"
-                                                        aria-describedby="helpId" placeholder="">
-                                                    <div> <button name="add_val" type="submit">Add</button></div>
+                                                    <form action="{{ route('addValue') }}" method="post">
+                                                        @csrf
+                                                        <label>Add value for attribute</label>
+                                                        <input type="hidden" name="id_attr" value="{{ $attr->id }}">
+                                                        <input name="value_name" type="text" class="form-control"
+                                                            aria-describedby="helpId" placeholder="Enter value">
+                                                        <button class="margin-attr" name="add_val" type="submit">Add</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             @php

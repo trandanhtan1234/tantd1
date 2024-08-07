@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Products\ProductsRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Attributes\AttributeRepositoryInterface;
-use App\Http\Requests\AddProductRequest;
+use App\Http\Requests\{AddProductRequest,AddValueRequest};
 
 class ProductController extends Controller
 {
@@ -71,5 +71,10 @@ class ProductController extends Controller
         } else {
             return redirect()->back()->with('failed', $delPrd['msg']);
         }
+    }
+
+    public function addValue(AddValueRequest $r)
+    {
+        dd($r->all());
     }
 }
