@@ -16,6 +16,10 @@ interface ProductsRepositoryInterface
 
     public function deleteProduct($id);
 
+    public function addAttr($params);
+
+    public function addValue($params);
+
     public function getFeatured();
 
     public function getNewProducts();

@@ -4,7 +4,7 @@ namespace App\Repositories\Products;
 
 use App\Repositories\Products\ProductsRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-use App\Models\models\{product,attributes,variants};
+use App\Models\models\{product,attributes,values,variants};
 use Exception;
 use Illuminate\Support\Str;
 
@@ -53,12 +53,6 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $letters = substr($params['name'],0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
-                // if (!is_dir($path)) {
-                //     mkdir($path);
-                // }
-                // if ($params['img'] != 'no-img.jpg') {
-                //     unlink('backend/img/'.$path.'/'.$params['img']);
-                // }
                 $file = $params['img'];
                 $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
@@ -111,7 +105,7 @@ class ProductsRepository implements ProductsRepositoryInterface
         try {
             DB::beginTransaction();
             $product = product::find($id);
-            // $product->code
+            $product->code = codeName($params['name'], $id);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
@@ -146,6 +140,51 @@ class ProductsRepository implements ProductsRepositoryInterface
                 'code' => 200,
                 'msg' => 'Edit Product Successfully!'
             ];
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $result = [
+                'code' => 500,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function addAttr($params)
+    {
+        try {
+            DB::beginTransaction();
+            $attr = new attributes();
+            $attr->name = $params['attr_name'];
+            $attr->save();
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Add Attribute Successfully!'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 200,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function addValue($params)
+    {
+        try {
+            DB::beginTransaction();
+            $value = new values();
+            $value->value = $params['value_name'];
+            $value->attr_id = $params['attr_id'];
+            $value->save();
+            DB::commit();
         } catch (Exception $e) {
             DB::rollback();
 

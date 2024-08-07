@@ -78,6 +78,26 @@
                                     <div class="panel-body tabs">
                                         <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
                                                 Options</a></label>
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                <strong>{{ session('success') }}</strong>
+                                            </div>
+                                        @endif
+                                        @if (session('failed'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ session('failed') }}</strong>
+                                            </div>
+                                        @endif
+                                        @if ($errors->has('attr_name'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $errors->first('attr_name') }}</strong>
+                                            </div>
+                                        @endif
+                                        @if ($errors->has('value_name'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $errors->first('value_name') }}</strong>
+                                            </div>
+                                        @endif
                                         <ul class="nav nav-tabs">
                                             @php
                                                 $i = 0;
@@ -115,7 +135,7 @@
                                                     <form action="{{ route('addValue') }}" method="post">
                                                         @csrf
                                                         <label>Add value for attribute</label>
-                                                        <input type="hidden" name="id_attr" value="{{ $attr->id }}">
+                                                        <input type="hidden" name="attr_id" value="{{ $attr->id }}">
                                                         <input name="value_name" type="text" class="form-control"
                                                             aria-describedby="helpId" placeholder="Enter value">
                                                         <button class="margin-attr" name="add_val" type="submit">Add</button>
@@ -127,14 +147,17 @@
                                             @endphp
                                             @endforeach
                                             <div class="tab-pane fade" id="tab-add">
-                                                <div class="form-group">
-                                                    <label for="">Add New Attribute</label>
-                                                    <input type="text" class="form-control" name="pro_name"
-                                                        aria-describedby="helpId" placeholder="">
-                                                </div>
-                                                <button type="submit" name="add_pro" class="btn btn-success"> <span
-                                                        class="glyphicon glyphicon-plus"></span>
-                                                    Add Attribute</button>
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="">Add New Attribute</label>
+                                                        <input type="text" class="form-control" name="attr_name"
+                                                            aria-describedby="helpId" placeholder="">
+                                                    </div>
+                                                    <button type="submit" name="add_pro" class="btn btn-success"> <span
+                                                            class="glyphicon glyphicon-plus"></span>
+                                                        Add Attribute</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
