@@ -9,6 +9,8 @@ class values extends Model
 {
     use HasFactory;
     protected $table = 'values';
+
+    public $timestamps = false;
     
     public function product()
     {

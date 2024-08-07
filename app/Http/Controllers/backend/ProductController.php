@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Products\ProductsRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Attributes\AttributeRepositoryInterface;
-use App\Http\Requests\{AddProductRequest,AddValueRequest};
+use App\Http\Requests\{AddProductRequest,EditProductRequest,AddAttributeRequest,AddValueRequest};
 
 class ProductController extends Controller
 {
@@ -57,9 +57,15 @@ class ProductController extends Controller
         return view('backend.product.editproduct', $data);
     }
 
-    public function postEditProduct(Request $r, $id)
+    public function postEditProduct(EditProductRequest $r, $id)
     {
         $editPrd = $this->productRepo->editProduct($r, $id);
+
+        if ($editPrd['code'] == 200) {
+            return redirect('admin/product')->with('success', $editPrd['msg']);
+        } else {
+            return redirect('admin/product')->with('failed', $editPrd['msg']);
+        }
     }
 
     public function deleteProduct($id)
@@ -73,8 +79,29 @@ class ProductController extends Controller
         }
     }
 
+    public function addAttribute(AddAttributeRequest $r)
+    {
+        dd($r->all());
+
+        $addAttr = $this->productRepo->addAttr($r);
+
+        if ($addAttr['code'] == 200) {
+            return redirect()->back()->with('success', $addAttr['msg']);
+        } else {
+            return redirect()->back()->with('failed', $addAttr['msg']);
+        }
+    }
+
     public function addValue(AddValueRequest $r)
     {
         dd($r->all());
+
+        $addValue = $this->productRepo->addValue($r);
+
+        if ($addValue['code'] == 200) {
+            return redirect()->back()->with('success', $addValue['msg']);
+        } else {
+            return redirect()->back()->with('success', $addValue['msg']);
+        }
     }
 }
