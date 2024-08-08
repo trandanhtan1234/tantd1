@@ -8,27 +8,30 @@
 			<li><a href="#"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Danh mục/Thuộc tính/Sửa giá trị của tính</li>
+			<li class="active">Menu/Attribute/Edit Attribute's Name</li>
 		</ol>
 	</div>
 	<!--/.row-->
-
-
 	<!--/.row-->
 	<div class="row col-md-offset-3 ">
 		<div class="col-md-6">	
 		<div class="panel panel-blue">
-			<div class="panel-heading dark-overlay">Sửa giá trị của tính</div>
+			<div class="panel-heading dark-overlay">Edit Attribute's Value</div>
 			<div class="panel-body">
-				<div class="form-group">
-					<label for="">Tên giá trị của thuộc tính</label>
-					<input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-			
-				</div>
-				<div  align="right"><button class="btn btn-success" type="submit">Sửa</button></div>
+				<form action="{{ route('') }}" method="post">
+					<div class="form-group">
+						<label>Value Name <span class="color-red">*</span></label>
+						<input type="text" name="value_name" class="form-control" value="{{ old('value_name') }}" placeholder="Enter Value Name" aria-describedby="helpId">
+						@if ($error->has('value_name'))
+							<div class="alert alert-danger">
+								<strong>{{ $errors->first('value_name') }}</strong>
+							</div>
+						@endif
+					</div>
+					<div align="right"><button class="btn btn-success" type="submit">Edit</button></div>
+				</form>
 			</div>
 		</div>
-										
 		</div>
 		<!--/.col-->
 	</div>

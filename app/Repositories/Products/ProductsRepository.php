@@ -232,4 +232,100 @@ class ProductsRepository implements ProductsRepositoryInterface
         
         return $products;
     }
+
+    public function getAttribute($id)
+    {
+        $attr = attributes::find($id);
+
+        return $attr;
+    }
+
+    public function editAttr($params, $id)
+    {
+        try {
+            DB::beginTransaction();
+            // code here
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Edit Attribute Successfully!'
+            ];
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 500,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function deleteAttribute($id)
+    {
+        try {
+            DB::beginTransaction();
+            attributes::destroy($id);
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Delete Attribute Successfully!'
+            ];
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 500,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function deleteValue($id)
+    {
+        try {
+            DB::beginTransaction();
+            values::destroy($id);
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Delete Value Successfully!'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 500,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function editValue($params, $id)
+    {
+        try {
+            DB::beginTransaction();
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Edit Attribute\'s Value Successfully!'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 200,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
 }

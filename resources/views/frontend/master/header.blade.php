@@ -9,18 +9,18 @@
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
-								<li class="active"><a href="{{ url('') }}">Trang chủ</a></li>
+								<li class="active"><a href="{{ url('') }}">Index</a></li>
 								<li class="has-dropdown">
-									<a href="{{ url('product') }}">Sản phẩm</a>
+									<a href="{{ url('product') }}">Products</a>
 									<ul class="dropdown">
-										<li><a href="{{ url('cart') }}">Giỏ hàng</a></li>
-										<li><a href="{{ url('checkout') }}">Thanh toán</a></li>
+										<li><a href="{{ url('cart') }}">Cart</a></li>
+										<li><a href="{{ url('checkout') }}">Checkout</a></li>
 
 									</ul>
 								</li>
-								<li><a href="{{ url('about') }}">Giới thiệu</a></li>
-								<li><a href="{{ url('contact') }}">Liên hệ</a></li>
-								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Giỏ hàng [0]</a></li>
+								<li><a href="{{ url('about') }}">About Us</a></li>
+								<li><a href="{{ url('contact') }}">Contact</a></li>
+								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Contact [0]</a></li>
 							</ul>
 						</div>
 					</div>
@@ -39,8 +39,8 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
-											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
+											<p class="category"><span>Professional Designs</span></p>
+											<p><a href="#" class="btn btn-primary">Connect with us</a></p>
 										</div>
 									</div>
 								</div>
@@ -56,8 +56,8 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
-											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
+											<p class="category"><span>Professional Designs</span></p>
+											<p><a href="#" class="btn btn-primary">Connect with us</a></p>
 										</div>
 									</div>
 								</div>
@@ -73,8 +73,8 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
-											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
+											<p class="category"><span>Professional Designs</span></p>
+											<p><a href="#" class="btn btn-primary">Connect with us</a></p>
 										</div>
 									</div>
 								</div>
@@ -84,3 +84,5 @@
 				</ul>
 			</div>
 		</aside>
+	</div>
+</div>

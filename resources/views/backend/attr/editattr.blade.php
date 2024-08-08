@@ -8,24 +8,24 @@
 			<li><a href="#"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Danh mục/Thuộc tính/Sửa thuộc tính</li>
+			<li class="active">Menu/Attributes/Edit Attribute</li>
 		</ol>
 	</div>
 	<!--/.row-->
-
-
 	<!--/.row-->
 	<div class="row col-md-offset-3 ">
 		<div class="col-md-6">	
 		<div class="panel panel-blue">
-			<div class="panel-heading dark-overlay">Sửa thuộc tính</div>
+			<div class="panel-heading dark-overlay">Edit Attribute</div>
 			<div class="panel-body">
-				<div class="form-group">
-					<label for="">Tên Thuộc tính</label>
-					<input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-			
-				</div>
-				<div  align="right"><button class="btn btn-success" type="submit">Sửa</button></div>
+				<form action="" method="post">
+					@csrf
+					<div class="form-group">
+						<label>Attribute Name <span class="color-red">*</span></label>
+						<input type="text" name="attr_name" id="" value="{{ old('attr_name', $attr->name) }}" class="form-control" placeholder="Enter Attribute Name" aria-describedby="helpId">
+					</div>
+					<div align="right"><button class="btn btn-success" type="submit">Edit</button></div>
+				</form>
 			</div>
 		</div>
 						

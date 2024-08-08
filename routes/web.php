@@ -58,8 +58,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::post('/edit/{id}', [ProductController::class, 'postEditProduct'])->name('editProduct');
         Route::get('/delete/{id}', [ProductController::class, 'deleteProduct']);
 
+        Route::get('/attr', [ProductController::class, 'detailAttr']);
         Route::post('/add-attr', [ProductController::class, 'addAttribute'])->name('addAttr');
+        Route::get('/edit-attr/{id}', [ProductController::class, 'editAttribute']);
+        Route::post('/edit-attr/{id}', [ProductController::class, 'postEditAttribute']);
+        Route::get('/delete-attr/{id}', [ProductController::class, 'deleteAttribute']);
+
         Route::post('/add-value', [ProductController::class, 'addValue'])->name('addValue');
+        Route::get('/edit-value/{id}', [ProductController::class, 'editValue']);
+        Route::get('/delete-value/{id}', [ProductController::class, 'deleteValue']);
     });
 
     Route::group(['prefix' => 'variant'], function() {
