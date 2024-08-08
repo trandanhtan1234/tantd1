@@ -8,14 +8,14 @@
 			<li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use>
 					</svg></a></li>
-			<li class="active">Tổng quan</li>
+			<li class="active">Overview</li>
 		</ol>
 	</div>
 	<!--/.row-->
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Tổng quan</h1>
+			<h1 class="page-header">Overview</h1>
 		</div>
 	</div>
 	<!--/.row-->
@@ -28,7 +28,7 @@
 					</div>
 					<div class="col-sm-9 col-lg-8 widget-right">
 						<div class="large">8.000.000 đ</div>
-						<div class="text-muted">Doanh thu tháng 7</div>
+						<div class="text-muted">Monthly Revenue: July</div>
 					</div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="col-sm-9 col-lg-7 widget-right">
 						<div class="large">52</div>
-						<div class="text-muted">Tương tác</div>
+						<div class="text-muted">Interact</div>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-sm-9 col-lg-7 widget-right">
 						<div class="large">24</div>
-						<div class="text-muted">Số đơn hàng</div>
+						<div class="text-muted">Orders</div>
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Biểu đồ doanh thu</div>
+				<div class="panel-heading">Income Statements</div>
 				<div class="panel-body">
 					<div class="canvas-wrapper">
 						<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>

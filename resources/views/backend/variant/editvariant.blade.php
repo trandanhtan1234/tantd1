@@ -8,14 +8,14 @@
             <li><a href="{{ url('admin') }}"><svg class="glyph stroked home">
                         <use xlink:href="#stroked-home"></use>
                     </svg></a></li>
-            <li class="active">Biến thể</li>
+            <li class="active">Variants</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Biến thể</h1>
+            <h1 class="page-header">Variants</h1>
         </div>
     </div>
     <!--/.row-->
@@ -24,38 +24,36 @@
             <form method="post">
                 <input type="hidden" name="_token" value="KTjVdSmjodG50U3AnVzVNpAycR5qb4qVtB4NUURJ">
                 <div class="panel-heading" align='center'>
-                    Giá cho từng biến thể sản phẩm : Áo khoác nam đẹp (AN01)
+                    Price for each variant of product: Armor level 3 (AN01)
                 </div>
                 <div class="panel-body" align='center'>
                     <table class="panel-body">
                         <thead>
                             <tr>
-                                <th width='33%'>Biến thể</th>
-                                <th width='33%'>Giá (có thể trống)</th>
-                                <th width='33%'>Tuỳ chọn</th>
+                                <th width='33%'>Variant</th>
+                                <th width='33%'>Price (Nullable)</th>
+                                <th width='33%'>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td scope="row">
-                                    size : M,
-                                    Màu sắc : đen,
+                                    Size : M,
+                                    Color : Black,
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input name="" class="form-control" placeholder="Giá cho biến thể" value="100000">
+                                        <input name="var_name" class="form-control" placeholder="Variant Price" value="100000">
                                     </div>
                                 </td>
                                 <td>
-                                    <a id="" class="btn btn-warning" href="admin/product/delete-variant/1" role="button">Xoá</a>
-
+                                    <a class="btn btn-warning" href="admin/product/delete-variant/1" role="button">Delete</a>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td scope="row">
-                                    size : L,
-                                    Màu sắc : đen,
+                                    Size : L,
+                                    Color : Black,
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -63,25 +61,17 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a id="" class="btn btn-warning" href="admin/product/delete-variant/2" role="button">Xoá</a>
-
+                                    <a id="" class="btn btn-warning" href="admin/product/delete-variant/2" role="button">Delete</a>
                                 </td>
-
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
-                <div align='right'><button class="btn btn-success" type="submit"> Cập nhật </button> <a class="btn btn-warning"
-                        href="admin/product" role="button">Bỏ qua</a></div>
+                <div align='right'><button class="btn btn-success" type="submit"> Update </button> <a class="btn btn-warning"
+                        href="admin/product" role="button">Ignore</a></div>
             </form>
         </div>
     </div>
-
-
-
-
-
 </div>
 <!--/.main-->
 @endsection

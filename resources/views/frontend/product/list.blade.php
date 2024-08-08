@@ -249,17 +249,16 @@
 								<div class="panel panel-default">
 									<div class="panel-heading" role="tab" id="headingOne">
 										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#menu2" aria-expanded="true" aria-controls="collapseOne">Quần
-												Áo Nữ
+											<a data-toggle="collapse" data-parent="#accordion" href="#menu2" aria-expanded="true" aria-controls="collapseOne">Female Fashion
 											</a>
 										</h4>
 									</div>
 									<div id="menu2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 										<div class="panel-body">
 											<ul>
-												<li><a href="#">Áo Sơ mi Nữ</a></li>
+												<li><a href="#">Female t-shirt</a></li>
 												<li><a href="#">Áo thun Nữ</a></li>
-												<li><a href="#">Áo Khoác Nữ</a></li>
+												<li><a href="#">Female Jacket</a></li>
 											</ul>
 										</div>
 									</div>
@@ -268,12 +267,12 @@
 						</div>
 					</div>
 					<div class="side">
-						<h2>Khoảng giá</h2>
+						<h2>Price</h2>
 						<form method="post" class="colorlib-form-2">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="guests">Từ:</label>
+										<label for="guests">From:</label>
 										<div class="form-field">
 											<i class="icon icon-arrow-down3"></i>
 											<select name="start" id="people" class="form-control">
@@ -288,7 +287,7 @@
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="guests">Đến:</label>
+										<label for="guests">To:</label>
 										<div class="form-field">
 											<i class="icon icon-arrow-down3"></i>
 											<select name="end" id="people" class="form-control">
@@ -302,31 +301,31 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
+							<button type="submit" style="width: 100%;border: none;height: 40px;">Search</button>
 						</form>
 					</div>
 					<div class="side">
-						<h2>Màu sắc</h2>
+						<h2>Color</h2>
 						<div class="size-wrap">
 							<p class="size-desc">
-								<a href="#" class="attr">Đỏ</a>
-								<a href="#" class="attr">Xanh</a>
-								<a href="#" class="attr">Đen</a>
-								<a href="#" class="attr">Trắng</a>
+								<a href="#" class="attr">Red</a>
+								<a href="#" class="attr">Blue</a>
+								<a href="#" class="attr">Black</a>
+								<a href="#" class="attr">White</a>
 
 							</p>
 						</div>
 					</div>
 					<div class="side">
-						<h2>Kích thước</h2>
+						<h2>Size</h2>
 						<div class="size-wrap">
 							<p class="size-desc">
-								<a href="#" class="attr">xs</a>
-								<a href="#" class="attr">s</a>
-								<a href="#" class="attr">m</a>
-								<a href="#" class="attr">l</a>
-								<a href="#" class="attr">xl</a>
-								<a href="#" class="attr">xxl</a>
+								<a href="#" class="attr">XS</a>
+								<a href="#" class="attr">S</a>
+								<a href="#" class="attr">M</a>
+								<a href="#" class="attr">L</a>
+								<a href="#" class="attr">XL</a>
+								<a href="#" class="attr">XXL</a>
 							</p>
 						</div>
 					</div>

@@ -18,29 +18,29 @@
 						<div class="col-md-7">
 							<form action="product/AddCart" method="post">
 								<div class="desc">
-									<h3>Áo khoác nam đẹp</h3>
+									<h3>Special t-shirt vip pro</h3>
 									<p class="price">
 										<span>150,000</span>
 									</p>
-									<p>thông tin</p>
+									<p>Information</p>
 									<div class="size-wrap">
 										<p class="size-desc">
-											size:
+											Size:
 											<a class="size">M</a>
 											<a class="size">L</a>
 										</p>
 									</div>
 									<div class="size-wrap">
 										<p class="size-desc">
-											Màu sắc:
-											<a class="size">đen</a>
+											Color:
+											<a class="size">Black</a>
 										</p>
 									</div>
-									<h4>Lựa chọn</h4>
+									<h4>Options</h4>
 									<div class="row">
 										<div class="col-md-3">
 											<div class="form-group">
-												<label>size:</label>
+												<label>Size:</label>
 												<select class="form-control " name="attr[size]" id="">
 													<option value="M"> M</option>
 													<option value="L"> L</option>
@@ -49,12 +49,9 @@
 										</div>
 										<div class="col-md-3">
 											<div class="form-group">
-												<label>Màu sắc:</label>
-												<select class="form-control " name="attr[Màu sắc]" id="">
-													<option value="đen"> đen</option>
-												</select>
-											</div>
-										</div>
+												<label>Color:</label>
+												<select class="form-control " name="attr[color]" id="">
+													<option value="0"> Black</option>
 												</select>
 											</div>
 										</div>
@@ -77,7 +74,7 @@
 										</div>
 									</div>
 									<input type="hidden" name="id_product" value="1">
-									<p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ hàng</button></p>
+									<p><button class="btn btn-primary btn-addtocart" type="submit"> Add To Cart</button></p>
 								</div>
 							</form>
 						</div>
@@ -90,11 +87,11 @@
 				<div class="row">
 					<div class="col-md-12 tabulation">
 						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#description">Mô tả</a></li>
+							<li class="active"><a data-toggle="tab" href="#description">Description</a></li>
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
-								Đây là sản phẩm đẹp
+								Benjamin Church is no brother of mine. No more than the Redcoats or their idiot King. I expected naïveté, but this. The Templars do not fight for the crown. We seek the same as you, boy. Freedom. Justice. Independence
 							</div>
 						</div>
 					</div>

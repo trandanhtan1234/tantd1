@@ -6,11 +6,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
-				<h3>Thôn tin liên hệ</h3>
+				<h3>Contact Details</h3>
 				<div class="row contact-info-wrap">
 					<div class="col-md-3">
-						<p><span><i class="icon-location"></i></span> Số nhà B8A ngõ 18 đường Võ Văn Dũng - Hoàng Cầu - Đống Đa - Hà
-							Nội</p>
+						<p><span><i class="icon-location"></i></span> B8A - 18 Vo Van Dung - Hoang Cau - Dong da - Ha Noi</p>
 					</div>
 					<div class="col-md-3">
 						<p><span><i class="icon-phone3"></i></span> <a href="tel://123456789">+ 123 456 789</a></p>
@@ -25,11 +24,11 @@
 			</div>
 			<div class="col-md-10 col-md-offset-1">
 				<div class="contact-wrap">
-					<h3>Liên hệ</h3>
+					<h3>Contact</h3>
 					<form action="#">
 						<div class="row form-group">
 							<div class="col-md-12 padding-bottom">
-								<label for="fname">Họ & Tên</label>
+								<label for="fname">Full Name</label>
 								<input type="text" id="fname" class="form-control" placeholder="Your firstname">
 							</div>
 						</div>
@@ -43,19 +42,19 @@
 
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label for="subject">Chủ đề</label>
-								<input type="text" id="subject" class="form-control" placeholder="Nhập chủ đề">
+								<label for="subject">Subject</label>
+								<input type="text" id="subject" class="form-control" placeholder="Enter Subject">
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label for="message">Lời nhắn</label>
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Nói gì đó cho chúng tôi"></textarea>
+								<label for="message">Message</label>
+								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Tell us something"></textarea>
 							</div>
 						</div>
 						<div class="form-group text-center">
-							<input type="submit" value="Gửi liên hệ" class="btn btn-primary">
+							<button type="submit" class="btn btn-primary">Send</button>
 						</div>
 					</form>
 				</div>

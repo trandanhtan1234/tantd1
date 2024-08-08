@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Products\ProductsRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Attributes\AttributeRepositoryInterface;
-use App\Http\Requests\{AddProductRequest,EditProductRequest,AddAttributeRequest,AddValueRequest};
+use App\Http\Requests\{AddProductRequest,EditProductRequest,AddAttributeRequest,EditAttributeRequest,AddValueRequest,EditValueRequest};
 
 class ProductController extends Controller
 {
@@ -78,6 +78,13 @@ class ProductController extends Controller
             return redirect()->back()->with('failed', $delPrd['msg']);
         }
     }
+    
+    public function detailAttr()
+    {
+        $data['attributes'] = $this->productRepo->getAttributes();
+
+        return view('backend.attr.attr', $data);
+    }
 
     public function addAttribute(AddAttributeRequest $r)
     {
@@ -92,6 +99,20 @@ class ProductController extends Controller
         }
     }
 
+    public function editAttribute($id)
+    {
+        $data['attr'] = $this->productRepo->getAttribute($id);
+
+        return view('backend.attr.editattr', $data);
+    }
+
+    public function postEditAttribute(EditAttributeRequest $r, $id)
+    {
+        dd($r->all());
+
+        $editAttr = $this->productRepo->editAttr($r, $id);
+    }
+
     public function addValue(AddValueRequest $r)
     {
         dd($r->all());
@@ -102,6 +123,39 @@ class ProductController extends Controller
             return redirect()->back()->with('success', $addValue['msg']);
         } else {
             return redirect()->back()->with('success', $addValue['msg']);
+        }
+    }
+
+    public function deleteAttribute($id)
+    {
+        $delAttr = $this->productRepo->deleteAttribute($id);
+
+        if ($delAttr['code'] == 200) {
+            return redirect()->back()->with('success', $delAttr['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delAttr['msg']);
+        }
+    }
+
+    public function deleteValue($id)
+    {
+        $delVal = $this->productRepo->deleteValue($id);
+
+        if ($delVal['code'] == 200) {
+            return redirect()->back()->with('success', $delVal['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delVal['msg']);
+        }
+    }
+
+    public function editValue(EditValueRequest $r, $id)
+    {
+        $editValue = $this->productRepo->editValue($r, $id);
+
+        if ($editValue['code'] == 200) {
+            return redirect('admin/product/detailAttr')->with('success', $editValue['msg']);
+        } else {
+            return redirect('admin/product/detailAttr')->with('failed', $editValue['msg']);
         }
     }
 }

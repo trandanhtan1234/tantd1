@@ -20,6 +20,16 @@ interface ProductsRepositoryInterface
 
     public function addValue($params);
 
+    public function getAttribute($id);
+
+    public function editAttr($params, $id);
+
+    public function deleteAttribute($id);
+
+    public function deleteValue($id);
+
+    public function editValue($params, $id);
+
     public function getFeatured();
 
     public function getNewProducts();
