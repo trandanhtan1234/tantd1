@@ -76,7 +76,7 @@
                             <div class="col-xs-4">
                                 <div class="panel panel-default">
                                     <div class="panel-body tabs">
-                                        <label>Attributes <a href="#"><span class="glyphicon glyphicon-cog"></span>
+                                        <label>Attributes <a href="{{ url('admin/product/attr') }}"><span class="glyphicon glyphicon-cog"></span>
                                                 Options</a></label>
                                         @if (session('success'))
                                             <div class="alert alert-success">
@@ -96,6 +96,11 @@
                                         @if ($errors->has('value_name'))
                                             <div class="alert alert-danger">
                                                 <strong>{{ $errors->first('value_name') }}</strong>
+                                            </div>
+                                        @endif
+                                        @if ($errors->has('attr'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $errors->first('attr') }}</strong>
                                             </div>
                                         @endif
                                         <ul class="nav nav-tabs">
@@ -132,22 +137,23 @@
                                                 </table>
                                                 <hr>
                                                 <div class="form-group">
-                                                    <form action="{{ route('addValue') }}" method="post">
+                                                    <form></form>
+                                                    <form action="{{ route('addVal') }}" method="post">
                                                         @csrf
                                                         <label>Add value for attribute</label>
                                                         <input type="hidden" name="attr_id" value="{{ $attr->id }}">
-                                                        <input name="value_name" type="text" class="form-control"
+                                                        <input name="value_name" type="text" value="{{ old('value_name') }}" class="form-control"
                                                             aria-describedby="helpId" placeholder="Enter value">
                                                         <button class="margin-attr" name="add_val" type="submit">Add</button>
                                                     </form>
                                                 </div>
                                             </div>
-                                            @php
-                                            $i=2;
-                                            @endphp
+                                                @php
+                                                    $i=2;
+                                                @endphp
                                             @endforeach
                                             <div class="tab-pane fade" id="tab-add">
-                                                <form action="" method="post">
+                                                <form action="{{ route('addAttr') }}" method="post">
                                                     @csrf
                                                     <div class="form-group">
                                                         <label for="">Add New Attribute</label>
@@ -171,16 +177,16 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea id="editor" name="description" style="width: 100%;height: 100px;"></textarea>
-                                    </div>
-                                    <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
-                                    <a href="{{ url('/admin/product') }}" class="btn btn-danger" type="reset">Cancel</a>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea id="editor" name="description" style="width: 100%;height: 100px;">{{ old('description') }}</textarea>
                                 </div>
+                                <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
+                                <a href="{{ url('/admin/product') }}" class="btn btn-danger" type="reset">Cancel</a>
                             </div>
+                        </div>
                         <div class="clearfix"></div>
                     </div>
                 </form>
@@ -194,6 +200,10 @@
 <!--end main-->
 @endsection
 @section('active')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'editor' );
+</script>
 <script>
     $('.products').addClass('active');
 

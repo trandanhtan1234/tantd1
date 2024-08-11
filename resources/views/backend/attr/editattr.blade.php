@@ -18,7 +18,7 @@
 		<div class="panel panel-blue">
 			<div class="panel-heading dark-overlay">Edit Attribute</div>
 			<div class="panel-body">
-				<form action="" method="post">
+				<form action="{{ route('editAttr', ['id' => $attr->id]) }}" method="post">
 					@csrf
 					<div class="form-group">
 						<label>Attribute Name <span class="color-red">*</span></label>

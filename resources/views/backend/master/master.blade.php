@@ -32,13 +32,13 @@
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <!-- <script src="js/easypiechart.js"></script>
     <script src="js/easypiechart-data.js"></script> -->
     <script src="js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     @yield('user')
     @yield('active')
-    {{--<script src="js/chart-data.js"></script>--}}
 @show
 </body>
 

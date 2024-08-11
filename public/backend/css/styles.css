@@ -1061,6 +1061,12 @@ h1.page-header {
 {
 	display: flex;
 }
+.display-flex {
+	display: flex;
+}
+.justify-between {
+	justify-content: space-between;
+}
 .product-color
 {
 	width: 20px;
@@ -1127,5 +1133,16 @@ h1.page-header {
 	padding: 0 5px;
 }
 
+.popup-add-value {
+	margin: 0 auto;
+	top: 80px;
+	left: 0;
+	right: 0;
+	width: 226px;
+}
+
+.variant-table tr td {
+	padding: 5px 10px 5px 0;
+}
 
 

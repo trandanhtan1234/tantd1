@@ -10,6 +10,8 @@ class attributes extends Model
     use HasFactory;
     protected $table = 'attributes';
 
+    public $timestamps = false;
+
     public function values()
     {
         return $this->hasMany('App\Models\models\values', 'attr_id', 'id');

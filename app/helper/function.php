@@ -80,6 +80,11 @@ function codeName($name, $id) {
     return $prdCode.$id;
 }
 
+function convertCharacters($name) {
+    $name = str_replace(unicode(), noSpecialCharacters(), $name);
+    return $name;
+}
+
 function unicode() {
     return [
         "à","á","ạ","ả","ã","â","ầ","ấ","ậ","ẩ","ẫ","ă","ằ","ắ","ặ","ẳ","ẵ",
@@ -130,4 +135,23 @@ function getCombinations($array) {
         $result = $tmp;
     }
     return $result;
+}
+
+function checkValue($products, $valId) {
+    foreach ($products->values as $val) {
+        if ($val->id == $valId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function valueAttr($values) {
+    $array = [];
+    foreach ($values as $value) {
+        $attr = $value->attribute->name;
+        $array[$attr][] = $value->value;
+    }
+    
+    return $array;
 }

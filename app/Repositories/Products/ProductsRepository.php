@@ -45,12 +45,13 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
             $product->featured = $params['featured'];
-            $product->status = $params['status'];
+            $product->status = ($params['quantity']>0||$params['quantity']!=''?$params['status']:0);
             $product->quantity = $params['quantity'];
             $product->description = $params['description'];
             // img
             if ($params->hasFile('img')) {
-                $letters = substr($params['name'],0,2);
+                $name = convertCharacters($params['name']);
+                $letters = substr($name,0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
                 $file = $params['img'];
@@ -79,13 +80,16 @@ class ProductsRepository implements ProductsRepositoryInterface
             foreach ($variants as $var) {
                 $variant = new variants();
                 $variant->product_id = $product->id;
+                $variant->price = $params['price'];
                 $variant->save();
                 $variant->values()->attach($var);
             }
+            $prdId = $product->id;
             DB::commit();
 
             $result = [
                 'code' => 200,
+                'prdId' => $prdId,
                 'msg' => 'Add Product Successfully!'
             ];
             return $result;
@@ -110,36 +114,52 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
             $product->featured = $params['featured'];
-            $product->status = $params['status'];
+            $product->status = ($params['quantity']>0||$params['quantity']!=''?$params['status']:0);
             $product->quantity = $params['quantity'];
             $product->description = $params['description'];
             // img
             if ($params->hasFile('img')) {
-                $letters = substr($params['name'],0,2);
+                $name = convertCharacters($params['name']);
+                $letters = substr($name,0,2);
                 $folder = str_split($letters);
                 $path = 'base/img/'.$folder[0].'/'.$folder[1];
-                // if (!is_dir($path)) {
-                //     mkdir($path);
-                // }
-                if ($product->img != 'no-img.jpg') {
-                    unlink('backend/img/'.$path.'/'.$params['img']);
+                if ($product->img != 'no-img.jpg' && file_exists($product->img)) {
+                    unlink($product->img);
                 }
                 $file = $params['img'];
-                $fileName = Str::slug($params['name'], '-').'-'.$file->getClientOriginalExtension();
+                $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
                 $file->move($path,$fileName);
                 $product->img = $path.'/'.$fileName;
-            } else {
-                $product->img = 'no-img.jpg';
             }
             $product->category_id = $params['category'];
             $product->updated_at = \Carbon\Carbon::now();
             $product->save();
+
+            // Values Products
+            $arr = [];
+            foreach ($params['attr'] as $value) {
+                foreach ($value as $item) {
+                    $arr[] = $item;
+                }
+            }
+            $product->values()->attach($arr);
+
+            // Variants
+            $variants = getCombinations($params['attr']);
+            foreach ($variants as $var) {
+                $variant = new variants();
+                $variant->product_id = $product->id;
+                $variant->save();
+                $variant->values()->attach($var);
+            }
+            $prdId = $product->id;
             DB::commit();
 
             $result = [
                 'code' => 200,
                 'msg' => 'Edit Product Successfully!'
             ];
+            return $result;
         } catch (Exception $e) {
             DB::rollback();
 
@@ -169,7 +189,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             DB::rollBack();
 
             $result = [
-                'code' => 200,
+                'code' => 500,
                 'msg' => static::failed_msg
             ];
             return $result;
@@ -185,6 +205,12 @@ class ProductsRepository implements ProductsRepositoryInterface
             $value->attr_id = $params['attr_id'];
             $value->save();
             DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Add Value Successfully!'
+            ];
+            return $result;
         } catch (Exception $e) {
             DB::rollback();
 
@@ -221,12 +247,12 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function getFeatured()
     {
-        $featured = product::where('featured',1)->where('status',1)->orderBy('id','DESC')->get();
+        $featured = product::where('featured',1)->where('status',1)->orderBy('id','DESC')->take(4)->get();
 
         return $featured;
     }
 
-    public function getNewProducts()
+    public function getProducts()
     {
         $products = product::orderBy('id', 'DESC')->paginate(12);
         
@@ -240,17 +266,27 @@ class ProductsRepository implements ProductsRepositoryInterface
         return $attr;
     }
 
+    public function getValue($id)
+    {
+        $value = values::find($id);
+
+        return $value;
+    }
+
     public function editAttr($params, $id)
     {
         try {
             DB::beginTransaction();
-            // code here
+            $attr = attributes::find($id);
+            $attr->name = $params['attr_name'];
+            $attr->save();
             DB::commit();
 
             $result = [
                 'code' => 200,
                 'msg' => 'Edit Attribute Successfully!'
             ];
+            return $result;
         } catch (Exception $e) {
             DB::rollBack();
 
@@ -273,6 +309,7 @@ class ProductsRepository implements ProductsRepositoryInterface
                 'code' => 200,
                 'msg' => 'Delete Attribute Successfully!'
             ];
+            return $result;
         } catch (Exception $e) {
             DB::rollBack();
 
@@ -327,5 +364,45 @@ class ProductsRepository implements ProductsRepositoryInterface
             ];
             return $result;
         }
+    }
+
+    public function getVariants($id)
+    {
+        $variant = product::find($id);
+
+        return $variant;
+    }
+
+    public function addVariant($params)
+    {
+        try {
+            DB::beginTransaction();
+            foreach ($params['var_price'] as $key => $value) {
+                $variant = variants::find($key);
+                $variant->price = $value;
+                $variant->save();
+            }
+            DB::commit();
+
+            $result = [
+                'code' => 200,
+                'msg' => 'Add Variant\'s Price Successfully!'
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            $result = [
+                'code' => 500,
+                'msg' => static::failed_msg
+            ];
+            return $result;
+        }
+    }
+
+    public function getListNew()
+    {
+        $new = product::orderBy('id', 'DESC')->take(8)->get();
+        return $new;
     }
 }

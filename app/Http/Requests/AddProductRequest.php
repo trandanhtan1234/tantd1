@@ -23,7 +23,8 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|unique:products,name',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'attr' => 'required'
         ];
     }
 
@@ -34,7 +35,8 @@ class AddProductRequest extends FormRequest
             'name.min' => 'Please enter a Product Name more than 5 characters!',
             'name.unique' => 'Product Name is already used!',
             'price.required' => 'This field is required!',
-            'price.numeric' => 'Enter numbers only!'
+            'price.numeric' => 'Enter numbers only!',
+            'attr.required' => 'Attribute\'s Values are required'
         ];
     }
 }

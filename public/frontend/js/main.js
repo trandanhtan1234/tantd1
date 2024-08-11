@@ -233,6 +233,7 @@
 		   nav: true,
 		   dots: false,
 		   autoplay: true,
+		   autoWidth: true,
 		   autoplayHoverPause: true,
 		   smartSpeed: 500,
 		   responsive:{

@@ -261,7 +261,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
   float: left;
   z-index: 0;
-  margin-bottom: 9em; }
+}
   #colorlib-hero .btn {
     font-size: 24px; }
     #colorlib-hero .btn.btn-primary {
@@ -428,6 +428,10 @@ h1, h2, h3, h4, h5, h6, figure {
 .colorlib-blog,
 #colorlib-subscribe,
 #colorlib-footer {
+  background-image: url(../images/evie.jpg);
+  background-repeat: unset;
+  background-position: center;
+  padding-top: 3.75em;
   padding-bottom: 9em;
   clear: both; }
 
@@ -1205,8 +1209,8 @@ h1, h2, h3, h4, h5, h6, figure {
     .size-wrap p.size-desc .size {
       font-size: 12px;
       text-align: center;
-      width: 36px;
-      padding: 5px 0;
+      min-width: 36px;
+      padding: 5px;
       display: inline-block;
       border: 1px solid #e6e6e6;
       margin-bottom: 3px;
@@ -1914,37 +1918,6 @@ input[type="text"] {
     .colorlib-nav-toggle {
       display: block; } }
 
-.pagination li {
-  margin: 2px; }
-  .pagination li a {
-    color: #000;
-    background: #fff;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-    margin: 2px; }
-    .pagination li a:first-child {
-      -webkit-border-radius: 2px;
-      -moz-border-radius: 2px;
-      -ms-border-radius: 2px;
-      border-radius: 2px; }
-    .pagination li a:hover, .pagination li a:focus {
-      background: #FFC300;
-      color: #fff;
-      border: 1px solid #FFC300; }
-    @media screen and (max-width: 768px) {
-      .pagination li a {
-        padding: 7px 15px; } }
-  .pagination li.active a {
-    border: 1px solid #FFC300;
-    background: #FFC300;
-    color: #000; }
-    .pagination li.active a:hover, .pagination li.active a:focus {
-      background: #FFC300;
-      color: #000;
-      border: 1px solid #FFC300; }
-
 .btn {
   margin-right: 4px;
   margin-bottom: 4px;
@@ -2113,4 +2086,9 @@ input[type="text"] {
   background: url(../images/loader.gif) center no-repeat #fff; }
 
 .js .animate-box {
-  opacity: 0; }
+  opacity: 0;
+}
+
+.slider-row {
+  width: 262.5px;
+}

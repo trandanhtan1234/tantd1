@@ -19,7 +19,8 @@ class IndexController extends Controller
     public function getIndex()
     {
         $data['featured'] = $this->productRepo->getFeatured();
-        $data['list'] = $this->productRepo->getList();
+        $data['list'] = $this->productRepo->getListNew();
+        $data['now'] = \Carbon\Carbon::now();
 
         return view('frontend.index', $data);
     }
