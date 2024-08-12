@@ -20,7 +20,6 @@
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
-
 							<a href="orderinfo.html" class="btn btn-success">Approved Orders</a>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>

@@ -33,6 +33,7 @@ class ProductController extends Controller
     public function getDetailProduct($id)
     {
         $data['product'] = $this->productRepo->getProduct($id);
+        $data['prd_new'] = $this->productRepo->getListNew();
 
         return view('frontend.product.detail', $data);
     }

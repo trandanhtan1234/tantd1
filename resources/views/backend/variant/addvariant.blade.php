@@ -40,7 +40,6 @@
                                     @foreach ($row->values as $val)
                                         {{ $val->attribute->name }} : {{ $val->value }},
                                     @endforeach
-                                    <!-- Color : Black, -->
                                 </td>
                                 <td>
                                     <div>
@@ -49,20 +48,6 @@
                                 </td>
                             </tr>
                             @endforeach
-                            <!-- <tr>
-                                <td scope="row">
-                                    Size : L,
-                                    Color : Black,
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input name="" class="form-control" placeholder="Giá cho biến thể" value="">
-                                    </div>
-                                </td>
-                                <td>
-                                    <a id="" class="btn btn-warning" href="admin/product/delete-variant/2" role="button">Delete</a>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>

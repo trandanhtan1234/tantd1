@@ -32,6 +32,7 @@ Route::group(['prefix' => 'product'], function() {
 
 Route::group(['prefix' => 'cart'], function() {
     Route::get('/', [CartController::class, 'getCart']);
+    Route::get('/add-cart', [CartController::class, 'addCart'])->name('addCart');
 });
 
 // BACKEND
