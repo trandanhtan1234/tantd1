@@ -74,7 +74,7 @@
 				<div class="panel-heading">Income Statements</div>
 				<div class="panel-body">
 					<div class="canvas-wrapper">
-						<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+						<canvas class="main-chart" id="myChart" height="200" width="600"></canvas>
 					</div>
 				</div>
 			</div>
@@ -88,5 +88,26 @@
 @section('active')
 <script>
 	$('.overview').addClass('active');
+	const xValues = [1,2,3,4,5,6,7,8,9,10,11,12];
+	const yValues = [7,8,8,9,9,9,10,11,14,14,15,3,0];
+	const barColors = ["red", "green", "blue", "orange", "brown", "black", "gray", "purple", "yellow", "brown", "mustard", "silver"];
+
+	const myChart = new Chart("myChart", {
+		type: "bar",
+		data: {
+			labels: xValues,
+			datasets: [{
+				backgroundColor: "gray",
+				borderColor: 'green',
+				data: yValues
+			}]
+		},
+		options: {
+			legend: {display: false},
+			animation: {
+				
+			}
+		}
+	});
 </script>
 @endsection

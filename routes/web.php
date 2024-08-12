@@ -27,7 +27,7 @@ Route::group(['prefix' => 'checkout'], function() {
 
 Route::group(['prefix' => 'product'], function() {
     Route::get('/', [ProductFrontend::class, 'getListProducts']);
-    Route::get('/detail', [ProductFrontend::class, 'getDetailProduct']);
+    Route::get('/detail/{id}', [ProductFrontend::class, 'getDetailProduct']);
 });
 
 Route::group(['prefix' => 'cart'], function() {
@@ -61,17 +61,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::get('/attr', [ProductController::class, 'detailAttr']);
         Route::post('/add-attr', [ProductController::class, 'addAttribute'])->name('addAttr');
         Route::get('/edit-attr/{id}', [ProductController::class, 'editAttribute']);
-        Route::post('/edit-attr/{id}', [ProductController::class, 'postEditAttribute']);
+        Route::post('/edit-attr/{id}', [ProductController::class, 'postEditAttribute'])->name('editAttr');
         Route::get('/delete-attr/{id}', [ProductController::class, 'deleteAttribute']);
 
-        Route::post('/add-value', [ProductController::class, 'addValue'])->name('addValue');
+        Route::post('/add-value', [ProductController::class, 'addValue'])->name('addVal');
         Route::get('/edit-value/{id}', [ProductController::class, 'editValue']);
+        Route::post('/edit-value/{id}', [ProductController::class, 'postEditValue'])->name('editValue');
         Route::get('/delete-value/{id}', [ProductController::class, 'deleteValue']);
-    });
-
-    Route::group(['prefix' => 'variant'], function() {
-        Route::get('/add', [VariantController::class, 'getAddVariant']);
-        Route::get('/edit', [VariantController::class, 'getEditVariant']);
+        
+        Route::get('/add-variant/{id}', [ProductController::class, 'getAddVariant']);
+        Route::post('/add-variant/{id}', [ProductController::class, 'postAddVariant'])->name('addVariant');
+        Route::get('/edit-variant', [ProductController::class, 'getEditVariant']);
     });
 
     Route::group(['prefix' => 'order'], function() {

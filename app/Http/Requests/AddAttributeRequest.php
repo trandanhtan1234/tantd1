@@ -29,7 +29,7 @@ class AddAttributeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'attr_name.required' => 'This field is required!',
+            'attr_name.required' => 'Attribute Name is required!',
             'attr_name.unique' => 'Attribute Name is already used!'
         ];
     }

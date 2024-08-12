@@ -12,7 +12,6 @@
         </ol>
     </div>
     <!--/.row-->
-
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Variants</h1>
@@ -21,35 +20,36 @@
     <!--/.row-->
     <div class="col-md-12">
         <div class="panel panel-default">
-        
+            <form action="{{ route('addVariant', ['id' => $product->id]) }}" method="post">
+                @csrf
                 <div class="panel-heading" align='center'>
-                    Price for each variant of product: Armor level 3 (AN01)
+                    Price for each variant of product: {{ $product->name }} ({{ $product->code }})
                 </div>
-                <div class="panel-body" align='center'>
+                <div class="panel-body variant-table" align='center'>
                     <table class="panel-body">
                         <thead>
                             <tr>
                                 <th width='33%'>Variant</th>
                                 <th width='33%'>Price (Nullable)</th>
-                                <th width='33%'>Options</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($product->variant as $row)
                             <tr>
                                 <td scope="row">
-                                    Size : M,
-                                    Color : Black,
+                                    @foreach ($row->values as $val)
+                                        {{ $val->attribute->name }} : {{ $val->value }},
+                                    @endforeach
+                                    <!-- Color : Black, -->
                                 </td>
                                 <td>
-                                    <div class="form-group">
-                                        <input name="var_name" class="form-control" placeholder="Variant Price" value="{{ old('var_name') }}">
+                                    <div>
+                                        <input type="number" name="var_price[{{ $row->id }}]" class="form-control" placeholder="Variant Price" value="{{ old('var_price', $row->price) }}">
                                     </div>
                                 </td>
-                                <td>
-                                    <a id="" class="btn btn-warning" href="admin/product/delete-variant/1" role="button">Delete</a>
-                                </td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td scope="row">
                                     Size : L,
                                     Color : Black,
@@ -62,12 +62,15 @@
                                 <td>
                                     <a id="" class="btn btn-warning" href="admin/product/delete-variant/2" role="button">Delete</a>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
-                <div align='right'><button class="btn btn-success" type="submit"> Update </button> <a class="btn btn-warning"
-                        href="admin/product" role="button">Ignore</a></div>
+                <div align='right' class="tab-content">
+                    <button class="btn btn-success" type="submit">Update</button>
+                    <a class="btn btn-warning" href="{{ url('admin/product') }}" role="button">Ignore</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

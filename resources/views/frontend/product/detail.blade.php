@@ -10,32 +10,31 @@
 					<div class="row">
 						<div class="col-md-5">
 							<div class="product-entry">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);">
-								</div>
-								</div>
+								<div class="product-img" style="background-image: url(images/item-6.jpg);"></div>
 							</div>
 						</div>
 						<div class="col-md-7">
 							<form action="product/AddCart" method="post">
 								<div class="desc">
-									<h3>Special t-shirt vip pro</h3>
+									<h3>{{ $product->name }}</h3>
 									<p class="price">
-										<span>150,000</span>
+										<span>{{ number_format($product->price,0,',','.') }} đ</span>
 									</p>
 									<p>Information</p>
+									@foreach (valueAttr($product->values) as $values => $value)
 									<div class="size-wrap">
 										<p class="size-desc">
-											Size:
-											<a class="size">M</a>
-											<a class="size">L</a>
+											{{ $values }}:
+											@foreach ($value as $name)
+												@if ($values != 'Color')
+													<span class="size">{{ $name }}</span>
+												@else
+													<span class="size" style="background-color: {{ $name }}">{{ $name }}</span>
+												@endif
+											@endforeach
 										</p>
 									</div>
-									<div class="size-wrap">
-										<p class="size-desc">
-											Color:
-											<a class="size">Black</a>
-										</p>
-									</div>
+									@endforeach
 									<h4>Options</h4>
 									<div class="row">
 										<div class="col-md-3">
@@ -91,7 +90,7 @@
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
-								Benjamin Church is no brother of mine. No more than the Redcoats or their idiot King. I expected naïveté, but this. The Templars do not fight for the crown. We seek the same as you, boy. Freedom. Justice. Independence
+								{{ strip_tags($product->description) }}
 							</div>
 						</div>
 					</div>

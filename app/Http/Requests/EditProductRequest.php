@@ -22,8 +22,9 @@ class EditProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5|unique:product,name,'.$this->id.',id',
-            'price' => 'required|numeric'
+            'name' => 'required|min:5|unique:products,name,'.$this->id.',id',
+            'price' => 'required|numeric',
+            'attr' => 'required'
         ];
     }
 
@@ -34,7 +35,8 @@ class EditProductRequest extends FormRequest
             'name.min' => 'Please enter a Product Name more than 5 characters!',
             'name.unique' => 'Product Name is already used!',
             'price.required' => 'This field is required!',
-            'price.numeric' => 'Enter numbers only!'
+            'price.numeric' => 'Enter numbers only!',
+            'attr.required' => 'Attribute\'s Values are required'
         ];
     }
 }

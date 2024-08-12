@@ -40,7 +40,7 @@
 								<strong>{{ session('success') }}</strong>
 							</div>
 							@endif
-							<a href="{{ url('admin/product/add') }}" class="btn btn-primary">Add New Produt</a>
+							<a href="{{ url('admin/product/add') }}" class="btn btn-primary">Add New Product</a>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>
 									<tr class="bg-primary">
@@ -60,9 +60,11 @@
 											<div class="row">
 												@php
 													$img = $row->img;
-													$no_img = '../../base/img/no-img.jpg';
+													if (!file_exists(public_path('/'.$img))) {
+														$img = 'base/img/no-img.jpg';
+													}
 												@endphp
-												<div class="col-md-3"><img src="{{ file_exists(public_path('/'.$img))?'../../'.$img:$no_img }}" alt="{{ $row->name }}" width="100px" class="thumbnail"></div>
+												<div class="col-md-3"><img src="{{ url($img) }}" alt="{{ $row->name }}" width="100px" class="thumbnail"></div>
 												<div class="col-md-9">
 													<p><strong>Product Code : {{ $row->code }}</strong></p>
 													<p>Product Name :{{ $row->name }}</p>
@@ -84,6 +86,7 @@
 										<td>{{ $row->category->name }}</td>
 										<td>
 											<a href="{{ url('admin/product/edit/'.$row->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+											<a href="{{ url('admin/product/add-variant/'.$row->id) }}" class="btn btn-success">Edit Variants</a>
 											<a onclick="return del_prd(name)" name="{{ $row->name }}" href="{{ url('admin/product/delete/'.$row->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</td>
 									</tr>

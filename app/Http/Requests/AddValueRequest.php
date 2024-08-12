@@ -29,7 +29,7 @@ class AddValueRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'value_name.required' => 'This field is required!',
+            'value_name.required' => 'Value Name is required!',
             'value_name.unique' => 'Value is already used!'
         ];
     }

@@ -23,14 +23,17 @@ class ProductController extends Controller
 
     public function getListProducts()
     {
-        $data['list'] = $this->productRepo->getNewProducts();
+        $data['list'] = $this->productRepo->getProducts();
         $data['category'] = $this->categoryRepo->getListCategory();
+        $data['now'] = \Carbon\Carbon::now();
 
         return view('frontend.product.list', $data);
     }
 
-    public function getDetailProduct()
+    public function getDetailProduct($id)
     {
-        return view('frontend.product.detail');
+        $data['product'] = $this->productRepo->getProduct($id);
+
+        return view('frontend.product.detail', $data);
     }
 }

@@ -28,9 +28,17 @@ interface ProductsRepositoryInterface
 
     public function deleteValue($id);
 
+    public function getValue($id);
+
     public function editValue($params, $id);
+
+    public function getVariants($id);
+
+    public function addVariant($params);
 
     public function getFeatured();
 
-    public function getNewProducts();
+    public function getListNew();
+
+    public function getProducts();
 }

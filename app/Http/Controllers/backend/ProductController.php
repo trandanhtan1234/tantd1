@@ -43,7 +43,7 @@ class ProductController extends Controller
         $addPrd = $this->productRepo->addProduct($r);
 
         if ($addPrd['code'] == 200) {
-            return redirect('admin/product')->with('success', $addPrd['msg']);
+            return redirect('admin/product/add-variant/'.$addPrd['prdId'])->with('success', $addPrd['msg']);
         } else {
             return redirect('admin/product')->with('failed', $addPrd['msg']);
         }
@@ -53,6 +53,7 @@ class ProductController extends Controller
     {
         $data['category'] = $this->cateRepo->getListCategory();
         $data['product'] = $this->productRepo->getProduct($id);
+        $data['attrs'] = $this->productRepo->getAttributes();
 
         return view('backend.product.editproduct', $data);
     }
@@ -88,8 +89,6 @@ class ProductController extends Controller
 
     public function addAttribute(AddAttributeRequest $r)
     {
-        dd($r->all());
-
         $addAttr = $this->productRepo->addAttr($r);
 
         if ($addAttr['code'] == 200) {
@@ -108,15 +107,17 @@ class ProductController extends Controller
 
     public function postEditAttribute(EditAttributeRequest $r, $id)
     {
-        dd($r->all());
-
         $editAttr = $this->productRepo->editAttr($r, $id);
+
+        if ($editAttr['code'] == 200) {
+            return redirect('admin/product/attr')->with('success', $editAttr['msg']);
+        } else {
+            return redirect('admin/product/attr')->with('failed', $editAttr['msg']);
+        }
     }
 
     public function addValue(AddValueRequest $r)
     {
-        dd($r->all());
-
         $addValue = $this->productRepo->addValue($r);
 
         if ($addValue['code'] == 200) {
@@ -148,7 +149,15 @@ class ProductController extends Controller
         }
     }
 
-    public function editValue(EditValueRequest $r, $id)
+    public function editValue($id)
+    {
+        $data['value'] = $this->productRepo->getValue($id);
+        
+        return view('backend.attr.editvalue', $data);
+
+    }
+
+    public function postEditValue(EditValueRequest $r, $id)
     {
         $editValue = $this->productRepo->editValue($r, $id);
 
@@ -157,5 +166,28 @@ class ProductController extends Controller
         } else {
             return redirect('admin/product/detailAttr')->with('failed', $editValue['msg']);
         }
+    }
+
+    public function getAddVariant($id)
+    {
+        $data['product'] = $this->productRepo->getVariants($id);
+
+        return view('backend.variant.addvariant', $data);
+    }
+
+    public function postAddVariant(Request $r, $id)
+    {
+        $addVariant = $this->productRepo->addVariant($r);
+        
+        if ($addVariant['code'] == 200) {
+            return redirect('admin/product')->with('success', $addVariant['msg']);
+        } else {
+            return redirect('admin/product')->with('failed', $addVariant['msg']);
+        }
+    }
+
+    public function getEditVariant()
+    {
+        return view('backend.variant.editvariant');
     }
 }
