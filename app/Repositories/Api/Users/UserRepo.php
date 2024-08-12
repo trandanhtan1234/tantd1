@@ -18,27 +18,27 @@ class UserRepo implements UserRepoInterface
         $listUsers = users::get();
 
         return response()->json([
+            config('constparam.error_code') => config('constparam.success'),
             'message' => static::successMsg,
             'data' => $listUsers
-        ]);
+        ],200);
     }
 
     public function findId($id)
     {
         $user = users::find($id);
         
-        if (!$user) {
+        if (count($user)==0) {
             return response()->json([
                 config('constparam.error_code') => config('constparam.fail'),
                 config('constparam.error_mess') => static::noUserError
-            ],400);
-        } else {
-            return response()->json([
-                config('constparam.error_code') => config('constparam.success'),
-                config('constparam.error_mess') => static::successMsg,
-                'data' => $user
-            ],200);
+            ],404);
         }
+        return response()->json([
+            config('constparam.error_code') => config('constparam.success'),
+            config('constparam.error_mess') => static::successMsg,
+            'data' => $user
+        ],200);
     }
 
     public function destroy($id)
