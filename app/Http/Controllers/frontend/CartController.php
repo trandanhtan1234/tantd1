@@ -11,4 +11,10 @@ class CartController extends Controller
     {
         return view('frontend.cart.cart');
     }
+
+    public function addCart(Request $r)
+    {
+        
+        dd($r);
+    }
 }

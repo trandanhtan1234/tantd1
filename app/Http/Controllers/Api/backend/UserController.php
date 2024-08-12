@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return $this->userRepo->getUsers();
     }
 
     /**
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->userRepo->findId($id);
     }
 
     /**
@@ -53,6 +53,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->userRepo->destroy($id);
     }
 }
