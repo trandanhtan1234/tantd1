@@ -8,7 +8,7 @@ interface UserRepoInterface
 
     public function storeUser($params);
 
-    public function findId($id);
+    public function show($id);
 
     public function updateUser($params, $id);
 

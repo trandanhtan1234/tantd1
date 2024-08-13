@@ -29,7 +29,7 @@ class UserController extends Controller
         return view('backend.user.adduser');
     }
 
-    public function postAddUser(AddUserRequest $r, $id)
+    public function postAddUser(AddUserRequest $r)
     {
         $addUser = $this->userRepo->addUser($r);
 

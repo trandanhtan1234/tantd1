@@ -9,12 +9,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::namespace('Api')->group(function() {
+Route::namespace('api')->group(function() {
     Route::prefix('user')->group(function() {
         Route::get('/', [UserController::class, 'index']);
-        Route::get('/show', [UserController::class, 'show']);
-        Route::post('/store/{id}', [UserController::class, 'store']);
-        Route::get('/destroy/{id}', [UserController::class, 'destroy']);
+        Route::get('/show/{id}', [UserController::class, 'show']);
+        Route::post('/store', [UserController::class, 'store']);
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy']);
     });
 
     Route::prefix('category')->group(function() {

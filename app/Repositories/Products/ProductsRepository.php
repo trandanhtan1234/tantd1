@@ -62,8 +62,6 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $product->img = 'no-img.jpg';
             }
             $product->category_id = $params['category'];
-            $product->created_at = \Carbon\Carbon::now();
-            $product->updated_at = \Carbon\Carbon::now();
             $product->save();
 
             // Values Products
@@ -132,7 +130,6 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $product->img = $path.'/'.$fileName;
             }
             $product->category_id = $params['category'];
-            $product->updated_at = \Carbon\Carbon::now();
             $product->save();
 
             // Values Products
@@ -152,7 +149,6 @@ class ProductsRepository implements ProductsRepositoryInterface
                 $variant->save();
                 $variant->values()->attach($var);
             }
-            $prdId = $product->id;
             DB::commit();
 
             $result = [
