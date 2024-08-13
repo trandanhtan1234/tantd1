@@ -4,15 +4,24 @@ namespace App\Http\Controllers\Api\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\Api\Category\CateRepoInterface;
 
 class CategoryController extends Controller
 {
+    protected $cateRepo;
+
+    public function __construct(
+        CateRepoInterface $cateRepo
+    ) {
+        $this->cateRepo = $cateRepo;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $data)
     {
-        //
+        return $this->cateRepo->index($data);
     }
 
     /**
@@ -28,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->cateRepo->show($id);
     }
 
     /**
@@ -44,6 +53,6 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->cateRepo->destroy($id);
     }
 }
