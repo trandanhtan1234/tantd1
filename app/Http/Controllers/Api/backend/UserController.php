@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Api\Users\UserRepoInterface;
+use App\Http\Requests\api\{AddUserRequest,EditUserRequest};
 
 class UserController extends Controller
 {
@@ -19,17 +20,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $data)
     {
-        return $this->userRepo->getUsers();
+        return $this->userRepo->getUsers($data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddUserRequest $request)
     {
-        //
+        return $this->userRepo->storeUser($request);
     }
 
     /**
@@ -43,9 +44,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditUserRequest $request, string $id)
     {
-        //
+        return $this->userRepo->updateUser($request, $id);
     }
 
     /**
