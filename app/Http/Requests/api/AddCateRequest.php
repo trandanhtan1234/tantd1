@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class EditUserRequest extends FormRequest
+class AddCateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,15 @@ class EditUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full' => 'required|max:20',
-            'phone' => 'required|regex:/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|unique:users,phone,'.$this->id.',id'
+            'name' => 'required|unique:category,name'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'full.required' => 'This field is required!',
-            'full.max' => 'Full name cannot be more than 20 characters!',
-            'phone.required' => 'This field is required!',
-            'phone.regex' => 'Phone number is invalid!',
-            'phone.unique' => 'Phone number is already used!'
+            'name.required' => 'This field is required!',
+            'name.unique' => 'Category Name is already used!'
         ];
     }
 

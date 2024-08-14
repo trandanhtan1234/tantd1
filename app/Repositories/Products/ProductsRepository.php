@@ -3,6 +3,7 @@
 namespace App\Repositories\Products;
 
 use App\Repositories\Products\ProductsRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\models\{product,attributes,values,variants};
 use Exception;
@@ -93,6 +94,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -158,6 +160,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -183,6 +186,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -209,6 +213,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -232,6 +237,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -285,6 +291,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -308,6 +315,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -331,6 +339,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -353,6 +362,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 200,
@@ -387,6 +397,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
