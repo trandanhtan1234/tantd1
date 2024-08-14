@@ -13,7 +13,7 @@ class UserRepo implements UserRepoInterface
     public function getUsers($data)
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? (int)$data['limit'] : 10;
-        $listUsers = users::paginate($limit);
+        $listUsers = users::orderBy('id', 'DESC')->paginate($limit);
 
         return response()->json([
             config('constparam.code') => 200,
@@ -33,8 +33,6 @@ class UserRepo implements UserRepoInterface
             $user->address = $params['address'];
             $user->phone = $params['phone'];
             $user->level = $params['level'];
-            $user->created_at = \Carbon\Carbon::now();
-            $user->updated_at = \Carbon\Carbon::now();
             $user->save();
             DB::commit();
 
@@ -52,11 +50,11 @@ class UserRepo implements UserRepoInterface
         }
     }
 
-    public function findId($id)
+    public function show($id)
     {
         $user = users::find($id);
         
-        if (count($user)==0) {
+        if (!$user) {
             return response()->json([
                 config('constparam.code') => 404,
                 config('constparam.msg') => config('constparam.not_found')
@@ -84,7 +82,6 @@ class UserRepo implements UserRepoInterface
             $user->address = $params['address'];
             $user->phone = $params['phone'];
             $user->level = $params['level'];
-            $user->updated_at = \Carbon\Carbon::now();
             $user->save();
             DB::commit();
 

@@ -12,7 +12,7 @@ class UsersRepository implements UsersRepositoryInterface
 {
     public function getList()
     {
-        $getList = users::paginate(5);
+        $getList = users::orderBy('id', 'DESC')->paginate(5);
         
         return $getList;
     }
@@ -35,8 +35,6 @@ class UsersRepository implements UsersRepositoryInterface
             $user->address = $params['address'];
             $user->phone = $params['phone'];
             $user->level = $params['level'];
-            $user->created_at = \Carbon\Carbon::now();
-            $user->updated_at = \Carbon\Carbon::now();
             $user->save();
             DB::commit();
 
@@ -65,7 +63,6 @@ class UsersRepository implements UsersRepositoryInterface
             $user->address = $params['address'];
             $user->phone = $params['phone'];
             $user->level = $params['level'];
-            $user->updated_at = \Carbon\Carbon::now();
             $user->save();
             DB::commit();
 

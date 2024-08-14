@@ -3,6 +3,8 @@
 namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class AddUserRequest extends FormRequest
 {
@@ -34,7 +36,7 @@ class AddUserRequest extends FormRequest
         return [
             'email.required' => 'This field is required!',
             'email.unique' => 'This email is already used!',
-            'email.email' => 'Email is incorrect!',
+            'email.email' => 'Email format is incorrect!',
             'password.required' => 'This field is required!',
             'password.min' => 'Please enter a password more than 6 characters!',
             'password.regex' => 'Password is invalid',
@@ -44,5 +46,14 @@ class AddUserRequest extends FormRequest
             'phone.regex' => 'Phone number is invalid!',
             'phone.unique' => 'Phone number is already used!'
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'   => false,
+            'message'   => 'Validation errors',
+            'data'      => $validator->errors()
+        ]));
     }
 }
