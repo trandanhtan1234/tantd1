@@ -3,6 +3,7 @@
 namespace App\Repositories\Api\Users;
 
 use App\Repositories\Api\Users\UserRepoInterface;
+use Illuminate\Support\Facades\Log;
 use App\Models\models\users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,13 @@ class UserRepo implements UserRepoInterface
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? (int)$data['limit'] : 10;
         $listUsers = users::orderBy('id', 'DESC')->paginate($limit);
+
+        if (!$listUsers) {
+            return response()->json([
+                config('constparam.code') => 404,
+                config('constparam.msg') => config('constparam.not_found')
+            ],404);
+        }
 
         return response()->json([
             config('constparam.code') => 200,
@@ -42,6 +50,7 @@ class UserRepo implements UserRepoInterface
             ],200);
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             return response()->json([
                 config('constparam.code') => 500,
@@ -72,7 +81,7 @@ class UserRepo implements UserRepoInterface
         try {
             DB::beginTransaction();
             $user = users::find($id);
-            if (count($user)==0) {
+            if (!$user) {
                 return response()->json([
                     config('constparam.code') => config('constparam.invalid_msg'),
                     config('constparam.msg') => config('constparam.not_found')
@@ -91,6 +100,7 @@ class UserRepo implements UserRepoInterface
             ],200);
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             return response()->json([
                 config('constparam.code') => 500,
@@ -119,6 +129,7 @@ class UserRepo implements UserRepoInterface
             ],200);
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             return response()->json([
                 config('constparam.code') => 500,

@@ -3,6 +3,7 @@
 namespace App\Repositories\Users;
 
 use App\Repositories\Users\UsersRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 use App\Models\models\users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -45,6 +46,7 @@ class UsersRepository implements UsersRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -73,6 +75,7 @@ class UsersRepository implements UsersRepositoryInterface
             return $result;
         } catch (\Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -98,6 +101,7 @@ class UsersRepository implements UsersRepositoryInterface
             return $result;
         } catch (\Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,

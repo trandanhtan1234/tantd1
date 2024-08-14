@@ -3,6 +3,7 @@
 namespace App\Repositories\Category;
 
 use App\Repositories\Category\CategoryRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 use App\Models\models\category;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -34,7 +35,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             if (checkLevel($list, $params->parent, 1) > 3) {
                 DB::commit();
                 $result = [
-                    'code' => 413,
+                    'code' => 400,
                     'msg' => 'Cannot add category that is beyond level 3'
                 ];
                 return $result;
@@ -53,6 +54,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollback();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -70,7 +72,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             if (checkLevel($list, $params->parent, 1) > 3) {
                 DB::commit();
                 $result = [
-                    'code' => 413,
+                    'code' => 400,
                     'msg' => 'Cannot add category that is beyond level 3'
                 ];
                 return $result;
@@ -89,6 +91,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,
@@ -116,6 +119,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             return $result;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage());
 
             $result = [
                 'code' => 500,

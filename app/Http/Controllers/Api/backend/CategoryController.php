@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Api\Category\CateRepoInterface;
+use App\Http\Requests\api\{AddCateRequest,EditCateRequest};
 
 class CategoryController extends Controller
 {
@@ -27,9 +28,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddCateRequest $request)
     {
-        //
+        return $this->cateRepo->store($request);
     }
 
     /**
@@ -43,9 +44,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditCateRequest $request, string $id)
     {
-        //
+        return $this->cateRepo->update($request,$id);
     }
 
     /**

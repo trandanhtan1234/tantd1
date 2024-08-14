@@ -4,23 +4,33 @@ namespace App\Http\Controllers\Api\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\Api\Products\ProductRepoInterface;
+use App\Http\Requests\api\AddProductRequest;
 
 class ProductController extends Controller
 {
+    protected $prdRepo;
+
+    public function __construct(
+        ProductRepoInterface $prdRepo
+    ) {
+        $this->prdRepo = $prdRepo;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $data)
     {
-        //
+        return $this->prdRepo->index($data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddProductRequest $request)
     {
-        //
+        return $this->prdRepo->store($request);
     }
 
     /**
@@ -28,7 +38,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->prdRepo->show($id);
     }
 
     /**
@@ -36,7 +46,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->prdRepo->update($request,$id);
     }
 
     /**
@@ -44,6 +54,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->prdRepo->destroy($id);
     }
 }
