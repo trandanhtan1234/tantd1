@@ -95,6 +95,63 @@ class ProductRepo implements ProductRepoInterface
         }
     }
 
+    public function storeAttribute($params)
+    {
+        try {
+            DB::beginTransaction();
+            $attr = new attributes();
+            $attr->name = $params['name'];
+            $attr->save();
+            DB::commit();
+
+            return response()->json([
+                config('constparam.code') => 200,
+                config('constparam.msg') => config('constparam.success_msg')
+            ],200);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+
+            return response()->json([
+                config('constparam.code') => 500,
+                config('constparam.msg') => config('constparam.error_msg')
+            ],500);
+        }
+    }
+
+    public function storeValue($params)
+    {
+        try {
+            DB::beginTransaction();
+            $checkAttr = attributes::find($params['attr_id']);
+            if (!$checkAttr) {
+                return response()->json([
+                    config('constparam.code') => 404,
+                    config('constparam.msg') => config('constparam.not_found')
+                ],404);
+            }
+
+            $value = new values();
+            $value->value = $params['value'];
+            $value->attr_id = $params['attr_id'];
+            $value->save();
+            DB::commit();
+            
+            return response()->json([
+                config('constparam.code') => 200,
+                config('constparam.msg') => config('constparam.success_msg')
+            ],200);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+
+            return response()->json([
+                config('constparam.code') => 500,
+                config('constparam.msg') => config('constparam.error_msg')
+            ],500);
+        }
+    }
+
     public function show($id)
     {
         $product = product::find($id);
@@ -181,6 +238,11 @@ class ProductRepo implements ProductRepoInterface
                 config('constparam.msg') => config('constparam.error_msg')
             ],500);
         }
+    }
+
+    public function updateAttribute($params,$id)
+    {
+        
     }
 
     public function destroy($id)
