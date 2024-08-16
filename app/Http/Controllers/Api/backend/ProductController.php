@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Api\Products\ProductRepoInterface;
-use App\Http\Requests\api\AddProductRequest;
+use App\Http\Requests\api\{AddProductRequest,AddAttributeRequest,AddValueRequest,EditAttributeRequest};
 
 class ProductController extends Controller
 {
@@ -33,6 +33,16 @@ class ProductController extends Controller
         return $this->prdRepo->store($request);
     }
 
+    public function storeAttribute(AddAttributeRequest $request)
+    {
+        return $this->prdRepo->storeAttribute($request);
+    }
+
+    public function storeValue(AddValueRequest $request)
+    {
+        return $this->prdRepo->storeValue($request);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -47,6 +57,11 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         return $this->prdRepo->update($request,$id);
+    }
+
+    public function updateAttribute(EditAttributeRequest $request,$id)
+    {
+        return $this->prdRepo->updateAttribute($request,$id);
     }
 
     /**
