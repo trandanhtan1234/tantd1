@@ -76,42 +76,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="product-cart">
-						<div class="one-forth">
-							<div class="product-img">
-								<img class="img-thumbnail cart-img" src="images/item-6.jpg">
-							</div>
-							<div class="detail-buy">
-								<h4>Tên sản phẩm</h4>
-								<div class="row">
-									<div class="col-md-3"><strong>Color:Red</strong></div>
-									<div class="col-md-3"><strong>Size:XL</strong></div>
-									
-								</div>
-							</div>
-						</div>
-						<div class="one-eight text-center">
-							<div class="display-tc">
-								<span class="price">₫ 680.000</span>
-							</div>
-						</div>
-						<div class="one-eight text-center">
-							<div class="display-tc">
-								<input type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="1">
-							</div>
-						</div>
-						<div class="one-eight text-center">
-							<div class="display-tc">
-								<span class="price">₫ 1.200.000</span>
-							</div>
-						</div>
-						<div class="one-eight text-center">
-							<div class="display-tc">
-								<a href="#" class="closed"></a>
-							</div>
-						</div>
-					</div>
-			
 			</div>
 		</div>
 		<div class="row">

@@ -41,7 +41,7 @@ Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 Route::get('/logout', [LoginController::class, 'getLogout']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
-    Route::get('/', [IndexController::class, 'Index']);
+    Route::get('/', [IndexController::class, 'index']);
     
     Route::group(['prefix' => 'category'], function() {
         Route::get('/', [CategoryController::class, 'getCategory']);
@@ -77,8 +77,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
 
     Route::group(['prefix' => 'order'], function() {
         Route::get('/', [OrderController::class, 'getOrder']);
-        Route::get('/detail', [OrderController::class, 'getDetail']);
-        Route::get('/processed', [OrderController::class, 'getProcessed']);
+        Route::get('/detail/{id}', [OrderController::class, 'getDetail']);
+        Route::post('/detail/{id}', [OrderController::class, 'approveOrder'])->name('approveOrder');
+        Route::get('/approved', [OrderController::class, 'getApproved']);
     });
 
     Route::group(['prefix' => 'user'], function() {
