@@ -16,7 +16,7 @@ class CateRepo implements CateRepoInterface
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? $data['limit'] : 10;
         $cate = category::orderBy('id', 'DESC')->paginate($limit);
 
-        if (!$cate) {
+        if (!$cate->all()) {
             return response()->json([
                 config('constparam.code') => 404,
                 config('constparam.msg') => config('constparam.not_found')
@@ -40,6 +40,13 @@ class CateRepo implements CateRepoInterface
                     config('constparam.code') => 400,
                     config('constparam.msg') => 'Only accept max category level 3!'
                 ],400);
+            }
+            $checkParent = category::find($params['parent']);
+            if (!$checkParent) {
+                return response()->json([
+                    config('constparam.code') => 404,
+                    config('constparam.msg') => config('constparam.invalid_msg')
+                ],404);
             }
             $cate = new category();
             $cate->name = $params['name'];

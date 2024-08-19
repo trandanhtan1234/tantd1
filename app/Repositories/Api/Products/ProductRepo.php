@@ -16,7 +16,7 @@ class ProductRepo implements ProductRepoInterface
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? $data['limit'] : 10;
         $products = product::orderBy('id', 'DESC')->paginate($limit);
 
-        if (!$products) {
+        if (!$products->all()) {
             return response()->json([
                 config('constparam.code') => 404,
                 config('constparam.msg') => config('constparam.not_found')

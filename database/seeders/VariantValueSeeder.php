@@ -15,30 +15,30 @@ class VariantValueSeeder extends Seeder
     {
         DB::table('variant_value')->delete();
         DB::table('variant_value')->insert([
-            ['variant_id'=>1,'values_id'=>1],
-            ['variant_id'=>1,'values_id'=>4],
-            ['variant_id'=>2,'values_id'=>2],
-            ['variant_id'=>2,'values_id'=>4],
+            ['variant_id'=>1,'value_id'=>1],
+            ['variant_id'=>1,'value_id'=>4],
+            ['variant_id'=>2,'value_id'=>2],
+            ['variant_id'=>2,'value_id'=>4],
 
-            ['variant_id'=>3,'values_id'=>2],
-            ['variant_id'=>3,'values_id'=>5],
-            ['variant_id'=>4,'values_id'=>3],
-            ['variant_id'=>4,'values_id'=>5],
+            ['variant_id'=>3,'value_id'=>2],
+            ['variant_id'=>3,'value_id'=>5],
+            ['variant_id'=>4,'value_id'=>3],
+            ['variant_id'=>4,'value_id'=>5],
 
-            ['variant_id'=>5,'values_id'=>3],
-            ['variant_id'=>5,'values_id'=>5],
-            ['variant_id'=>6,'values_id'=>3],
-            ['variant_id'=>6,'values_id'=>6],
+            ['variant_id'=>5,'value_id'=>3],
+            ['variant_id'=>5,'value_id'=>5],
+            ['variant_id'=>6,'value_id'=>3],
+            ['variant_id'=>6,'value_id'=>6],
 
-            ['variant_id'=>7,'values_id'=>2],
-            ['variant_id'=>7,'values_id'=>4],
-            ['variant_id'=>8,'values_id'=>2],
-            ['variant_id'=>8,'values_id'=>6],
+            ['variant_id'=>7,'value_id'=>2],
+            ['variant_id'=>7,'value_id'=>4],
+            ['variant_id'=>8,'value_id'=>2],
+            ['variant_id'=>8,'value_id'=>6],
 
-            ['variant_id'=>9,'values_id'=>2],
-            ['variant_id'=>9,'values_id'=>4],
-            ['variant_id'=>10,'values_id'=>2],
-            ['variant_id'=>10,'values_id'=>5]
+            ['variant_id'=>9,'value_id'=>2],
+            ['variant_id'=>9,'value_id'=>4],
+            ['variant_id'=>10,'value_id'=>2],
+            ['variant_id'=>10,'value_id'=>5]
         ]);
     }
 }
