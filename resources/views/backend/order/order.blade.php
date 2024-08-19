@@ -28,20 +28,21 @@
 										<th>Customer Name</th>
 										<th>Phone</th>
 										<th>Address</th>
-										<th>Handle</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
+									@foreach ($orders as $order)
 									<tr>
-										<td>1</td>
-										<td>Nguyễn Thế Phúc</td>
-										<td>0356653300</td>
-										<td>Thường tín</td>
+										<td>{{ $order->id }}</td>
+										<td>{{ $order->customer->full }}</td>
+										<td>{{ $order->customer->phone }}</td>
+										<td>{{ $order->address }}</td>
 										<td>
-											<a href="{{ url('admin/detailorder') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Handle</a>
+											<a href="{{ url('admin/detailorder/'.$order->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Details</a>
 										</td>
 									</tr>
-
+									@endforeach
 								</tbody>
 							</table>
 						</div>
