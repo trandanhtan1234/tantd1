@@ -20,31 +20,31 @@
 	</div>
 	<!--/.row-->
 	<div class="row">
-		<div class="col-xs-12 col-md-12 col-lg-6">
-			<div class="panel panel-blue panel-widget ">
+		<div class="col-xs-12 col-md-12 col-lg-4">
+			<div class="panel panel-blue panel-widget">
 				<div class="row no-padding">
 					<div class="col-sm-3 col-lg-4 widget-left">
 						<span class="glyphicon glyphicon-signal icon-50" aria-hidden="true"></span>
 					</div>
 					<div class="col-sm-9 col-lg-8 widget-right">
-						<div class="large">8.000.000 đ</div>
-						<div class="text-muted">Monthly Revenue: July</div>
+						<div class="large">{{ number_format($monthRevenue,0,',','.') }} đ</div>
+						<div class="text-muted">Month Revenue: {{ $monthN }}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-md-6 col-lg-3">
+		<div class="col-xs-12 col-md-12 col-lg-4">
 			<div class="panel panel-orange panel-widget">
 				<div class="row no-padding">
-					<div class="col-sm-3 col-lg-5 widget-left">
+					<div class="col-sm-3 col-lg-4 widget-left">
 						<svg class="glyph stroked empty-message">
 							<use xlink:href="#stroked-empty-message"></use>
 						</svg>
 					</div>
-					<div class="col-sm-9 col-lg-7 widget-right">
-						<div class="large">52</div>
-						<div class="text-muted">Interact</div>
+					<div class="col-sm-9 col-lg-8 widget-right">
+						<div class="large">{{ number_format($dayRevenue,0,',','.') }} VNĐ</div>
+						<div class="text-muted">Today Income</div>
 					</div>
 				</div>
 			</div>
@@ -58,8 +58,8 @@
 						</svg>
 					</div>
 					<div class="col-sm-9 col-lg-7 widget-right">
-						<div class="large">24</div>
-						<div class="text-muted">Orders</div>
+						<div class="large">{{ $orders }}</div>
+						<div class="text-muted">Orders This Month</div>
 					</div>
 				</div>
 			</div>
@@ -88,9 +88,16 @@
 @section('active')
 <script>
 	$('.overview').addClass('active');
-	const xValues = [1,2,3,4,5,6,7,8,9,10,11,12];
-	const yValues = [7,8,8,9,9,9,10,11,14,14,15,3,0];
-	const barColors = ["red", "green", "blue", "orange", "brown", "black", "gray", "purple", "yellow", "brown", "mustard", "silver"];
+	const xValues = [
+		@foreach ($months as $month)
+			{{ $month }},
+		@endforeach
+	];
+	const yValues = [
+		@foreach ($revenue as $val)
+			{{ $val }},
+		@endforeach	
+	0];
 
 	const myChart = new Chart("myChart", {
 		type: "bar",
