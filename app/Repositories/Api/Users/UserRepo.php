@@ -16,7 +16,7 @@ class UserRepo implements UserRepoInterface
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? (int)$data['limit'] : 10;
         $listUsers = users::orderBy('id', 'DESC')->paginate($limit);
 
-        if (!$listUsers) {
+        if (!$listUsers->all()) {
             return response()->json([
                 config('constparam.code') => 404,
                 config('constparam.msg') => config('constparam.not_found')
