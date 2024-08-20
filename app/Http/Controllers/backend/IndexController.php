@@ -18,7 +18,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        $index = $this->indexRepo->index();
-        return view('backend.index');
+        $data = $this->indexRepo->index();
+        
+        return view('backend.index', $data);
     }
 }
