@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\backend\UserController;
 use App\Http\Controllers\Api\backend\CategoryController;
 use App\Http\Controllers\Api\backend\ProductController;
+use App\Http\Controllers\Api\backend\OrderController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -33,5 +34,9 @@ Route::namespace('api')->group(function() {
         Route::get('/show/{id}', [ProductController::class, 'show']);
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
+    });
+
+    Route::prefix('order')->group(function() {
+        route::get('/', [OrderController::class, 'index']);
     });
 });
