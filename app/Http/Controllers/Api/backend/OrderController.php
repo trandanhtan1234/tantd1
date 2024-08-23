@@ -37,7 +37,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->orderRepo->show($id);
     }
 
     /**
