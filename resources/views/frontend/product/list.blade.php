@@ -29,7 +29,7 @@
 								</div>
 								<div class="desc">
 									<h3><a href="{{ url('product/detail/'.$row->id) }}">{{ $row->name }}</a></h3>
-									<p class="price"><span>{{ number_format($row->price,0,',','.') }} đ</span></p>
+									<p class="price"><span>{{ number_format($row->price,0,',','.') }} VNĐ</span></p>
 								</div>
 							</div>
 						</div>
@@ -42,29 +42,36 @@
 			<div class="col-md-3 col-md-pull-9">
 				<div class="sidebar">
 					<div class="side">
-						<h2>Danh mục</h2>
+						<h2>Category</h2>
 						<div class="fancy-collapse-panel">
 							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingOne">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#menu1" aria-expanded="true" aria-controls="collapseOne">Quần
-												Áo Nam
-											</a>
-										</h4>
-									</div>
-									<div id="menu1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-										<div class="panel-body">
-											<ul>
-												<li><a href="#">Áo Sơ mi nam</a></li>
-												<li><a href="#">Áo thun nam</a></li>
-												<li><a href="#">Áo Khoác nam</a></li>
-												<li><a href="#">Áo vest Nam</a></li>
-											</ul>
+								@foreach ($category as $row)
+									@if ($row->parent == 0)
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="headingOne">
+												<h4 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#menu{{ $row->id }}" aria-expanded="true" aria-controls="collapseOne">{{ $row->name }}
+													</a>
+												</h4>
+											</div>
+											<div id="menu{{ $row->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+												<div class="panel-body">
+													<ul>
+														@foreach ($category as $row1)
+															@if ($row1->parent == $row->id)
+																<li><a href="#">{{ $row1->name }}</a></li>
+															@endif
+														@endif
+														<!-- <li><a href="#">Áo thun nam</a></li>
+														<li><a href="#">Áo Khoác nam</a></li>
+														<li><a href="#">Áo vest Nam</a></li> -->
+													</ul>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
+									@endif
+								@endforeach
+								<!-- <div class="panel panel-default">
 									<div class="panel-heading" role="tab" id="headingOne">
 										<h4 class="panel-title">
 											<a data-toggle="collapse" data-parent="#accordion" href="#menu2" aria-expanded="true" aria-controls="collapseOne">Female Fashion
@@ -80,7 +87,7 @@
 											</ul>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -122,19 +129,22 @@
 							<button type="submit" style="width: 100%;border: none;height: 40px;">Search</button>
 						</form>
 					</div>
+					@foreach ($attributes as $attr)
 					<div class="side">
-						<h2>Color</h2>
+						<h2>{{ $attr->name }}</h2>
 						<div class="size-wrap">
 							<p class="size-desc">
-								<a href="#" class="attr">Red</a>
-								<a href="#" class="attr">Blue</a>
+								@foreach ($attr->values as $val)
+								<a href="#" class="attr">{{ $val->value }}</a>
+								@endforeach
+								<!-- <a href="#" class="attr">Blue</a>
 								<a href="#" class="attr">Black</a>
-								<a href="#" class="attr">White</a>
-
+								<a href="#" class="attr">White</a> -->
 							</p>
 						</div>
 					</div>
-					<div class="side">
+					@endforeach
+					<!-- <div class="side">
 						<h2>Size</h2>
 						<div class="size-wrap">
 							<p class="size-desc">
@@ -146,7 +156,7 @@
 								<a href="#" class="attr">XXL</a>
 							</p>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

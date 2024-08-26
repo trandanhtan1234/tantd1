@@ -45,7 +45,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->orderRepo->update($request, $id);
     }
 
     /**

@@ -18,7 +18,7 @@
 								<div class="desc">
 									<h3>{{ $product->name }}</h3>
 									<p class="price">
-										<span>{{ number_format($product->price,0,',','.') }} đ</span>
+										<span>{{ number_format($product->price,0,',','.') }} VNĐ</span>
 									</p>
 									<p>Information</p>
 									@foreach (valueAttr($product->values) as $values => $value)
@@ -49,14 +49,6 @@
 											</div>
 										</div>
 										@endforeach
-										<!-- <div class="col-md-3">
-											<div class="form-group">
-												<label>Color:</label>
-												<select class="form-control " name="attr[color]" id="">
-													<option value="0"> Black</option>
-												</select>
-											</div>
-										</div> -->
 									</div>
 									<div class="row row-pb-sm">
 										<div class="col-md-4">
@@ -93,7 +85,7 @@
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
-								{{ strip_tags($product->description) }}
+								{{ $product->description }}
 							</div>
 						</div>
 					</div>
@@ -107,7 +99,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
-				<h2><span>Sản phẩm Mới</span></h2>
+				<h2><span>New Products</span></h2>
 			</div>
 		</div>
 		<div class="row">
@@ -129,40 +121,6 @@
 					</div>
 				</div>
 			@endforeach
-			<!-- <div class="col-md-3 text-center">
-				<div class="product-entry">
-					<div class="product-img" style="background-image: url(images/item-8.jpg);">
-						<p class="tag"><span class="new">New</span></p>
-						<div class="cart">
-							<p>
-								<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
-								<span><a href="product/detail/2"><i class="icon-eye"></i></a></span>
-							</p>
-						</div>
-					</div>
-					<div class="desc">
-						<h3><a href="shop.html">Áo khoác nữ đẹp</a></h3>
-						<p class="price"><span>50,000 VNĐ</span></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 text-center">
-				<div class="product-entry">
-					<div class="product-img" style="background-image: url(images/item-6.jpg);">
-						<p class="tag"><span class="new">New</span></p>
-						<div class="cart">
-							<p>
-								<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
-								<span><a href="product/detail/1"><i class="icon-eye"></i></a></span>
-							</p>
-						</div>
-					</div>
-					<div class="desc">
-						<h3><a href="shop.html">Áo khoác nam đẹp</a></h3>
-						<p class="price"><span>150,000 VNĐ</span></p>
-					</div>
-				</div>
-			</div> -->
 		</div>
 	</div>
 </div>
