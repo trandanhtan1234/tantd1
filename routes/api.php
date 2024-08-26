@@ -37,6 +37,8 @@ Route::namespace('api')->group(function() {
     });
 
     Route::prefix('order')->group(function() {
-        route::get('/', [OrderController::class, 'index']);
+        Route::get('/', [OrderController::class, 'index']);
+        Route::get('/show/{id}', [OrderController::class, 'show']);
+        Route::post('/update/{id}', [OrderController::class, 'update']);
     });
 });

@@ -103,7 +103,7 @@
 						</div>
 						<div class="desc">
 							<h3><a href="shop.html">{{ $product->name }}</a></h3>
-							<p class="price"><span>{{ number_format($product->price,0,',','.') }} đ</span> </p>
+							<p class="price"><span>{{ number_format($product->price,0,',','.') }} VNĐ</span> </p>
 						</div>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 					</div>
 					<div class="desc">
 						<h3><a href="{{ url('product/detail/'.$row->id) }}">{{ $row->name }}</a></h3>
-						<p class="price"><span>{{ number_format($row->price,0,',','.') }} đ</span> </p>
+						<p class="price"><span>{{ number_format($row->price,0,',','.') }} VNĐ</span></p>
 					</div>
 				</div>
 			</div>

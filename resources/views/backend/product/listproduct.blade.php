@@ -79,7 +79,7 @@
 												</div>
 											</div>
 										</td>
-										<td>{{ number_format($row->price,0,'.','.') }} VND</td>
+										<td>{{ number_format($row->price,0,'.','.') }} VNĐ</td>
 										<td>
 											<p class="btn btn-{{ $row->status==1?'success':'danger' }}">{{ productStatus($row->status) }}</p>
 										</td>
