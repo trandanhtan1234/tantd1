@@ -19,6 +19,7 @@ use App\Http\Controllers\frontend\CartController;
 Route::get('/', [Frontend::class, 'getIndex']);
 Route::get('/about-us', [Frontend::class, 'getAboutUs']);
 Route::get('/contact', [Frontend::class, 'getContact']);
+Route::get('/map', [Frontend::class, 'map']);
 
 Route::group(['prefix' => 'checkout'], function() {
     Route::get('/', [CheckoutController::class, 'getCheckout']);

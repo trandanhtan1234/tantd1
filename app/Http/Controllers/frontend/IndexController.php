@@ -34,4 +34,9 @@ class IndexController extends Controller
     {
         return view('frontend.contact');
     }
+
+    public function map()
+    {
+        return view('frontend.map');
+    }
 }
