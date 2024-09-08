@@ -16,7 +16,8 @@
 .attr{font-size: 12px;text-align: center;padding: 5px 10px;display: inline-block;border: 1px solid #e6e6e6;margin-bottom: 3px;text-transform: uppercase;color: gray;}
 .cart-img
 {
-    height: 100%;
+    width: 100px;
+    height: 100px;
 }
 .product-cart .detail-buy
 {

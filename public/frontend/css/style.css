@@ -428,9 +428,6 @@ h1, h2, h3, h4, h5, h6, figure {
 .colorlib-blog,
 #colorlib-subscribe,
 #colorlib-footer {
-  background-image: url(../images/evie.jpg);
-  background-repeat: unset;
-  background-position: center;
   padding-top: 3.75em;
   padding-bottom: 9em;
   clear: both; }

@@ -38,7 +38,20 @@ class VariantValueSeeder extends Seeder
             ['variant_id'=>9,'value_id'=>2],
             ['variant_id'=>9,'value_id'=>4],
             ['variant_id'=>10,'value_id'=>2],
-            ['variant_id'=>10,'value_id'=>5]
+            ['variant_id'=>10,'value_id'=>5],
+
+            ['variant_id'=>11,'value_id'=>2],
+            ['variant_id'=>11,'value_id'=>5],
+            ['variant_id'=>12,'value_id'=>2],
+            ['variant_id'=>12,'value_id'=>6],
+
+            ['variant_id'=>13,'value_id'=>2],
+            ['variant_id'=>13,'value_id'=>6],
+            ['variant_id'=>14,'value_id'=>3],
+            ['variant_id'=>14,'value_id'=>6],
+
+            ['variant_id'=>15,'value_id'=>1],
+            ['variant_id'=>15,'value_id'=>4]
         ]);
     }
 }
