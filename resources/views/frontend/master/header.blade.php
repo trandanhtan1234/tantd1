@@ -20,7 +20,7 @@
 								</li>
 								<li><a href="{{ url('about') }}">About Us</a></li>
 								<li><a href="{{ url('contact') }}">Contact</a></li>
-								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Contact [0]</a></li>
+								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Checkout [{{ Cart::count() }}]</a></li>
 							</ul>
 						</div>
 					</div>

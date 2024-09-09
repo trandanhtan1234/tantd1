@@ -7,6 +7,15 @@
 		<div class="row row-pb-lg">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="product-detail-wrap">
+					@if (session('success'))
+						<div class="alert bg-success">
+							<strong>{{ session('success') }}</strong>
+						</div>
+					@elseif (session('failed'))
+						<div class="alert alert-danger">
+							<strong>{{ session('failed') }}</strong>
+						</div>
+					@endif
 					<div class="row">
 						<div class="col-md-5">
 							<div class="product-entry">

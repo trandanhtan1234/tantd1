@@ -3,6 +3,7 @@
 @section('content')
 <!-- main -->
 <div class="colorlib-shop">
+	@if ($count > 0)
 	<div class="container">
 		<div class="row row-pb-md">
 			<div class="col-md-10 col-md-offset-1">
@@ -69,7 +70,7 @@
 						</div>
 						<div class="one-eight text-center">
 							<div class="display-tc">
-								<input type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="{{ $prd->qty }}">
+								<input onchange="updateQty('{{ $prd->rowId }}',this.value)" type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="{{ $prd->qty }}">
 							</div>
 						</div>
 						<div class="one-eight text-center">
@@ -106,6 +107,11 @@
 			</div>
 		</div>
 	</div>
+	@else
+	<div class="flex justify-center">
+		<h1>You have no Products in Cart!</h1>
+	</div>
+	@endif
 </div>
 <!-- end main -->
 @endsection
@@ -113,6 +119,12 @@
 <script>
 	function delProduct(name) {
 		return confirm('Remove '+name+' from Cart?');
+	}
+
+	function updateQty(rowId,qty) {
+		$.get('/cart/update-cart/'+rowId+'/'+qty, function() {
+			window.location.reload();
+		});
 	}
 </script>
 @endsection

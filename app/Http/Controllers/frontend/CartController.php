@@ -21,7 +21,7 @@ class CartController extends Controller
         $addCart = $this->cartRepo->addCart($r);
         
         if ($addCart) {
-            return redirect('/cart');
+            return redirect()->back()->with('success', 'Product has been added to Cart!');
         } else {
             return redirect()->back()->with('failed', 'Something went wrong. Please try again later!');
         }
@@ -34,8 +34,19 @@ class CartController extends Controller
         return view('frontend.cart.cart', $data);
     }
 
+    public function updateCart($rowId,$qty)
+    {
+        $update = $this->cartRepo->updateCart($rowId,$qty);
+    }
+
     public function removeProduct($id)
     {
         $delete = $this->cartRepo->deleteProduct($id);
+
+        if ($delete['code'] == 200) {
+            return redirect()->back()->with('success', $delete['msg']);
+        } else {
+            return redirect()->back()->with('failed', $delete['msg']);
+        }
     }
 }
