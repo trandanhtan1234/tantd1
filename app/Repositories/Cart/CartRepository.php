@@ -100,7 +100,15 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->img = $prd->options->img;
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
+
+                $product = product::where('id', $prd->id)->first();
+                if (($product->quantity - $prd->qty) == 0) {
+                    $product->status = 0;
+                }
+                $product->quantity = $product->quantity - $prd->qty;
+                $product->save();
             }
+            Cart::destroy();
             DB::commit();
 
             $result = [

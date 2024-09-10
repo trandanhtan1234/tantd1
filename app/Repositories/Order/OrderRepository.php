@@ -3,7 +3,7 @@
 namespace App\Repositories\Order;
 
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Models\models\order;
+use App\Models\models\{order,orderdetail,product};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +30,15 @@ class OrderRepository implements OrderRepositoryInterface
     {
         try {
             DB::beginTransaction();
+            if ($params['status'] == 2) {
+                $detailOrder = orderdetail::where('order_id', $id)->get();
+                foreach ($detailOrder as $prd) {
+                    $product = product::where('code', $prd['code'])->first();
+                    $product->quantity = $product->quantity + $detailOrder->quantity;
+                    $product->save();
+                }
+            }
+
             $order = order::find($id);
             $order->status = $params['status'];
             $order->save();
