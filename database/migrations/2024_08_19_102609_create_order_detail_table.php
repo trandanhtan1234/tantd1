@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->decimal('price',10,0);
-            $table->tiniInteger('quantity')->unsigned();
+            $table->tinyInteger('quantity')->unsigned();
             $table->string('img');
-            $table->integer('order_id');
+            $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
         });
     }

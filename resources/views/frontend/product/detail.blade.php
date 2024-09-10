@@ -7,14 +7,29 @@
 		<div class="row row-pb-lg">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="product-detail-wrap">
+					@if (session('success'))
+						<div class="alert bg-success">
+							<strong>{{ session('success') }}</strong>
+						</div>
+					@elseif (session('failed'))
+						<div class="alert alert-danger">
+							<strong>{{ session('failed') }}</strong>
+						</div>
+					@endif
 					<div class="row">
 						<div class="col-md-5">
 							<div class="product-entry">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);"></div>
+								@php
+								$img = $product->img;
+								if (!file_exists(public_path($img))) {
+									$img = 'base/img/no-img.jpg';
+								}
+								@endphp
+								<div class="product-img" style="background-image: url({{ url($img) }});"></div>
 							</div>
 						</div>
 						<div class="col-md-7">
-							<form action="{{ url('addCart') }}" method="get">
+							<form action="{{ route('addCart') }}" method="get">
 								<div class="desc">
 									<h3>{{ $product->name }}</h3>
 									<p class="price">
@@ -44,7 +59,7 @@
 												<select class="form-control " name="attr[{{ $values }}]" id="">
 													@foreach ($value as $name)
 														<option value="{{ $name }}"> {{ $name }}</option>
-													@foreach
+													@endforeach
 												</select>
 											</div>
 										</div>
@@ -54,13 +69,14 @@
 										<div class="col-md-4">
 											<div class="input-group">
 												<span class="input-group-btn">
-													<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+													<button type="button" class="quantity-left-minus btn" onclick="minusOne()" data-type="minus" data-field="">
 														<i class="icon-minus2"></i>
 													</button>
 												</span>
 												<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+												<input type="hidden" id="max" value="{{ $product->quantity }}">
 												<span class="input-group-btn">
-													<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+													<button type="button" class="quantity-right-plus btn" onclick="plusOne()" data-type="plus" data-field="">
 														<i class="icon-plus2"></i>
 													</button>
 												</span>
@@ -85,7 +101,7 @@
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
-								{{ $product->description }}
+								{!! $product->description !!}
 							</div>
 						</div>
 					</div>
@@ -106,8 +122,17 @@
 			@foreach ($prd_new as $product)
 				<div class="col-md-3 text-center">
 					<div class="product-entry">
-						<div class="product-img" style="background-image: url(images/item-7.jpg);">
-							<p class="tag"><span class="new">New</span></p>
+						@php
+							$img = $product->img;
+							if (!file_exists(public_path($img))) {
+								$img = 'base/img/no-img.jpg';
+							}
+							$created_at = strtotime($product->created_at);
+							$now = strtotime($now);
+							$created_days = round(($now-$created_at)/(60*60*24));
+						@endphp
+						<div class="product-img" style="background-image: url({{ url($img) }});">
+							@if($created_days<=7)<p class="tag"><span class="new">New</span></p>@endif
 							<div class="cart">
 								<p>
 									<span><a href="{{ url('product/detail/'.$product->id) }}"><i class="icon-eye"></i></a></span>
@@ -125,4 +150,21 @@
 	</div>
 </div>
 <!-- end main -->
+@endsection
+@section('detailProduct')
+<script>
+	function minusOne() {
+		const curQuantity = parseInt($('#quantity').val());
+		if (curQuantity > 1) {
+			$('#quantity').val(curQuantity - 1);
+		}
+	}
+	function plusOne() {
+		const curQuantity = parseInt($('#quantity').val());
+		const max = parseInt($('#max').val());
+		if (curQuantity < max) {
+			$('#quantity').val(curQuantity + 1);
+		}
+	}
+</script>
 @endsection

@@ -34,7 +34,18 @@ class ValueProductSeeder extends Seeder
 
             ['product_id'=>5,'value_id'=>2],
             ['product_id'=>5,'value_id'=>4],
-            ['product_id'=>5,'value_id'=>5]
+            ['product_id'=>5,'value_id'=>5],
+
+            ['product_id'=>6,'value_id'=>2],
+            ['product_id'=>6,'value_id'=>5],
+            ['product_id'=>6,'value_id'=>6],
+            
+            ['product_id'=>7,'value_id'=>2],
+            ['product_id'=>7,'value_id'=>3],
+            ['product_id'=>7,'value_id'=>6],
+            
+            ['product_id'=>8,'value_id'=>1],
+            ['product_id'=>8,'value_id'=>4]
         ]);
     }
 }

@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Repositories\Products\ProductsRepositoryInterface::class, \App\Repositories\Products\ProductsRepository::class);
         $this->app->singleton(\App\Repositories\Order\OrderRepositoryInterface::class, \App\Repositories\Order\OrderRepository::class);
         $this->app->singleton(\App\Repositories\Index\IndexRepositoryInterface::class, \App\Repositories\Index\IndexRepository::class);
+        $this->app->singleton(\App\Repositories\Cart\CartRepositoryInterface::class, \App\Repositories\Cart\CartRepository::class);
 
         // api
         $this->app->singleton(\App\Repositories\Api\Users\UserRepoInterface::class, \App\Repositories\Api\Users\UserRepo::class);

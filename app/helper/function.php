@@ -68,7 +68,7 @@ function attr_values($array)
     return $result;
 }
 
-function codeName($name, $id) {
+function codeName($name,$id) {
     $prdCode = '';
     $name = str_replace(unicode(), noSpecialCharacters(), $name);
     $id = sprintf('%06d', $id);
@@ -137,7 +137,7 @@ function getCombinations($array) {
     return $result;
 }
 
-function checkValue($products, $valId) {
+function checkValue($products,$valId) {
     foreach ($products->values as $val) {
         if ($val->id == $valId) {
             return true;
@@ -154,4 +154,17 @@ function valueAttr($values) {
     }
     
     return $array;
+}
+
+function getPrice($product,$attr) {
+    foreach ($product->variant as $variant) {
+        $array = [];
+        foreach ($variant->values as $value) {
+            $array[] = $value->value;
+        }
+
+        if (empty(array_diff($array,$attr))) {
+            return $variant->price;
+        }
+    }
 }

@@ -26,7 +26,7 @@ class ProductController extends Controller
         $data['list'] = $this->productRepo->getProducts();
         $data['category'] = $this->categoryRepo->getListCategory();
         $data['now'] = \Carbon\Carbon::now();
-        $data['attribtes'] = $this->productRepo->getAttributes();
+        $data['attributes'] = $this->productRepo->getAttributes();
 
         return view('frontend.product.list', $data);
     }
@@ -35,6 +35,7 @@ class ProductController extends Controller
     {
         $data['product'] = $this->productRepo->getProduct($id);
         $data['prd_new'] = $this->productRepo->getListNew();
+        $data['now'] = \Carbon\Carbon::now();
 
         return view('frontend.product.detail', $data);
     }

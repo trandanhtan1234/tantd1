@@ -28,7 +28,15 @@ class VariantsSeeder extends Seeder
             ['id'=>8,'price'=>800000,'product_id'=>4],
 
             ['id'=>9,'price'=>900000,'product_id'=>5],
-            ['id'=>10,'price'=>1000000,'product_id'=>5]
+            ['id'=>10,'price'=>1000000,'product_id'=>5],
+
+            ['id'=>11,'price'=>500000,'product_id'=>6],
+            ['id'=>12,'price'=>550000,'product_id'=>6],
+
+            ['id'=>13,'price'=>400000,'product_id'=>7],
+            ['id'=>14,'price'=>400000,'product_id'=>7],
+            
+            ['id'=>15,'price'=>600000,'product_id'=>8]
         ]);
     }
 }

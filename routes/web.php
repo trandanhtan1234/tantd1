@@ -23,6 +23,7 @@ Route::get('/map', [Frontend::class, 'map']);
 
 Route::group(['prefix' => 'checkout'], function() {
     Route::get('/', [CheckoutController::class, 'getCheckout']);
+    Route::post('/', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
     Route::get('/complete', [CheckoutController::class, 'getComplete']);
 });
 
@@ -34,6 +35,8 @@ Route::group(['prefix' => 'product'], function() {
 Route::group(['prefix' => 'cart'], function() {
     Route::get('/', [CartController::class, 'getCart']);
     Route::get('/add-cart', [CartController::class, 'addCart'])->name('addCart');
+    Route::get('/update-cart/{rowId}/{qty}', [CartController::class, 'updateCart']);
+    Route::get('/remove/{id}', [CartController::class, 'removeProduct'])->name('removeProduct');
 });
 
 // BACKEND

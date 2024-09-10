@@ -428,9 +428,6 @@ h1, h2, h3, h4, h5, h6, figure {
 .colorlib-blog,
 #colorlib-subscribe,
 #colorlib-footer {
-  background-image: url(../images/evie.jpg);
-  background-repeat: unset;
-  background-position: center;
   padding-top: 3.75em;
   padding-bottom: 9em;
   clear: both; }
@@ -2053,7 +2050,7 @@ input[type="text"] {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
   height: 54px;
   font-size: 18px;
   font-weight: 300; }
@@ -2092,3 +2089,17 @@ input[type="text"] {
 .slider-row {
   width: 262.5px;
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.color-gray { color: #5f6468; }
+.color-blue { color: #30a5ff; }
+.color-teal { color: #1ebfae; }
+.color-orange { color: #ffb53e; }
+.color-red { color: #f9243f; }

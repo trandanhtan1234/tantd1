@@ -61,7 +61,7 @@
 															@if ($row1->parent == $row->id)
 																<li><a href="#">{{ $row1->name }}</a></li>
 															@endif
-														@endif
+														@endforeach
 														<!-- <li><a href="#">Áo thun nam</a></li>
 														<li><a href="#">Áo Khoác nam</a></li>
 														<li><a href="#">Áo vest Nam</a></li> -->

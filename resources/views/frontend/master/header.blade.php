@@ -11,7 +11,7 @@
 							<ul>
 								<li class="active"><a href="{{ url('') }}">Index</a></li>
 								<li class="has-dropdown">
-									<a>Products</a>
+									<a href="{{ url('product') }}">Products</a>
 									<ul class="dropdown">
 										<li><a href="{{ url('cart') }}">Cart</a></li>
 										<li><a href="{{ url('checkout') }}">Checkout</a></li>
@@ -20,7 +20,7 @@
 								</li>
 								<li><a href="{{ url('about') }}">About Us</a></li>
 								<li><a href="{{ url('contact') }}">Contact</a></li>
-								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Contact [0]</a></li>
+								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Checkout [{{ Cart::count() }}]</a></li>
 							</ul>
 						</div>
 					</div>
