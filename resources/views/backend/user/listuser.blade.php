@@ -40,7 +40,10 @@
 								</svg>{{ session('failed') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>
 							@endif
-							<a href="{{ url('admin/user/add') }}" class="btn btn-primary">Add User</a>
+							<div class="display-flex justify-between">
+								<a href="{{ url('admin/user/add') }}" class="btn btn-primary">Add User</a>
+								<a href="{{ url('admin/user/export-users') }}" class="excel-btn btn" target="_blank">Export</a>
+							</div>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>
 									<tr class="bg-primary">
