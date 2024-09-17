@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Order\OrderRepositoryInterface;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CustomersExport;
 
 class OrderController extends Controller
 {
@@ -46,5 +48,12 @@ class OrderController extends Controller
         $data['orders'] = $this->orderRepo->getApproved();
 
         return view('backend.order.orderapproved', $data);
+    }
+
+    public function getCustomers()
+    {
+        $customers = $this->orderRepo->getCustomers();
+
+        return Excel::download(new CustomersExport($customers), 'customers.xlsx');
     }
 }

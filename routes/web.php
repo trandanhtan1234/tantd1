@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::get('/detail/{id}', [OrderController::class, 'getDetail']);
         Route::post('/detail/{id}', [OrderController::class, 'approveOrder'])->name('approveOrder');
         Route::get('/approved', [OrderController::class, 'getApproved']);
+        Route::get('/export-customers', [OrderController::class, 'getCustomers']);
     });
 
     Route::group(['prefix' => 'user'], function() {

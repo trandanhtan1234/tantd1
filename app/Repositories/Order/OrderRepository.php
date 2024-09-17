@@ -3,7 +3,7 @@
 namespace App\Repositories\Order;
 
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Models\models\{order,orderdetail,product};
+use App\Models\models\{order,orderdetail,product,customer};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -66,5 +66,12 @@ class OrderRepository implements OrderRepositoryInterface
         $orders = order::where('status', 1)->paginate(5);
 
         return $orders;
+    }
+
+    public function getCustomers()
+    {
+        $customers = customer::get();
+
+        return $customers;
     }
 }
