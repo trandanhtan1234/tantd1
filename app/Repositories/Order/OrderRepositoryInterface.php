@@ -11,4 +11,6 @@ interface OrderRepositoryInterface
     public function approveOrder($params,$id);
 
     public function getApproved();
+
+    public function getCustomers();
 }
