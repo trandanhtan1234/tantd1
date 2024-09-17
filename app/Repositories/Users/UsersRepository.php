@@ -18,6 +18,13 @@ class UsersRepository implements UsersRepositoryInterface
         return $getList;
     }
 
+    public function getAll()
+    {
+        $getAll = users::get();
+
+        return $getAll;
+    }
+
     public function getUserInfo($id)
     {
         $userInfo = users::find($id);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Http\Requests\{AddUserRequest,EditUserRequest};
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 
 class UserController extends Controller
 {
@@ -67,5 +69,12 @@ class UserController extends Controller
         } else {
             return redirect()->back()->with('failed', $delUser['msg']);
         }
+    }
+
+    public function exportUsers()
+    {
+        $users = $this->userRepo->getAll();
+        
+        return Excel::download(new UsersExport($users), 'users.xlsx');
     }
 }
