@@ -86,6 +86,7 @@
 <!--end main-->
 @endsection
 @section('active')
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> -->
 <script>
 	$('.overview').addClass('active');
 	const xValues = [
