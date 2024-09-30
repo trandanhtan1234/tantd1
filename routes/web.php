@@ -21,6 +21,12 @@ Route::get('/about-us', [Frontend::class, 'getAboutUs']);
 Route::get('/contact', [Frontend::class, 'getContact']);
 Route::get('/map', [Frontend::class, 'map']);
 
+// Login - Register
+Route::get('/login-customer', [Frontend::class, 'loginCustomer']);
+Route::post('/login-customer', [Frontend::class, 'postLoginCustomer'])->name('loginCustomer');
+Route::get('/register-customer', [Frontend::class, 'registerCustomer']);
+Route::post('/register-customer', [Frontend::class, 'postRegisterCustomer'])->name('registerCustomer');
+
 Route::group(['prefix' => 'checkout'], function() {
     Route::get('/', [CheckoutController::class, 'getCheckout']);
     Route::post('/', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
