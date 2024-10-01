@@ -9,10 +9,9 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CustomerRegister extends Mailable
+class RegisterUser extends Mailable
 {
     use Queueable, SerializesModels;
-
     private $data;
 
     /**
@@ -29,7 +28,7 @@ class CustomerRegister extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Customer Register',
+            subject: 'Register User',
         );
     }
 
@@ -39,14 +38,8 @@ class CustomerRegister extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'frontend.email.customer_register',
-            with: [
-                'full' => $this->data['full'],
-                'email' => $this->data['email'],
-                'password' => $this->data['password'],
-                'address' => $this->data['address'],
-                'phone' => $this->data['phone']
-            ]
+            view: 'backend.user.email.register_user',
+            with: $this->data
         );
     }
 

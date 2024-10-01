@@ -8,6 +8,8 @@ use App\Models\models\users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterUser;
 
 class UsersRepository implements UsersRepositoryInterface
 {
@@ -44,6 +46,8 @@ class UsersRepository implements UsersRepositoryInterface
             $user->phone = $params['phone'];
             $user->level = $params['level'];
             $user->save();
+
+            Mail::to($params['email'])->send(new RegisterUser($params));
             DB::commit();
 
             $result = [
