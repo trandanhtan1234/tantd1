@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Repositories\Api\Category\CateRepoInterface::class, \App\Repositories\Api\Category\CateRepo::class);
         $this->app->singleton(\App\Repositories\Api\Products\ProductRepoInterface::class, \App\Repositories\Api\Products\ProductRepo::class);
         $this->app->singleton(\App\Repositories\Api\Order\OrderRepoInterface::class, \App\Repositories\Api\Order\OrderRepo::class);
+        $this->app->singleton(\App\Repositories\Api\Customer\CustomerRepoInterface::class, \App\Repositories\Api\Customer\CustomerRepo::class);
     }
 
     /**

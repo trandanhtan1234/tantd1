@@ -41,4 +41,8 @@ Route::namespace('api')->group(function() {
         Route::get('/show/{id}', [OrderController::class, 'show']);
         Route::post('/update/{id}', [OrderController::class, 'update']);
     });
+
+    Route::prefix('customer')->group(function() {
+        Route::get('/');
+    });
 });
