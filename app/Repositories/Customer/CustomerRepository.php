@@ -13,6 +13,13 @@ use App\Mail\CustomerRegister;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
+    public function index()
+    {
+        $customers = customer::orderBy('id', 'DESC')->paginate(5);
+
+        return $customers;
+    }
+
     public function addCustomer($params)
     {
         try {
@@ -43,5 +50,12 @@ class CustomerRepository implements CustomerRepositoryInterface
             ];
             return $result;
         }
+    }
+
+    public function show($id)
+    {
+        $customer = customer::find($id);
+
+        return $customer;
     }
 }

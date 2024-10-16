@@ -8,5 +8,6 @@
         <li class="orders"><a href="{{ url('admin/order') }}"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad" /></svg>Orders</a></li>
         <li role="presentation" class="divider"></li>
         <li class="manage_members"><a href="{{ url('admin/user') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Manage Members</a></li>
+        <li class="manage_customers"><a href="{{ url('admin/customer') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Manage Customers</a></li>
     </ul>
 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\VariantController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\frontend\IndexController as Frontend;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\ProductController as ProductFrontend;
@@ -101,6 +102,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::post('/edit/{id}', [UserController::class, 'postEditUser'])->name('user.editUser');
         Route::get('/delete/{id}', [UserController::class, 'getDeleteUser']);
         Route::get('/export-users', [UserController::class, 'exportUsers']);
+    });
+
+    Route::group(['prefix' => 'customer'], function() {
+        Route::get('/', [CustomerController::class, 'index']);
+        Route::get('/edit/{id}', [CustomerController::class, 'update']);
+        Route::post('/edit/{id}', [CustomerController::class, 'postUpdate'])->name('update.customer');
     });
 
     Route::group(['prefix' => 'comment'], function() {
