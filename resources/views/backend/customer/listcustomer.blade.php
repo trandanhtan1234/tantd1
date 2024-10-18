@@ -41,7 +41,7 @@
 							</div>
 							@endif
 							<div class="display-flex justify-between">
-								<a href="#" class="btn btn-primary">Add Customer</a>
+								<a href="{{ url('/admin/customer/add') }}" class="btn btn-primary">Add Customer</a>
 								<a href="#" class="excel-btn btn" target="_blank">Export</a>
 							</div>
 							<table class="table table-bordered" style="margin-top:20px;">
@@ -64,8 +64,8 @@
 										<td>{{ $customer->address }}</td>
 										<td>{{ $customer->phone }}</td>
 										<td>
-											<a href="#" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-											<a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+											<a href="{{ url('/admin/customer/edit/'. $customer->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
+											<a onclick="return delCustomer('<?= $customer->full ?>')" href="{{ url('admin/customer/delete/'. $customer->id') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</td>
 									</tr>
 									@endforeach
@@ -91,5 +91,9 @@
 @section('active')
 <script>
 	$('.manage_customers').addClass('active');
+
+	function delCustomer(name) {
+		return confirm('Delete Customer: '+name+'?');
+	}
 </script>
 @endsection
