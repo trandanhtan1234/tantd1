@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\backend\UserController;
 use App\Http\Controllers\Api\backend\CategoryController;
 use App\Http\Controllers\Api\backend\ProductController;
 use App\Http\Controllers\Api\backend\OrderController;
+use App\Http\Controllers\Api\backend\CustomerController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -43,6 +44,10 @@ Route::namespace('api')->group(function() {
     });
 
     Route::prefix('customer')->group(function() {
-        Route::get('/');
+        Route::get('/', [CustomerController::class, 'index']);
+        Route::post('/store', [CustomerController::class, 'store']);
+        Route::get('/show/{id}', [CustomerController::class, 'show']);
+        Route::post('/update/{id}', [CustomerController::class, 'update']);
+        Route::get('/destroy/{id}', [CustomerController::class, 'destroy']);
     });
 });

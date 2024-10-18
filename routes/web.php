@@ -106,8 +106,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
 
     Route::group(['prefix' => 'customer'], function() {
         Route::get('/', [CustomerController::class, 'index']);
+        Route::get('/add', [CustomerController::class, 'getStore']);
         Route::get('/edit/{id}', [CustomerController::class, 'update']);
         Route::post('/edit/{id}', [CustomerController::class, 'postUpdate'])->name('update.customer');
+        Route::get('/delete/{id}', [CustomerController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'comment'], function() {

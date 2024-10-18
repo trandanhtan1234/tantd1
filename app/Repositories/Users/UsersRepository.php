@@ -13,6 +13,8 @@ use App\Mail\RegisterUser;
 
 class UsersRepository implements UsersRepositoryInterface
 {
+    const failed_msg = 'Something went wrong, please try again later!';
+
     public function getList()
     {
         $getList = users::orderBy('id', 'DESC')->paginate(5);
@@ -61,7 +63,7 @@ class UsersRepository implements UsersRepositoryInterface
 
             $result = [
                 'code' => 500,
-                'msg' => 'Add User Failed'
+                'msg' => static::failed_msg
             ];
             return $result;
         }
@@ -90,7 +92,7 @@ class UsersRepository implements UsersRepositoryInterface
 
             $result = [
                 'code' => 500,
-                'msg' => 'Edit User failed'
+                'msg' => static::failed_msg
             ];
             return $result;
         }
@@ -100,8 +102,7 @@ class UsersRepository implements UsersRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $user = users::find($id);
-            $user->delete();
+            users::destroy($id);
             DB::commit();
 
             $result = [
@@ -116,7 +117,7 @@ class UsersRepository implements UsersRepositoryInterface
 
             $result = [
                 'code' => 500,
-                'msg' => 'Something went wrong. Please try again later'
+                'msg' => static::failed_msg
             ];
 
             return $result;

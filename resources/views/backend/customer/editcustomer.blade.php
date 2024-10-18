@@ -34,6 +34,11 @@
                                     <div class="form-group">
                                         <label>Address</label>
                                         <input type="address" name="address" class="form-control" value="{{ old('address', $customer->address) }}">
+                                        @if ($errors->has('phone'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label>Phone <span class="color-red">*</span></label>
