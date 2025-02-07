@@ -2103,3 +2103,7 @@ input[type="text"] {
 .color-teal { color: #1ebfae; }
 .color-orange { color: #ffb53e; }
 .color-red { color: #f9243f; }
+
+.mr-15 {
+  margin-right: 15px;
+}

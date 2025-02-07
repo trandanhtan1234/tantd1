@@ -10,15 +10,15 @@
 				<div class="process-wrap">
 					<div class="process text-center active">
 						<p><span>01</span></p>
-						<h3>Giỏ hàng</h3>
+						<h3>Cart</h3>
 					</div>
 					<div class="process text-center">
 						<p><span>02</span></p>
-						<h3>Thanh toán</h3>
+						<h3>Checkout</h3>
 					</div>
 					<div class="process text-center">
 						<p><span>03</span></p>
-						<h3>Hoàn tất thanh toán</h3>
+						<h3>Complete</h3>
 					</div>
 				</div>
 			</div>
@@ -27,19 +27,19 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="product-name">
 					<div class="one-forth text-center">
-						<span>Chi tiết sản phẩm</span>
+						<span>Details</span>
 					</div>
 					<div class="one-eight text-center">
-						<span>Giá</span>
+						<span>Price</span>
 					</div>
 					<div class="one-eight text-center">
-						<span>Số lượng</span>
+						<span>Quantity</span>
 					</div>
 					<div class="one-eight text-center">
-						<span>Tổng</span>
+						<span>Total</span>
 					</div>
 					<div class="one-eight text-center">
-						<span>Xóa</span>
+						<span>Remove</span>
 					</div>
 				</div>
 				@foreach ($cart as $prd)
@@ -94,11 +94,20 @@
 						<div class="col-md-8">
 
 						</div>
-						<div class="col-md-3 col-md-push-1 text-center">
+						<div class="col-md-3 col-md-push-1 text-center flex">
+							<div class="mr-15 total">
+								<div class="grand-total">
+									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
+									<form action="{{ route('vnpay_payment') }}" method="post">
+										@csrf
+										<button type="submit" class="btn btn-primary" name="redirect">VNPAY Checkout</button>
+									</form>
+								</div>
+							</div>
 							<div class="total">
 								<div class="grand-total">
-									<p><span><strong>Tổng cộng:</strong></span> <span>₫ {{ $total }}</span></p>
-									<a href="{{ url('checkout') }}" class="btn btn-primary">Thanh toán <i class="icon-arrow-right-circle"></i></a>
+									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
+									<a href="{{ url('checkout') }}" class="btn btn-primary">Checkout <i class="icon-arrow-right-circle"></i></a>
 								</div>
 							</div>
 						</div>

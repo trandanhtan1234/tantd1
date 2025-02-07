@@ -70,6 +70,7 @@
 
 
 	</div>
+	@livewire('search')
 	<!--/.row-->
 </div>
 <!--/.main-->

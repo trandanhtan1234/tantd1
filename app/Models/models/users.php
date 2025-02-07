@@ -4,9 +4,11 @@ namespace App\Models\models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class users extends Model
 {
+    use \Illuminate\Notifications\Notifiable;
     use HasFactory;
     protected $table="users";
 

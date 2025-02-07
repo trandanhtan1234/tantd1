@@ -18,7 +18,7 @@
 				<div class="panel-heading">Detail Order</div>
 				<div class="panel-body">
 					<div class="bootstrap-table">
-						<form action="{{ route('approveOrder') }}" method="post">
+						<form action="{{ route('approveOrder', ['id' => $order->id]) }}" method="post">
 							<input type="hidden" name="order_id" value="{{ $order->id }}">
 							<div class="table-responsive">
 								<div class="form-group">
