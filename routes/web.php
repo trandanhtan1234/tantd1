@@ -13,6 +13,7 @@ use App\Http\Controllers\frontend\IndexController as Frontend;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\ProductController as ProductFrontend;
 use App\Http\Controllers\frontend\CartController;
+use App\Livewire\Search;
 
 
 // FRONTEND
@@ -27,12 +28,6 @@ Route::post('/login-customer', [Frontend::class, 'postLoginCustomer'])->name('lo
 Route::get('/register-customer', [Frontend::class, 'registerCustomer']);
 Route::post('/register-customer', [Frontend::class, 'postRegisterCustomer'])->name('registerCustomer');
 
-Route::group(['prefix' => 'checkout'], function() {
-    Route::get('/', [CheckoutController::class, 'getCheckout']);
-    Route::post('/', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
-    Route::get('/complete', [CheckoutController::class, 'getComplete']);
-});
-
 Route::group(['prefix' => 'product'], function() {
     Route::get('/', [ProductFrontend::class, 'getListProducts']);
     Route::get('/detail/{id}', [ProductFrontend::class, 'getDetailProduct']);
@@ -45,8 +40,20 @@ Route::group(['prefix' => 'cart'], function() {
     Route::get('/remove/{id}', [CartController::class, 'removeProduct'])->name('removeProduct');
 });
 
+Route::group(['prefix' => 'checkout'], function() {
+    Route::get('/', [CheckoutController::class, 'getCheckout']);
+    Route::post('/', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
+    Route::get('/complete', [CheckoutController::class, 'getComplete']);
+    Route::post('/vnpay_payment', [CheckoutController::class, 'vnPay'])->name('vnpay_payment');
+});
+
+Route::get('livewire-user', [Search::class, 'render']);
+Route::get('list-users', function() {
+    return view('livewire.list-users');
+});
+
 // BACKEND
-Route::get('/login', [LoginController::class, 'getLogin'])->middleware('CheckLogout');
+Route::get('/login', [LoginController::class, 'getLogin'])->middleware('CheckLogout')->name('getLogin');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 Route::get('/logout', [LoginController::class, 'getLogout']);
 

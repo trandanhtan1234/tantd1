@@ -19,6 +19,9 @@ class LoginController extends Controller
         $credentials = $r->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $user->last_login = \Carbon\Carbon::now();
+            $user->save();
             return redirect('/admin');
         } else {
             return redirect('login')->withInput()->with('failed', 'Email or Password is incorrect!');
