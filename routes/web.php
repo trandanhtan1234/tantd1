@@ -45,6 +45,7 @@ Route::group(['prefix' => 'checkout'], function() {
     Route::post('/', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
     Route::get('/complete', [CheckoutController::class, 'getComplete']);
     Route::post('/vnpay_payment', [CheckoutController::class, 'vnPay'])->name('vnpay_payment');
+    Route::post('/momo_payment', [CheckoutController::class, 'momoPay'])->name('momo_payment');
 });
 
 Route::get('livewire-user', [Search::class, 'render']);

@@ -102,7 +102,7 @@
 							</div>
 						</div>
 						<div class="desc">
-							<h3><a href="shop.html">{{ $product->name }}</a></h3>
+							<h3><a href={{ url('product/detail/'.$product->id) }}">{{ $product->name }}</a></h3>
 							<p class="price"><span>{{ number_format($product->price,0,',','.') }} VNĐ</span> </p>
 						</div>
 					</div>

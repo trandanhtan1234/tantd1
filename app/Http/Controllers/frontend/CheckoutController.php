@@ -38,22 +38,23 @@ class CheckoutController extends Controller
         return view('frontend.checkout.complete');
     }
     
-    public function vnPay()
+    public function vnPay(Request $r)
     {
+        $data = $r->all();
+        $codeCart = rand(00,9999);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:8000/cart";
         $vnp_TmnCode = "2FB4TSJS";//Mã website tại VNPAY
         $vnp_HashSecret = "EO2UQ6WKK39MSAGN3654HMEUH53CK20Y"; //Chuỗi bí mật
 
-        $vnp_TxnRef = '12'; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = $codeCart; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = 'Checkout Test';
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 20000 * 100;
+        $vnp_Amount = $data['total_vnpay'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         //Add Params of 2.0.1 Version
-        // $vnp_ExpireDate = $_POST['txtexpire'];
         //Billing
         
         $inputData = array(
@@ -108,5 +109,68 @@ class CheckoutController extends Controller
             echo json_encode($returnData);
         }
             // vui lòng tham khảo thêm tại code demo
+    }
+
+    public function momoPay(Request $r)
+    {
+        $data = $r->all();
+        
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        
+        
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua ATM MoMo";
+        $amount = $data['total_momo'];
+        $orderId = time() . "";
+        $redirectUrl = "http://localhost:8000/cart";
+        $ipnUrl = "http://localhost:8000/cart";
+        $extraData = "";
+
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array('partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature);
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+
+        //Just a example, please check more in there
+
+        return redirect()->to($jsonResult['payUrl']);
+    }
+
+    public function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data))
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
     }
 }
