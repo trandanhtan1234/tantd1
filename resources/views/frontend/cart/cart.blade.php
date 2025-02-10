@@ -91,15 +91,23 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="total-wrap">
 					<div class="row">
-						<div class="col-md-8">
-
-						</div>
-						<div class="col-md-3 col-md-push-1 text-center flex">
+						<div class="col-md-push-1 text-center flex">
+							<div class="mr-15 total">
+								<div class="grand-total">
+									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
+									<form action="{{ route('momo_payment') }}" method="post">
+										@csrf
+										<input type="hidden" name="total_momo" value="{{ str_replace('.','',$total) }}">
+										<button type="submit" class="btn btn-primary" name="payUrl">MOMO Checkout</button>
+									</form>
+								</div>
+							</div>
 							<div class="mr-15 total">
 								<div class="grand-total">
 									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
 									<form action="{{ route('vnpay_payment') }}" method="post">
 										@csrf
+										<input type="hidden" name="total_vnpay" value="{{ $total }}">
 										<button type="submit" class="btn btn-primary" name="redirect">VNPAY Checkout</button>
 									</form>
 								</div>
