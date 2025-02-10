@@ -12,5 +12,9 @@ interface CartRepositoryInterface
 
     public function postCheckout($params);
 
+    public function vnPay($params);
+    
+    public function momoPay($params);
+
     public function deleteProduct($id);
 }

@@ -95,21 +95,23 @@
 							<div class="mr-15 total">
 								<div class="grand-total">
 									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
-									<form action="{{ route('momo_payment') }}" method="post">
+									<a href="{{ url('checkout/momo_payment') }}" class="btn btn-primary">MOMOPAY Checkout<i class="icon-arrow-right-circle"></i></a>
+									<!-- <form action="{{ route('momo_payment') }}" method="post">
 										@csrf
 										<input type="hidden" name="total_momo" value="{{ str_replace('.','',$total) }}">
 										<button type="submit" class="btn btn-primary" name="payUrl">MOMO Checkout</button>
-									</form>
+									</form> -->
 								</div>
 							</div>
 							<div class="mr-15 total">
 								<div class="grand-total">
 									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
-									<form action="{{ route('vnpay_payment') }}" method="post">
+									<a href="{{ url('checkout/vnpay_payment') }}" class="btn btn-primary">VNPAY Checkout<i class="icon-arrow-right-circle"></i></a>
+									<!-- <form action="{{ route('vnpay_payment') }}" method="post">
 										@csrf
-										<input type="hidden" name="total_vnpay" value="{{ $total }}">
+										<input type="hidden" name="total_vnpay" value="{{ str_replace('.','',$total) }}">
 										<button type="submit" class="btn btn-primary" name="redirect">VNPAY Checkout</button>
-									</form>
+									</form> -->
 								</div>
 							</div>
 							<div class="total">
