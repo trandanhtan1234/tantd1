@@ -24,12 +24,21 @@ class CheckoutController extends Controller
 
     public function postCheckout(CheckoutRequest $r)
     {
-        $postCheckout = $this->cartRepo->postCheckout($r);
+        if ($r->payment_method == 0) {
+            $postCheckout = $this->cartRepo->postCheckout($r);
+            if ($postCheckout['code'] == 200) {
+                return redirect('/checkout/complete')->with('success', $postCheckout['msg']);
+            } else {
+                return redirect()->back()->with('failed', $postCheckout['msg']);
+            }
+        } elseif ($r->payment_method == 1) {
+            $momoPay = $this->cartRepo->momoPay($r);
 
-        if ($postCheckout['code'] == 200) {
-            return redirect('/checkout/complete')->with('success', $postCheckout['msg']);
+            if ($momoPay['code'] == 200) {
+                return redirect()->to($momoPay['url']);
+            }
         } else {
-            return redirect()->back()->with('failed', $postCheckout['msg']);
+            $vnPay = $this->cartRepo->vnPay($r);
         }
     }
 
@@ -38,29 +47,29 @@ class CheckoutController extends Controller
         return view('frontend.checkout.complete');
     }
 
-    public function getVnPay()
-    {
-        $data = $this->cartRepo->getCart();
-        return view('fontend.checkout.vnpay_checkout', $data);
-    }
+    // public function getVnPay()
+    // {
+    //     $data = $this->cartRepo->getCart();
+    //     return view('fontend.checkout.vnpay_checkout', $data);
+    // }
     
-    public function vnPay(CheckoutRequest $r)
-    {
-        $vnPay = $this->cartRepo->vnPay($r);
-    }
+    // public function vnPay(CheckoutRequest $r)
+    // {
+    //     $vnPay = $this->cartRepo->vnPay($r);
+    // }
     
-    public function getMomoPay()
-    {
-        $data = $this->cartRepo->getCart();
-        return view('frontend.checkout.momo_checkout', $data);
-    }
+    // public function getMomoPay()
+    // {
+    //     $data = $this->cartRepo->getCart();
+    //     return view('frontend.checkout.momo_checkout', $data);
+    // }
 
-    public function momoPay(CheckoutRequest $r)
-    {
-        $momoPay = $this->cartRepo->momoPay($r);
+    // public function momoPay(CheckoutRequest $r)
+    // {
+    //     $momoPay = $this->cartRepo->momoPay($r);
 
-        if ($momoPay['code'] == 200) {
-            return redirect()->to($momoPay['url']);
-        }
-    }
+    //     if ($momoPay['code'] == 200) {
+    //         return redirect()->to($momoPay['url']);
+    //     }
+    // }
 }

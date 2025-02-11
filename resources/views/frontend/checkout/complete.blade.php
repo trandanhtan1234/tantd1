@@ -15,7 +15,7 @@
 						<p><span>02</span></p>
 						<h3>Thanh toán</h3>
 					</div>
-					<div class="process text-center">
+					<div class="process text-center active">
 						<p><span>03</span></p>
 						<h3>Hoàn tất thanh toán</h3>
 					</div>

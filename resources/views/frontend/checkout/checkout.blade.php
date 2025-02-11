@@ -26,54 +26,62 @@
 			@csrf
 			<div class="row">
 				<div class="col-md-7">
-					<form method="post" class="colorlib-form">
-						<h2>Checkout Details</h2>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="fname">Full Name <span class="color-red">*</span></label>
-									<input type="text" name="fname" id="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
-									@if ($errors->has('fname'))
-										<div class="alert alert-danger">
-											<strong>{{ $errors->first('fname') }}</strong>
-										</div>
-									@endif
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="address">Address <span class="color-red">*</span></label>
-									<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
-									@if ($errors->has('address'))
-										<div class="alert alert-danger">
-											<strong>{{ $errors->first('address') }}</strong>
-										</div>
-									@endif
-								</div>
-							</div>
-
+					<h2>Checkout Details</h2>
+					<div class="row">
+						<div class="col-md-12">
 							<div class="form-group">
-								<div class="col-md-6">
-									<label for="email">Email <span class="color-red">*</span></label>
-									<input type="email" name="email" id="email" class="form-control" placeholder="Ex: youremail@domain.com" value="{{ old('email') }}">
-									@if ($errors->has('email'))
-										<div class="alert alert-danger">
-											<strong>{{ $errors->first('email') }}</strong>
-										</div>
-									@endif
-								</div>
-								<div class="col-md-6">
-									<label for="Phone">Phone <span class="color-red">*</span></label>
-									<input type="text" name="phone" id="phone" class="form-control" placeholder="Ex: 0123456789" value="{{ old('phone') }}">
-									@if ($errors->has('phone'))
-										<div class="alert alert-danger">
-											<strong>{{ $errors->first('phone') }}</strong>
-										</div>
-									@endif
-								</div>
+								<label for="fname">Full Name <span class="color-red">*</span></label>
+								<input type="text" name="fname" id="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
+								@if ($errors->has('fname'))
+									<div class="alert alert-danger">
+										<strong>{{ $errors->first('fname') }}</strong>
+									</div>
+								@endif
 							</div>
 						</div>
-					</form>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="address">Address <span class="color-red">*</span></label>
+								<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+								@if ($errors->has('address'))
+									<div class="alert alert-danger">
+										<strong>{{ $errors->first('address') }}</strong>
+									</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="payment_method">Payment Method</label>
+								<select name="payment_method" id="payment_method">
+									<option value="0">Cash</option>
+									<option value="1">Momo</option>
+									<option value="2">VNPAY</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6">
+								<label for="email">Email <span class="color-red">*</span></label>
+								<input type="email" name="email" id="email" class="form-control" placeholder="Ex: youremail@domain.com" value="{{ old('email') }}">
+								@if ($errors->has('email'))
+									<div class="alert alert-danger">
+										<strong>{{ $errors->first('email') }}</strong>
+									</div>
+								@endif
+							</div>
+							<div class="col-md-6">
+								<label for="Phone">Phone <span class="color-red">*</span></label>
+								<input type="text" name="phone" id="phone" class="form-control" placeholder="Ex: 0123456789" value="{{ old('phone') }}">
+								@if ($errors->has('phone'))
+									<div class="alert alert-danger">
+										<strong>{{ $errors->first('phone') }}</strong>
+									</div>
+								@endif
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-5">
 					<div class="cart-detail">
