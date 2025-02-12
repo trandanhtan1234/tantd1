@@ -55,8 +55,8 @@
 								<label for="payment_method">Payment Method</label>
 								<select name="payment_method" class="form-control" id="payment_method">
 									<option value="0">Cash</option>
-									<option value="1">Momo</option>
-									<option value="2">VNPAY</option>
+									<option value="1" @if (str_replace('.','',$total) < 10000) disabled @endif>Momo</option>
+									<option value="2" @if (str_replace('.','',$total) < 10000) disabled @endif>VNPAY</option>
 								</select>
 							</div>
 						</div>

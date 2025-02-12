@@ -41,9 +41,4 @@ class CheckoutController extends Controller
             $vnPay = $this->cartRepo->vnPay($r);
         }
     }
-
-    public function getComplete()
-    {
-        return view('frontend.checkout.complete');
-    }
 }
