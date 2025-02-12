@@ -46,30 +46,4 @@ class CheckoutController extends Controller
     {
         return view('frontend.checkout.complete');
     }
-
-    // public function getVnPay()
-    // {
-    //     $data = $this->cartRepo->getCart();
-    //     return view('fontend.checkout.vnpay_checkout', $data);
-    // }
-    
-    // public function vnPay(CheckoutRequest $r)
-    // {
-    //     $vnPay = $this->cartRepo->vnPay($r);
-    // }
-    
-    // public function getMomoPay()
-    // {
-    //     $data = $this->cartRepo->getCart();
-    //     return view('frontend.checkout.momo_checkout', $data);
-    // }
-
-    // public function momoPay(CheckoutRequest $r)
-    // {
-    //     $momoPay = $this->cartRepo->momoPay($r);
-
-    //     if ($momoPay['code'] == 200) {
-    //         return redirect()->to($momoPay['url']);
-    //     }
-    // }
 }
