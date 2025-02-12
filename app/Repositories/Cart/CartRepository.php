@@ -80,6 +80,7 @@ class CartRepository implements CartRepositoryInterface
             }
 
             $order = new order();
+            $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
             $order->status = 0;
@@ -212,6 +213,7 @@ class CartRepository implements CartRepositoryInterface
             }
 
             $order = new order();
+            $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
             $order->status = 0;
@@ -323,6 +325,7 @@ class CartRepository implements CartRepositoryInterface
             }
 
             $order = new order();
+            $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
             $order->status = 0;
