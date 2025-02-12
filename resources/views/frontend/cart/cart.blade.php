@@ -96,6 +96,16 @@
 						<div class="col-md-3 col-md-push-1 text-center flex">
 							<div class="total">
 								<div class="grand-total">
+									<form action="{{ route('postOnepay') }}" method="post">
+										@csrf
+										<input type="hidden" name="onepay_method" value="{{ str_replace('.','',$total) }}">
+										<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
+										<button type="submit" class="btn btn-primary">Onepay Method</button>
+									</form>
+								</div>
+							</div>
+							<div class="total">
+								<div class="grand-total">
 									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
 									<a href="{{ url('checkout') }}" class="btn btn-primary">Checkout <i class="icon-arrow-right-circle"></i></a>
 								</div>
