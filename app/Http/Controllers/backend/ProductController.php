@@ -190,4 +190,6 @@ class ProductController extends Controller
     {
         return view('backend.variant.editvariant');
     }
+    // secret_key = "sk-proj-ffjj11NUsoEWOqIAYMtnT3BAbkFJfW391HlSK2blNNpocuFu"
+    // model = "gpt-4o"
 }
