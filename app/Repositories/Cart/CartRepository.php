@@ -144,7 +144,7 @@ class CartRepository implements CartRepositoryInterface
             $vnp_TxnRef = $codeCart; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
             $vnp_OrderInfo = 'Checkout Test';
             $vnp_OrderType = 'billpayment';
-            $vnp_Amount = $data['total_vnpay'] * 100;
+            $vnp_Amount = $data['total'] * 100;
             $vnp_Locale = 'vn';
             $vnp_BankCode = 'NCB';
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -282,7 +282,7 @@ class CartRepository implements CartRepositoryInterface
             $accessKey = 'klm05TvNBzhg7h7j';
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
             $orderInfo = "Thanh toán qua ATM MoMo";
-            $amount = $data['total_momo'];
+            $amount = $data['total'];
             $orderId = time() . "";
             $redirectUrl = url('checkout/complete');
             $ipnUrl = url('checkout/complete');
@@ -393,6 +393,175 @@ class CartRepository implements CartRepositoryInterface
         //close connection
         curl_close($ch);
         return $result;
+    }
+
+    public function onePay($params)
+    {
+        try {
+            // Payment Process
+            DB::beginTransaction();
+            /* -----------------------------------------------------------------------------
+
+            Version 2.0
+
+            @author OnePAY
+
+            ------------------------------------------------------------------------------*/
+
+            // *********************
+            // START OF MAIN PROGRAM
+            // *********************
+
+            // Define Constants
+            // ----------------
+            // This is secret for encoding the MD5 hash
+            // This secret will vary from merchant to merchant
+            // To not create a secure hash, let SECURE_SECRET be an empty string - ""
+            // $SECURE_SECRET = "secure-hash-secret";
+            // Khóa bí mật - được cấp bởi OnePAY
+            $SECURE_SECRET = "A3EFDFABA8653DF2342E8DAC29B51AF0";
+
+            // add the start of the vpcURL querystring parameters
+            // *****************************Lấy giá trị url cổng thanh toán*****************************
+            $vpcURL = "https://mtf.onepay.vn/onecomm-pay/vpc.op" . "?";
+
+            // Remove the Virtual Payment Client URL from the parameter hash as we 
+            // do not want to send these fields to the Virtual Payment Client.
+            // bỏ giá trị url và nút submit ra khỏi mảng dữ liệu
+            // unset($_POST["virtualPaymentClientURL"]); 
+            // unset($_POST["SubButL"]);
+            $vpc_Merchant = 'ONEPAY';
+            $vpc_AccessCode = 'D67342C2';
+            $vpc_MerchTxnRef = time();
+            $vpc_OrderInfo = 'JSECURETEST01';
+            $vpc_Amount = $_POST['onepay_method'];
+            $vpc_ReturnURL = url('checkout/complete');
+            $vpc_Version = '2';
+            $vpc_Command = 'pay';
+            $vpc_Locale = 'vn';
+            $vpc_Currency = 'VND';
+
+            $data = [
+                'vpc_Merchant' => $vpc_Merchant,
+                'vpc_AccessCode' => $vpc_AccessCode,
+                'vpc_MerchTxnRef' => $vpc_MerchTxnRef,
+                'vpc_OrderInfo' => $vpc_OrderInfo,
+                'vpc_Amount' => $vpc_Amount,
+                'vpc_ReturnURL' => $vpc_ReturnURL,
+                'vpc_Version' => $vpc_Version,
+                'vpc_Command' => $vpc_Command,
+                'vpc_Locale' => $vpc_Locale,
+                'vpc_Currency' => $vpc_Currency
+            ];
+            //$stringHashData = $SECURE_SECRET; *****************************Khởi tạo chuỗi dữ liệu mã hóa trống*****************************
+            $stringHashData = "";
+            // sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
+            // arrange array data a-z before make a hash
+            ksort ($data);
+
+            // set a parameter to show the first pair in the URL
+            // đặt tham số đếm = 0
+            $appendAmp = 0;
+
+            foreach($data as $key => $value) {
+
+                // create the md5 input and URL leaving out any fields that have no value
+                // tạo chuỗi đầu dữ liệu những tham số có dữ liệu
+                if (strlen($value) > 0) {
+                    // this ensures the first paramter of the URL is preceded by the '?' char
+                    if ($appendAmp == 0) {
+                        $vpcURL .= urlencode($key) . '=' . urlencode($value);
+                        $appendAmp = 1;
+                    } else {
+                        $vpcURL .= '&' . urlencode($key) . "=" . urlencode($value);
+                    }
+                    //$stringHashData .= $value; *****************************sử dụng cả tên và giá trị tham số để mã hóa*****************************
+                    if ((strlen($value) > 0) && ((substr($key, 0,4)=="vpc_") || (substr($key,0,5) =="user_"))) {
+                        $stringHashData .= $key . "=" . $value . "&";
+                    }
+                }
+            }
+            //*****************************xóa ký tự & ở thừa ở cuối chuỗi dữ liệu mã hóa*****************************
+            $stringHashData = rtrim($stringHashData, "&");
+            // Create the secure hash and append it to the Virtual Payment Client Data if
+            // the merchant secret has been provided.
+            // thêm giá trị chuỗi mã hóa dữ liệu được tạo ra ở trên vào cuối url
+            if (strlen($SECURE_SECRET) > 0) {
+                //$vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($stringHashData));
+                // *****************************Thay hàm mã hóa dữ liệu*****************************
+                $vpcURL .= "&vpc_SecureHash=" . strtoupper(hash_hmac('SHA256', $stringHashData, pack('H*',$SECURE_SECRET)));
+            }
+
+            // FINISH TRANSACTION - Redirect the customers using the Digital Order
+            // ===================================================================
+            // chuyển trình duyệt sang cổng thanh toán theo URL được tạo ra
+            // End Payment Process
+
+            // Save Data
+            $checkCustomer = customer::where('email', $params['email'])->count();
+            if (!$checkCustomer) {
+                $customer = new customer();
+                $customer->email = $params['email'];
+                $customer->full = $params['fname'];
+                $customer->address = $params['address'];
+                $customer->phone = $params['phone'];
+                $customer->save();
+                $customerId = $customer->id;
+            } else {
+                $customerId = customer::where('email', $params['email'])->first()->id;
+            }
+
+            $order = new order();
+            $order->payment_method = $params['payment_method'];
+            $order->total = str_replace('.','',Cart::total());
+            $order->address = $params['address'];
+            $order->status = 0;
+            $order->customer_id = $customerId;
+            $order->save();
+            $orderId = $order->id;
+
+            foreach (Cart::content() as $prd) {
+                $orderDetail = new orderdetail();
+                $orderDetail->code = product::where('id', $prd->id)->first()->code;
+                $attrs = [];
+                foreach ($prd->options->attr as $attr) {
+                    $attrs[] = $attr;
+                }
+                $orderDetail->name = $prd->name.'-'.implode('-',$attrs);
+                $orderDetail->price = $prd->price;
+                $orderDetail->quantity = $prd->qty;
+                $orderDetail->img = $prd->options->img;
+                $orderDetail->order_id = $orderId;
+                $orderDetail->save();
+
+                $product = product::where('id', $prd->id)->first();
+                if (($product->quantity - $prd->qty) == 0) {
+                    $product->status = 0;
+                }
+                $product->quantity = $product->quantity - $prd->qty;
+                $product->save();
+            }
+            Cart::destroy();
+            // End Save Data
+            DB::commit();
+            return redirect()->to($vpcURL);
+            
+            $result = [
+                'code' => 200,
+                'msg' => 'Checkout Completed',
+                'url' => $vpcURL
+            ];
+            return $result;
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+
+            $result = [
+                'code' => 500,
+                'msg' => static::error_msg
+            ];
+            return $result;
+        }
     }
 
     public function deleteProduct($id)

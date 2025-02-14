@@ -94,7 +94,7 @@
 						<div class="col-md-8">
 						</div>
 						<div class="col-md-3 col-md-push-1 text-center flex">
-							<div class="total">
+							<!-- <div class="total">
 								<div class="grand-total">
 									<form action="{{ route('postOnepay') }}" method="post">
 										@csrf
@@ -103,7 +103,7 @@
 										<button type="submit" class="btn btn-primary">Onepay Method</button>
 									</form>
 								</div>
-							</div>
+							</div> -->
 							<div class="total">
 								<div class="grand-total">
 									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
