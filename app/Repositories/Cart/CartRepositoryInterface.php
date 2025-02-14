@@ -16,5 +16,7 @@ interface CartRepositoryInterface
     
     public function momoPay($params);
 
+    public function onePay($params);
+
     public function deleteProduct($id);
 }

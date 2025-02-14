@@ -57,6 +57,7 @@
 									<option value="0">Cash</option>
 									<option value="1" @if (str_replace('.','',$total) < 10000) disabled @endif>Momo</option>
 									<option value="2" @if (str_replace('.','',$total) < 10000) disabled @endif>VNPAY</option>
+									<option value="3" @if (str_replace('.','',$total) < 10000) disabled @endif>ONEPAY</option>
 								</select>
 							</div>
 						</div>
@@ -99,7 +100,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<input type="hidden" name="total_momo" value="{{ str_replace('.','',$total) }}">
+							<input type="hidden" name="total" value="{{ str_replace('.','',$total) }}">
 							<p><button type="submit" class="btn btn-primary">Complete</button></p>
 						</div>
 					</div>
