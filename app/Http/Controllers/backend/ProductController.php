@@ -8,6 +8,7 @@ use App\Repositories\Products\ProductsRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Attributes\AttributeRepositoryInterface;
 use App\Http\Requests\{AddProductRequest,EditProductRequest,AddAttributeRequest,EditAttributeRequest,AddValueRequest,EditValueRequest};
+use App\Services\ChatGPTService;
 
 class ProductController extends Controller
 {
@@ -15,12 +16,16 @@ class ProductController extends Controller
 
     protected $productRepo;
 
+    protected $chatGPTService;
+
     public function __construct(
         CategoryRepositoryInterface $cateRepo,
-        ProductsRepositoryInterface $productRepo
+        ProductsRepositoryInterface $productRepo,
+        ChatGPTService $chatGPTService
     ) {
         $this->cateRepo = $cateRepo;
         $this->productRepo = $productRepo;
+        $this->chatGPTService = $chatGPTService;
     }
 
     public function getListProducts()
@@ -190,6 +195,14 @@ class ProductController extends Controller
     {
         return view('backend.variant.editvariant');
     }
-    // secret_key = "sk-proj-ffjj11NUsoEWOqIAYMtnT3BAbkFJfW391HlSK2blNNpocuFu"
-    // model = "gpt-4o"
+
+    public function askChatGPT(Request $r)
+    {
+        $message = $r->input('message');
+        $response = $this->chatGPTService->chat($message);
+        return response()->json([
+            'code' => 200,
+            'response' => $response
+        ]);
+    }
 }
