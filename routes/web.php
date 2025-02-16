@@ -128,4 +128,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
         Route::get('/', [CommentController::class, 'getComment']);
         Route::get('/edit', [CommentController::class, 'editComment']);
     });
+    
+    Route::post('/ask-chatgpt', [ProductController::class, 'askChatGPT'])->name('askChatGPT');
 });

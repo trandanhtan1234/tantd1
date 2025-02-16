@@ -180,7 +180,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>Description <img class="w-20 c-pointer" id="use-openai" title="OpenAI" src="img/eye.svg" alt=""></label>
                                     <textarea id="editor" name="description" style="width: 100%;height: 100px;">{{ old('description') }}</textarea>
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Add Product</button>
@@ -192,6 +192,22 @@
                 </form>
             </div>
 
+            <!-- Popup OpenAI -->
+            <div class="popup position-fixed" id="popup-openai" style="display: none;">
+                <div class="panel panel-blue">
+                    <div class="panel-heading dark-overlay">OpenAI</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="message" class="easypiechart-panel">Tell me something <span class="color-red">*</span></label>
+                            <textarea name="message" id="message" class="donut color-gray p-5"></textarea>
+                        </div>
+                        <div class="display-flex justify-between">
+                            <button class="btn btn-success" id="send_openai" type="submit">Apply</button>
+                            <div class="btn btn-danger close-popup">Cancel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -220,5 +236,35 @@
             reader.readAsDataURL(event.files[0]);
         }
     }
+
+    $('#use-openai').on('click', function() {
+        $('#popup-openai').fadeIn(500);
+    });
+    $('.close-popup').on('click', function() {
+        $('#popup-openai').fadeOut(500);
+        // $('#message').val('');
+    });
+    $('#send_openai').on('click', function() {
+        const message = $('#message').val();
+        $.ajax({
+            url: "<?= route('askChatGPT') ?>",
+            type: 'POST',
+            data: {
+                message: message
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                if (result.code == 200) {
+                    $('#popup-openai').fadeOut(500);
+                    CKEDITOR.instances.editor.setData(result.response);
+                }
+            },
+            error: function (xhr) {
+                alert('Something went wrong. Please try again later!');
+            }
+        })
+    });
 </script>
 @endsection
