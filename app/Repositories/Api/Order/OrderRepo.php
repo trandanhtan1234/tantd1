@@ -3,7 +3,7 @@
 namespace App\Repositories\Api\Order;
 
 use App\Repositories\Api\Order\OrderRepoInterface;
-use App\Models\models\order;
+use App\Models\models\Order;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -13,7 +13,7 @@ class OrderRepo implements OrderRepoInterface
     public function index($data)
     {
         $limit = $data['limit']?$data['limit']:10;
-        $orders = order::orderBy('id', 'DESC')->paginate($limit);
+        $orders = Order::orderBy('id', 'DESC')->paginate($limit);
 
         if (!$orders) {
             return response()->json([
@@ -31,7 +31,7 @@ class OrderRepo implements OrderRepoInterface
 
     public function show($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
 
         if (!$order) {
             return response()->json([
@@ -51,7 +51,7 @@ class OrderRepo implements OrderRepoInterface
     {
         try {
             DB::beginTransaction();
-            $order = order::find($id);
+            $order = Order::find($id);
             if (!$order) {
                 return response()->json([
                     config('constparam.code') => 404,

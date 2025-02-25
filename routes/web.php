@@ -107,7 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
     });
 
     Route::group(['prefix' => 'user'], function() {
-        Route::get('/', [UserController::class, 'getListUsers']);
+        Route::get('/', [UserController::class, 'getListUsers'])->name('user');
         Route::get('/add', [UserController::class, 'getAddUser']);
         Route::post('/add', [UserController::class, 'postAddUser'])->name('user.postUser');
         Route::get('/edit/{id}', [UserController::class, 'getEditUser']);

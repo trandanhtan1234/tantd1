@@ -4,7 +4,7 @@ namespace App\Repositories\Users;
 
 interface UsersRepositoryInterface
 {
-    public function getList();
+    public function getList($params);
 
     public function getAll();
 

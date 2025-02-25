@@ -5,7 +5,7 @@ namespace App\Models\models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     use HasFactory;
     protected $table='category';
@@ -14,6 +14,6 @@ class category extends Model
 
     public function product()
     {
-        return $this->hasMany('App\Models\models\product', 'category_id', 'id');
+        return $this->hasMany('App\Models\models\Product', 'category_id', 'id');
     }
 }

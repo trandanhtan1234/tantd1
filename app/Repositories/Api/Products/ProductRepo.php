@@ -5,7 +5,7 @@ namespace App\Repositories\Api\Products;
 use App\Repositories\Api\Products\ProductRepoInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\models\{product,attributes,values,variants};
+use App\Models\models\{Product,Attributes,Values,Variants};
 use Exception;
 use Illuminate\Support\Str;
 
@@ -14,7 +14,7 @@ class ProductRepo implements ProductRepoInterface
     public function index($data)
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? $data['limit'] : 10;
-        $products = product::orderBy('id', 'DESC')->paginate($limit);
+        $products = Product::orderBy('id', 'DESC')->paginate($limit);
 
         if (!$products->all()) {
             return response()->json([
@@ -34,8 +34,8 @@ class ProductRepo implements ProductRepoInterface
     {
         try {
             DB::beginTransaction();
-            $latestId = product::orderBy('id', 'DESC')->first()->id;
-            $product = new product();
+            $latestId = Product::orderBy('id', 'DESC')->first()->id;
+            $product = new Product();
             $product->code = codeName($params['name'], $latestId+1);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
@@ -72,7 +72,7 @@ class ProductRepo implements ProductRepoInterface
             // Variants
             $variants = getCombinations($params['attr']);
             foreach ($variants as $var) {
-                $variant = new variants();
+                $variant = new Variants();
                 $variant->product_id = $product->id;
                 $variant->price = $params['price'];
                 $variant->save();
@@ -99,7 +99,7 @@ class ProductRepo implements ProductRepoInterface
     {
         try {
             DB::beginTransaction();
-            $attr = new attributes();
+            $attr = new Attributes();
             $attr->name = $params['name'];
             $attr->save();
             DB::commit();
@@ -123,7 +123,7 @@ class ProductRepo implements ProductRepoInterface
     {
         try {
             DB::beginTransaction();
-            $checkAttr = attributes::find($params['attr_id']);
+            $checkAttr = Attributes::find($params['attr_id']);
             if (!$checkAttr) {
                 return response()->json([
                     config('constparam.code') => 404,
@@ -131,7 +131,7 @@ class ProductRepo implements ProductRepoInterface
                 ],404);
             }
 
-            $value = new values();
+            $value = new Values();
             $value->value = $params['value'];
             $value->attr_id = $params['attr_id'];
             $value->save();
@@ -154,7 +154,7 @@ class ProductRepo implements ProductRepoInterface
 
     public function show($id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         if (!$product) {
             return response()->json([
                 config('constparam.code') => 404,
@@ -173,14 +173,14 @@ class ProductRepo implements ProductRepoInterface
     {
         try {
             DB::beginTransaction();
-            $checkPrd = product::find($id);
+            $checkPrd = Product::find($id);
             if (!$checkPrd) {
                 return response()->json([
                     config('constparam.code') => 404,
                     config('constparam.msg') => config('constparam.not_found')
                 ],404);
             }
-            $product = product::find($id);
+            $product = Product::find($id);
             $product->code = codeName($params['name'], $id);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
@@ -218,7 +218,7 @@ class ProductRepo implements ProductRepoInterface
             // Variants
             $variants = getCombinations($params['attr']);
             foreach ($variants as $var) {
-                $variant = new variants();
+                $variant = new Variants();
                 $variant->product_id = $product->id;
                 $variant->save();
                 $variant->values()->attach($var);
@@ -249,7 +249,7 @@ class ProductRepo implements ProductRepoInterface
     {
         try {
             DB::beginTransaction();
-            $product = product::find($id);
+            $product = Product::find($id);
     
             if (!$product) {
                 return response()->json([
@@ -257,7 +257,7 @@ class ProductRepo implements ProductRepoInterface
                     config('constparam.msg') => config('constparam.not_found')
                 ],404);
             }
-            product::destroy($id);
+            Product::destroy($id);
             DB::commit();
 
             return response()->json([

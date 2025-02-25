@@ -3,7 +3,7 @@
 namespace App\Repositories\Api\Customer;
 
 use App\Repositories\Api\Customer\CustomerRepoInterface;
-use App\Models\models\customer;
+use App\Models\models\Customer;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -16,7 +16,7 @@ class CustomerRepo implements CustomerRepoInterface
     public function index($data)
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? $data['limit'] : 10;
-        $customer = customer::orderBy('id', 'DESC')->paginate($limit);
+        $customer = Customer::orderBy('id', 'DESC')->paginate($limit);
 
         if (!$customer->all()) {
             return response()->json([
@@ -36,7 +36,7 @@ class CustomerRepo implements CustomerRepoInterface
     {
         try {
             DB::beginTransaction();
-            $customer = new customer();
+            $customer = new Customer();
             $customer->email = $params['email'];
             $customer->password = Hash::make($params['password']);
             $customer->full = $params['full'];
@@ -63,7 +63,7 @@ class CustomerRepo implements CustomerRepoInterface
 
     public function show($id)
     {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
 
         if (!$customer) {
             return response()->json([
@@ -83,7 +83,7 @@ class CustomerRepo implements CustomerRepoInterface
     {
         try {
             DB::beginTransaction();
-            $customer = customer::find($id);
+            $customer = Customer::find($id);
             if (!$customer) {
                 return response()->json([
                     config('constparam.code') => config('constparam.invalid_msg'),
@@ -114,7 +114,7 @@ class CustomerRepo implements CustomerRepoInterface
 
     public function destroy($id)
     {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
 
         if (!$customer) {
             return response()->json([
@@ -123,7 +123,7 @@ class CustomerRepo implements CustomerRepoInterface
             ],404);
         }
 
-        customer::destroy($id);
+        Customer::destroy($id);
 
         return response()->json([
             config('constparam.code') => 200,

@@ -3,7 +3,7 @@
 namespace App\Repositories\Customer;
 
 use App\Repositories\Customer\CustomerRepositoryInterface;
-use App\Models\models\customer;
+use App\Models\models\Customer;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -17,14 +17,14 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function index()
     {
-        $customers = customer::orderBy('id', 'DESC')->paginate(5);
+        $customers = Customer::orderBy('id', 'DESC')->paginate(5);
 
         return $customers;
     }
 
     public function getAll()
     {
-        $customers = customer::get();
+        $customers = Customer::get();
 
         return $customers;
     }
@@ -33,7 +33,7 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $customer = new customer();
+            $customer = new Customer();
             $customer->email = $params['email'];
             $customer->password = Hash::make($params['password']);
             $customer->full = $params['full'];
@@ -63,7 +63,7 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function show($id)
     {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
 
         return $customer;
     }
@@ -72,7 +72,7 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $customer = customer::find($id);
+            $customer = Customer::find($id);
             $customer->full = $params['full'];
             $customer->address = $params['address'];
             $customer->phone = $params['phone'];
@@ -99,7 +99,7 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            customer::destroy($id);
+            Customer::destroy($id);
             DB::commit();
 
             $result = [

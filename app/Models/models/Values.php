@@ -5,7 +5,7 @@ namespace App\Models\models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class values extends Model
+class Values extends Model
 {
     use HasFactory;
     protected $table = 'values';
@@ -14,11 +14,11 @@ class values extends Model
     
     public function product()
     {
-        return $this->belongsToMany('App\Models\models\product', 'value_id', 'product_id');
+        return $this->belongsToMany('App\Models\models\Product', 'value_id', 'product_id');
     }
 
     public function attribute()
     {
-        return $this->belongsTo('App\Models\models\attributes', 'attr_id', 'id');
+        return $this->belongsTo('App\Models\models\Attributes', 'attr_id', 'id');
     }
 }

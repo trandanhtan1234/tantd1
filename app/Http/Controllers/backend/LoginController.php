@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         $credentials = $r->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             $user = Auth::user();
             $user->last_login = \Carbon\Carbon::now();
             $user->save();

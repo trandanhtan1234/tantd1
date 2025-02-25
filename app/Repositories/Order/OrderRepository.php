@@ -3,7 +3,7 @@
 namespace App\Repositories\Order;
 
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Models\models\{order,orderdetail,product,customer};
+use App\Models\models\{Order,Orderdetail,Product,Customer};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -14,14 +14,14 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function orderIndex()
     {
-        $orders = order::orderBy('id', 'DESC')->paginate(5);
+        $orders = Order::orderBy('id', 'DESC')->paginate(5);
 
         return $orders;
     }
 
     public function detailOrder($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
 
         return $order;
     }
@@ -31,15 +31,15 @@ class OrderRepository implements OrderRepositoryInterface
         try {
             DB::beginTransaction();
             if ($params['status'] == 2) {
-                $detailOrder = orderdetail::where('order_id', $id)->get();
+                $detailOrder = Orderdetail::where('order_id', $id)->get();
                 foreach ($detailOrder as $prd) {
-                    $product = product::where('code', $prd['code'])->first();
+                    $product = Product::where('code', $prd['code'])->first();
                     $product->quantity = $product->quantity + $detailOrder->quantity;
                     $product->save();
                 }
             }
 
-            $order = order::find($id);
+            $order = Order::find($id);
             $order->status = $params['status'];
             $order->save();
             DB::commit();
@@ -63,14 +63,14 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getApproved()
     {
-        $orders = order::where('status', 1)->paginate(5);
+        $orders = Order::where('status', 1)->paginate(5);
 
         return $orders;
     }
 
     public function getCustomers()
     {
-        $customers = customer::get();
+        $customers = Customer::get();
 
         return $customers;
     }

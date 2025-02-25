@@ -4,7 +4,7 @@ namespace App\Repositories\Category;
 
 use App\Repositories\Category\CategoryRepositoryInterface;
 use Illuminate\Support\Facades\Log;
-use App\Models\models\category;
+use App\Models\models\Category;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Str;
@@ -15,14 +15,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     
     public function getListCategory()
     {
-        $category = category::get();
+        $category = Category::get();
 
         return $category;
     }
 
     public function getCategory($id)
     {
-        $category = category::find($id);
+        $category = Category::find($id);
 
         return $category;
     }
@@ -31,7 +31,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $list = category::get();
+            $list = Category::get();
             if (checkLevel($list, $params->parent, 1) > 3) {
                 DB::commit();
                 $result = [
@@ -40,7 +40,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 ];
                 return $result;
             }
-            $cate = new category();
+            $cate = new Category();
             $cate->name = $params['name'];
             $cate->slug = Str::slug($params['name'], '-');
             $cate->parent = $params['parent'];
@@ -68,7 +68,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $list = category::get();
+            $list = Category::get();
             if (checkLevel($list, $params->parent, 1) > 3) {
                 DB::commit();
                 $result = [
@@ -77,7 +77,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 ];
                 return $result;
             }
-            $cate = category::find($id);
+            $cate = Category::find($id);
             $cate->name = $params['name'];
             $cate->slug = Str::slug($params['name'], '-');
             $cate->parent = $params['parent'];
@@ -104,12 +104,12 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $cate = category::find($id);
+            $cate = Category::find($id);
 
             // Check if there are any child categories, set its parent as theirs first
-            category::where('parent', $id)->update(['parent' => $cate->parent]);
+            Category::where('parent', $id)->update(['parent' => $cate->parent]);
 
-            category::destroy($id);
+            Category::destroy($id);
             DB::commit();
             
             $result = [

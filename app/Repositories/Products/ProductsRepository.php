@@ -5,7 +5,7 @@ namespace App\Repositories\Products;
 use App\Repositories\Products\ProductsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\models\{product,attributes,values,variants};
+use App\Models\models\{Product,Attributes,Values,Variants};
 use Exception;
 use Illuminate\Support\Str;
 
@@ -15,21 +15,21 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function getList()
     {
-        $products = product::orderBy('id', 'DESC')->paginate(5);
+        $products = Product::orderBy('id', 'DESC')->paginate(5);
         
         return $products;
     }
 
     public function getProduct($id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
 
         return $product;
     }
 
     public function getAttributes()
     {
-        $attributes = attributes::get();
+        $attributes = Attributes::get();
 
         return $attributes;
     }
@@ -39,8 +39,8 @@ class ProductsRepository implements ProductsRepositoryInterface
         try {
             DB::beginTransaction();
             // Save Product
-            $latestId = product::orderBy('id', 'DESC')->first()->id;
-            $product = new product();
+            $latestId = Product::orderBy('id', 'DESC')->first()->id;
+            $product = new Product();
             $product->code = codeName($params['name'], $latestId+1);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
@@ -77,7 +77,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             // Variants
             $variants = getCombinations($params['attr']);
             foreach ($variants as $var) {
-                $variant = new variants();
+                $variant = new Variants();
                 $variant->product_id = $product->id;
                 $variant->price = $params['price'];
                 $variant->save();
@@ -108,7 +108,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $product = product::find($id);
+            $product = Product::find($id);
             $product->code = codeName($params['name'], $id);
             $product->name = $params['name'];
             $product->slug = Str::slug($params['name'], '-');
@@ -146,7 +146,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             // Variants
             $variants = getCombinations($params['attr']);
             foreach ($variants as $var) {
-                $variant = new variants();
+                $variant = new Variants();
                 $variant->product_id = $product->id;
                 $variant->save();
                 $variant->values()->attach($var);
@@ -200,7 +200,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $value = new values();
+            $value = new Values();
             $value->value = $params['value_name'];
             $value->attr_id = $params['attr_id'];
             $value->save();
@@ -227,7 +227,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            product::destroy($id);
+            Product::destroy($id);
             DB::commit();
 
             $result = [
@@ -249,28 +249,28 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function getFeatured()
     {
-        $featured = product::where('featured',1)->where('status',1)->orderBy('id','DESC')->take(4)->get();
+        $featured = Product::where('featured',1)->where('status',1)->orderBy('id','DESC')->take(4)->get();
 
         return $featured;
     }
 
     public function getProducts()
     {
-        $products = product::orderBy('id', 'DESC')->paginate(12);
+        $products = Product::orderBy('id', 'DESC')->paginate(12);
         
         return $products;
     }
 
     public function getAttribute($id)
     {
-        $attr = attributes::find($id);
+        $attr = Attributes::find($id);
 
         return $attr;
     }
 
     public function getValue($id)
     {
-        $value = values::find($id);
+        $value = Values::find($id);
 
         return $value;
     }
@@ -279,7 +279,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $attr = attributes::find($id);
+            $attr = Attributes::find($id);
             $attr->name = $params['attr_name'];
             $attr->save();
             DB::commit();
@@ -305,7 +305,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            attributes::destroy($id);
+            Attributes::destroy($id);
             DB::commit();
 
             $result = [
@@ -329,7 +329,7 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            values::destroy($id);
+            Values::destroy($id);
             DB::commit();
 
             $result = [
@@ -374,7 +374,7 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function getVariants($id)
     {
-        $variant = product::find($id);
+        $variant = Product::find($id);
 
         return $variant;
     }
@@ -384,7 +384,7 @@ class ProductsRepository implements ProductsRepositoryInterface
         try {
             DB::beginTransaction();
             foreach ($params['var_price'] as $key => $value) {
-                $variant = variants::find($key);
+                $variant = Variants::find($key);
                 $variant->price = $value;
                 $variant->save();
             }
@@ -409,7 +409,7 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function getListNew()
     {
-        $new = product::orderBy('id', 'DESC')->take(8)->get();
+        $new = Product::orderBy('id', 'DESC')->take(8)->get();
         return $new;
     }
 }

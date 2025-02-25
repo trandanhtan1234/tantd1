@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\models\users;
+use App\Models\models\Users;
 use App\Notifications\NotifyInactiveUser;
 
 class InactiveUser extends Command
@@ -28,7 +28,7 @@ class InactiveUser extends Command
     public function handle()
     {
         $limit = \Carbon\Carbon::now()->subday(3);
-        $inactiveUser = users::where('last_login', '<', $limit)->get();
+        $inactiveUser = Users::where('last_login', '<', $limit)->get();
         foreach ($inactiveUser as $user) {
             // dd($user);
             $user->notify(new NotifyInactiveUser());

@@ -4,34 +4,50 @@ namespace App\Repositories\Users;
 
 use App\Repositories\Users\UsersRepositoryInterface;
 use Illuminate\Support\Facades\Log;
-use App\Models\models\users;
+use App\Models\models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterUser;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsersRepository implements UsersRepositoryInterface
 {
     const failed_msg = 'Something went wrong, please try again later!';
 
-    public function getList()
+    public function getList($params)
     {
-        $getList = users::orderBy('id', 'DESC')->paginate(5);
+        $filters = $params->only(['full','email']);
+        $filters = array_filter($filters);
+
+        if ($filters != $params->query()) {
+            return redirect()->route('user', $filters);
+        }
+
+        $query = Users::query();
+        if (!empty($filters['full'])) {
+            $query->where('full','like','%'.$filters['full'].'%');
+        }
+        if (!empty($filters['email'])) {
+            $query->where('email','like','%'.$filters['email'].'%');
+        }
         
-        return $getList;
+        return view('backend.user.listuser', [
+            'users' => $query->orderBy('id', 'DESC')->paginate(5)->appends($filters)
+        ]);
     }
 
     public function getAll()
     {
-        $getAll = users::get();
+        $getAll = Users::get();
 
         return $getAll;
     }
 
     public function getUserInfo($id)
     {
-        $userInfo = users::find($id);
+        $userInfo = Users::find($id);
 
         return $userInfo;
     }
@@ -40,7 +56,7 @@ class UsersRepository implements UsersRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $user = new users();
+            $user = new Users();
             $user->email = $params['email'];
             $user->password = Hash::make($params['password']);
             $user->full = $params['full'];
@@ -73,7 +89,7 @@ class UsersRepository implements UsersRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $user = users::find($id);
+            $user = Users::find($id);
             $user->full = $params['full'];
             $user->address = $params['address'];
             $user->phone = $params['phone'];
@@ -102,7 +118,7 @@ class UsersRepository implements UsersRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            users::destroy($id);
+            Users::destroy($id);
             DB::commit();
 
             $result = [

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\{LoginCustomerRequest,RegisterRequest};
 use App\Repositories\Customer\CustomerRepositoryInterface;
 use App\Repositories\Products\{ProductsRepositoryInterface};
+use App\Models\models\Customer;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -38,7 +40,13 @@ class IndexController extends Controller
 
     public function postLoginCustomer(LoginCustomerRequest $r)
     {
-        dd($r->all());
+        $credentials = $r->only('email', 'password');
+
+        if (Auth::guard('customer')->attempt($credentials)) {
+            return redirect('');
+        } else {
+            return redirect('login-customer')->withInput()->with('failed', 'Email or Password is incorrect!');
+        }
     }
 
     public function registerCustomer()

@@ -4,7 +4,7 @@ namespace App\Repositories\Api\Category;
 
 use App\Repositories\Api\Category\CateRepoInterface;
 use Illuminate\Support\Facades\Log;
-use App\Models\models\category;
+use App\Models\models\Category;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Str;
@@ -14,7 +14,7 @@ class CateRepo implements CateRepoInterface
     public function index($data)
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? $data['limit'] : 10;
-        $cate = category::orderBy('id', 'DESC')->paginate($limit);
+        $cate = Category::orderBy('id', 'DESC')->paginate($limit);
 
         if (!$cate->all()) {
             return response()->json([
@@ -34,21 +34,21 @@ class CateRepo implements CateRepoInterface
     {
         try {
             DB::beginTransaction();
-            $list = category::get();
+            $list = Category::get();
             if (checkLevel($list, $params->parent, 1) > 3) {
                 return response()->json([
                     config('constparam.code') => 400,
                     config('constparam.msg') => 'Only accept max category level 3!'
                 ],400);
             }
-            $checkParent = category::find($params['parent']);
+            $checkParent = Category::find($params['parent']);
             if (!$checkParent) {
                 return response()->json([
                     config('constparam.code') => 404,
                     config('constparam.msg') => config('constparam.invalid_msg')
                 ],404);
             }
-            $cate = new category();
+            $cate = new Category();
             $cate->name = $params['name'];
             $cate->slug = Str::slug($params['name'], '-');
             $cate->parent = $params['parent'];
@@ -72,7 +72,7 @@ class CateRepo implements CateRepoInterface
 
     public function show($id)
     {
-        $cate = category::find($id);
+        $cate = Category::find($id);
 
         if (!$cate) {
             return response()->json([
@@ -92,14 +92,14 @@ class CateRepo implements CateRepoInterface
     {
         try {
             DB::beginTransaction();
-            $list = category::get();
+            $list = Category::get();
             if (checkLevel($list, $params->parent, 1) > 3) {
                 return response()->json([
                     config('constparam.code') => 400,
                     config('constparam.msg') => 'Only accept max category level 3!'
                 ],400);
             }
-            $cate = category::find($id);
+            $cate = Category::find($id);
             if (!$cate) {
                 return response()->json([
                     config('constparam.code') => 404,
@@ -137,7 +137,7 @@ class CateRepo implements CateRepoInterface
     {
         try {
             DB::beginTransaction();
-            $cate = category::find($id);
+            $cate = Category::find($id);
 
             if (!$cate) {
                 return response()->json([
@@ -146,10 +146,10 @@ class CateRepo implements CateRepoInterface
                 ],400);
             }
 
-            category::where('parent', $id)->update([
+            Category::where('parent', $id)->update([
                 'parent' => $cate->parent
             ]);
-            category::destroy($id);
+            Category::destroy($id);
             DB::commit();
 
             return response()->json([
