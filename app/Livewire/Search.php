@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\models\users;
+use App\Models\models\Users;
 
 class Search extends Component
 {
@@ -12,7 +12,7 @@ class Search extends Component
     public function render()
     {
         return view('livewire.search', [
-            'users' => users::where('email', 'like','%'.$this->search.'%')->get(),
+            'users' => Users::where('email', 'like','%'.$this->search.'%')->get(),
         ]);
         // $data['users'] = users::where('email', 'like','%'.$this->search.'%')->get();
 

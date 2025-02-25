@@ -5,15 +5,15 @@ namespace App\Models\models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class variants extends Model
+class Attributes extends Model
 {
     use HasFactory;
-    protected $table='variant';
+    protected $table = 'attributes';
 
     public $timestamps = false;
 
     public function values()
     {
-        return $this->belongsToMany('App\Models\models\values', 'variant_value', 'variant_id', 'value_id');
+        return $this->hasMany('App\Models\models\Values', 'attr_id', 'id');
     }
 }

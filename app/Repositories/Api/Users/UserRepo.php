@@ -4,7 +4,7 @@ namespace App\Repositories\Api\Users;
 
 use App\Repositories\Api\Users\UserRepoInterface;
 use Illuminate\Support\Facades\Log;
-use App\Models\models\users;
+use App\Models\models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -14,7 +14,7 @@ class UserRepo implements UserRepoInterface
     public function getUsers($data)
     {
         $limit = isset($data['limit']) && ctype_digit($data['limit']) ? (int)$data['limit'] : 10;
-        $listUsers = users::orderBy('id', 'DESC')->paginate($limit);
+        $listUsers = Users::orderBy('id', 'DESC')->paginate($limit);
 
         if (!$listUsers->all()) {
             return response()->json([
@@ -34,7 +34,7 @@ class UserRepo implements UserRepoInterface
     {
         try {
             DB::beginTransaction();
-            $user = new users();
+            $user = new Users();
             $user->email = $params['email'];
             $user->password = Hash::make($params['password']);
             $user->full = $params['full'];
@@ -61,7 +61,7 @@ class UserRepo implements UserRepoInterface
 
     public function show($id)
     {
-        $user = users::find($id);
+        $user = Users::find($id);
         
         if (!$user) {
             return response()->json([
@@ -80,7 +80,7 @@ class UserRepo implements UserRepoInterface
     {
         try {
             DB::beginTransaction();
-            $user = users::find($id);
+            $user = Users::find($id);
             if (!$user) {
                 return response()->json([
                     config('constparam.code') => config('constparam.invalid_msg'),
@@ -113,14 +113,14 @@ class UserRepo implements UserRepoInterface
     {
         try {
             DB::beginTransaction();
-            $user = users::find($id);
+            $user = Users::find($id);
             if (!$user) {
                 return response()->json([
                     config('constparam.code') => 400,
                     config('constparam.msg') => config('constparam.not_found')
                 ],400);
             }
-            users::destroy($id);
+            Users::destroy($id);
             DB::commit();
 
             return response()->json([

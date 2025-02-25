@@ -15,7 +15,7 @@
 	<!--/.row-->
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">List User</h1>
+			<h1 class="page-header">List Users</h1>
 		</div>
 	</div>
 	<!--/.row-->
@@ -44,6 +44,18 @@
 								<a href="{{ url('admin/user/add') }}" class="btn btn-primary">Add User</a>
 								<a href="{{ url('admin/user/export-users') }}" class="excel-btn btn" target="_blank">Export</a>
 							</div>
+
+							<form method="GET" action="{{ route('user') }}" class="form-inline mb-3" style="margin-top:20px;">
+                                <div class="form-group">
+                                    <input type="text" name="full" class="form-control" placeholder="Enter Name" value="{{ request('full') }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control" placeholder="Enter Email" value="{{ request('email') }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <a href="{{ url('admin/user') }}" class="btn btn-default">Reset</a>
+                            </form>
+
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>
 									<tr class="bg-primary">
@@ -73,9 +85,11 @@
 									@endforeach
 								</tbody>
 							</table>
+							@if ($users)
 							<div align='right'>
 								{{ $users->onEachSide(3)->links() }}
 							</div>
+							@endif
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -87,9 +101,11 @@
 </div>
 <!--end main-->
 @endsection
+
 @section('user')
-<script src="js/user.js"></script>
+<script src="{{  asset('js/user.js')  }}"></script>
 @endsection
+
 @section('active')
 <script>
 	$('.manage_members').addClass('active');

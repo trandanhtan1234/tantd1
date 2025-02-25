@@ -4,8 +4,9 @@ namespace App\Models\models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class customer extends Model
+class Customer extends Authenticatable
 {
     use HasFactory;
     protected $table='customer';
@@ -16,6 +17,6 @@ class customer extends Model
 
     public function order()
     {
-        return $this->hasMany('App\Models\models\order', 'id', 'customer_id');
+        return $this->hasMany('App\Models\models\Order', 'id', 'customer_id');
     }
 }

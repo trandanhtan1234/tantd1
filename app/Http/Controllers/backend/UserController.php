@@ -19,11 +19,11 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function getListUsers()
+    public function getListUsers(Request $request)
     {
-        $data['users'] = $this->userRepo->getList();
+        $result = $this->userRepo->getList($request);
 
-        return view('backend.user.listuser', $data);
+        return $result;
     }
 
     public function getAddUser()

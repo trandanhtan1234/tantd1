@@ -4,10 +4,11 @@ namespace App\Repositories\Cart;
 
 use App\Repositories\Cart\CartRepositoryInterface;
 use Cart;
-use App\Models\models\{product,customer,order,orderdetail};
+use App\Models\models\{Product,Customer,Order,Orderdetail};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class CartRepository implements CartRepositoryInterface
 {
@@ -15,7 +16,7 @@ class CartRepository implements CartRepositoryInterface
 
     public function addCart($params)
     {
-        $prd = product::find($params['product_id']);
+        $prd = Product::find($params['product_id']);
 
         Cart::add([
             'id' => $prd->id,
@@ -66,20 +67,21 @@ class CartRepository implements CartRepositoryInterface
     {
         try {
             DB::beginTransaction();
-            $checkCustomer = customer::where('email', $params['email'])->count();
+            $checkCustomer = Customer::where('email', $params['email'])->count();
             if (!$checkCustomer) {
-                $customer = new customer();
+                $customer = new Customer();
                 $customer->email = $params['email'];
+                $customer->password = Hash::make('123456');
                 $customer->full = $params['fname'];
                 $customer->address = $params['address'];
                 $customer->phone = $params['phone'];
                 $customer->save();
                 $customerId = $customer->id;
             } else {
-                $customerId = customer::where('email', $params['email'])->first()->id;
+                $customerId = Customer::where('email', $params['email'])->first()->id;
             }
 
-            $order = new order();
+            $order = new Order();
             $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
@@ -89,8 +91,8 @@ class CartRepository implements CartRepositoryInterface
             $orderId = $order->id;
 
             foreach (Cart::content() as $prd) {
-                $orderDetail = new orderdetail();
-                $orderDetail->code = product::where('id', $prd->id)->first()->code;
+                $orderDetail = new Orderdetail();
+                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -102,7 +104,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = product::where('id', $prd->id)->first();
+                $product = Product::where('id', $prd->id)->first();
                 if (($product->quantity - $prd->qty) == 0) {
                     $product->status = 0;
                 }
@@ -199,9 +201,9 @@ class CartRepository implements CartRepositoryInterface
             // End Payment Process
 
             // Save Data
-            $checkCustomer = customer::where('email', $params['email'])->count();
+            $checkCustomer = Customer::where('email', $params['email'])->count();
             if (!$checkCustomer) {
-                $customer = new customer();
+                $customer = new Customer();
                 $customer->email = $params['email'];
                 $customer->full = $params['fname'];
                 $customer->address = $params['address'];
@@ -209,10 +211,10 @@ class CartRepository implements CartRepositoryInterface
                 $customer->save();
                 $customerId = $customer->id;
             } else {
-                $customerId = customer::where('email', $params['email'])->first()->id;
+                $customerId = Customer::where('email', $params['email'])->first()->id;
             }
 
-            $order = new order();
+            $order = new Order();
             $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
@@ -222,8 +224,8 @@ class CartRepository implements CartRepositoryInterface
             $orderId = $order->id;
 
             foreach (Cart::content() as $prd) {
-                $orderDetail = new orderdetail();
-                $orderDetail->code = product::where('id', $prd->id)->first()->code;
+                $orderDetail = new Orderdetail();
+                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -235,7 +237,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = product::where('id', $prd->id)->first();
+                $product = Product::where('id', $prd->id)->first();
                 if (($product->quantity - $prd->qty) == 0) {
                     $product->status = 0;
                 }
@@ -311,9 +313,9 @@ class CartRepository implements CartRepositoryInterface
             // End Payment Process
 
             // Save Data
-            $checkCustomer = customer::where('email', $params['email'])->count();
+            $checkCustomer = Customer::where('email', $params['email'])->count();
             if (!$checkCustomer) {
-                $customer = new customer();
+                $customer = new Customer();
                 $customer->email = $params['email'];
                 $customer->full = $params['fname'];
                 $customer->address = $params['address'];
@@ -321,10 +323,10 @@ class CartRepository implements CartRepositoryInterface
                 $customer->save();
                 $customerId = $customer->id;
             } else {
-                $customerId = customer::where('email', $params['email'])->first()->id;
+                $customerId = Customer::where('email', $params['email'])->first()->id;
             }
 
-            $order = new order();
+            $order = new Order();
             $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
@@ -334,8 +336,8 @@ class CartRepository implements CartRepositoryInterface
             $orderId = $order->id;
 
             foreach (Cart::content() as $prd) {
-                $orderDetail = new orderdetail();
-                $orderDetail->code = product::where('id', $prd->id)->first()->code;
+                $orderDetail = new Orderdetail();
+                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -347,7 +349,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = product::where('id', $prd->id)->first();
+                $product = Product::where('id', $prd->id)->first();
                 if (($product->quantity - $prd->qty) == 0) {
                     $product->status = 0;
                 }
@@ -498,9 +500,9 @@ class CartRepository implements CartRepositoryInterface
             // End Payment Process
 
             // Save Data
-            $checkCustomer = customer::where('email', $params['email'])->count();
+            $checkCustomer = Customer::where('email', $params['email'])->count();
             if (!$checkCustomer) {
-                $customer = new customer();
+                $customer = new Customer();
                 $customer->email = $params['email'];
                 $customer->full = $params['fname'];
                 $customer->address = $params['address'];
@@ -508,10 +510,10 @@ class CartRepository implements CartRepositoryInterface
                 $customer->save();
                 $customerId = $customer->id;
             } else {
-                $customerId = customer::where('email', $params['email'])->first()->id;
+                $customerId = Customer::where('email', $params['email'])->first()->id;
             }
 
-            $order = new order();
+            $order = new Order();
             $order->payment_method = $params['payment_method'];
             $order->total = str_replace('.','',Cart::total());
             $order->address = $params['address'];
@@ -521,8 +523,8 @@ class CartRepository implements CartRepositoryInterface
             $orderId = $order->id;
 
             foreach (Cart::content() as $prd) {
-                $orderDetail = new orderdetail();
-                $orderDetail->code = product::where('id', $prd->id)->first()->code;
+                $orderDetail = new Orderdetail();
+                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -534,7 +536,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = product::where('id', $prd->id)->first();
+                $product = Product::where('id', $prd->id)->first();
                 if (($product->quantity - $prd->qty) == 0) {
                     $product->status = 0;
                 }
