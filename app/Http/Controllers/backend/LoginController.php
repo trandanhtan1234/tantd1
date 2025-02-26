@@ -30,7 +30,7 @@ class LoginController extends Controller
 
     public function getLogout()
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         return redirect('/login');
     }

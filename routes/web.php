@@ -26,6 +26,7 @@ Route::get('/map', [Frontend::class, 'map']);
 // Login - Register
 Route::get('/login-customer', [Frontend::class, 'loginCustomer']);
 Route::post('/login-customer', [Frontend::class, 'postLoginCustomer'])->name('loginCustomer');
+Route::get('/logout-customer', [Frontend::class, 'logoutCustomer']);
 Route::get('/register-customer', [Frontend::class, 'registerCustomer']);
 Route::post('/register-customer', [Frontend::class, 'postRegisterCustomer'])->name('registerCustomer');
 

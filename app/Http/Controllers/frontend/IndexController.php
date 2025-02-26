@@ -43,10 +43,19 @@ class IndexController extends Controller
         $credentials = $r->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($credentials)) {
+            $customer = Auth::guard('customer')->user();
+            $customer->save();
             return redirect('');
         } else {
             return redirect('login-customer')->withInput()->with('failed', 'Email or Password is incorrect!');
         }
+    }
+
+    public function logoutCustomer()
+    {
+        Auth::guard('customer')->logout();
+
+        return redirect('');
     }
 
     public function registerCustomer()
