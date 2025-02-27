@@ -22,6 +22,13 @@
 				</div>
 			</div>
 		</div>
+		@php
+		$customer = Auth::guard('customer')->user();
+		$full = $customer ? $customer->full : '';
+		$email = $customer ? $customer->email : '';
+		$address = $customer ? $customer->address : '';
+		$phone = $customer ? $customer->phone : '';
+		@endphp
 		<form action="{{ route('postCheckout') }}" method="post">
 			@csrf
 			<div class="row">
@@ -31,7 +38,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="fname">Full Name <span class="color-red">*</span></label>
-								<input type="text" name="fname" id="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
+								<input type="text" name="fname" id="fname" class="form-control" placeholder="First Name" value="{{ old('fname', $full) }}">
 								@if ($errors->has('fname'))
 									<div class="alert alert-danger">
 										<strong>{{ $errors->first('fname') }}</strong>
@@ -42,7 +49,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="address">Address <span class="color-red">*</span></label>
-								<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+								<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address', $address) }}">
 								@if ($errors->has('address'))
 									<div class="alert alert-danger">
 										<strong>{{ $errors->first('address') }}</strong>
@@ -65,7 +72,7 @@
 						<div class="form-group">
 							<div class="col-md-6">
 								<label for="email">Email <span class="color-red">*</span></label>
-								<input type="email" name="email" id="email" class="form-control" placeholder="Ex: youremail@domain.com" value="{{ old('email') }}">
+								<input type="email" name="email" id="email" class="form-control" placeholder="Ex: youremail@domain.com" value="{{ old('email', $email) }}">
 								@if ($errors->has('email'))
 									<div class="alert alert-danger">
 										<strong>{{ $errors->first('email') }}</strong>
@@ -74,7 +81,7 @@
 							</div>
 							<div class="col-md-6">
 								<label for="Phone">Phone <span class="color-red">*</span></label>
-								<input type="text" name="phone" id="phone" class="form-control" placeholder="Ex: 0123456789" value="{{ old('phone') }}">
+								<input type="text" name="phone" id="phone" class="form-control" placeholder="Ex: 0123456789" value="{{ old('phone', $phone) }}">
 								@if ($errors->has('phone'))
 									<div class="alert alert-danger">
 										<strong>{{ $errors->first('phone') }}</strong>
