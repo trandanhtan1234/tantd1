@@ -18,16 +18,21 @@
 
 									</ul>
 								</li>
-								<li><a href="{{ url('about') }}">About Us</a></li>
+								<li><a href="{{ url('about-us') }}">About Us</a></li>
 								<li><a href="{{ url('contact') }}">Contact</a></li>
 								<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Checkout [{{ Cart::count() }}]</a></li>
+								@if (Auth::guard('customer')->user())
+								<li><span>{{ Auth::guard('customer')->user()->email }}</span> <a href="{{ url('/logout-customer') }}">Logout</a></li>
+								@else
 								<li><a href="{{ url('login-customer') }}">Login</a></li>
+								@endif
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</nav>
+		@if (!Request::is('login-customer'))
 		<aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
@@ -85,5 +90,6 @@
 				</ul>
 			</div>
 		</aside>
+		@endif
 	</div>
 </div>

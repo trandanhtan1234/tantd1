@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class CheckLogout
+class CustomerLogout
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class CheckLogout
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('web')->check()) {
+        if (!Auth::guard('customer')->check()) {
             return $next($request);
         }
         
-        return redirect('/admin');
+        return redirect('');
     }
 }
