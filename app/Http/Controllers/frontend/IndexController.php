@@ -54,7 +54,6 @@ class IndexController extends Controller
     public function logoutCustomer()
     {
         Auth::guard('customer')->logout();
-
         return back();
     }
 
