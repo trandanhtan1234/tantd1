@@ -32,6 +32,7 @@
 				</div>
 			</div>
 		</nav>
+		@if (!Request::is('login-customer'))
 		<aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
@@ -89,5 +90,6 @@
 				</ul>
 			</div>
 		</aside>
+		@endif
 	</div>
 </div>
