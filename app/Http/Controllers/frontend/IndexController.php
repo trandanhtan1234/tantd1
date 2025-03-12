@@ -9,6 +9,8 @@ use App\Repositories\Customer\CustomerRepositoryInterface;
 use App\Repositories\Products\{ProductsRepositoryInterface};
 use App\Models\models\Customer;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -54,7 +56,6 @@ class IndexController extends Controller
     public function logoutCustomer()
     {
         Auth::guard('customer')->logout();
-
         return back();
     }
 
@@ -72,6 +73,39 @@ class IndexController extends Controller
         } else {
             return redirect()->back()->with('failed', $customer['msg']);
         }
+    }
+
+    public function authGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function authGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        
+        $checkCustomer = Customer::where('email', 'like', '%' . $googleUser->getEmail() . '%')->first();
+        
+        $params = [
+            'email' => $googleUser->getEmail(),
+            'password' => Hash::make('123456')
+        ];
+
+        if (!$checkCustomer) {
+            $this->customerRepo->addCustomer($params);
+        }
+
+        $customer = Customer::updateOrCreate([
+            'email' => $googleUser->getEmail(),
+        ], [
+            'full' => $googleUser->getName(),
+            'password' => Hash::make('123456'),
+            'phone' => ''
+        ]);
+
+        Auth::guard('customer')->login($customer);
+
+        return redirect('/');
     }
 
     public function getAboutUs()

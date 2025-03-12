@@ -42,8 +42,9 @@
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary">Login</button>
 						</div>
-						<a href="{{ url('register-customer') }}">Register</a>
 					</form>
+					<div><a class="btn btn-primary" href="{{ url('register-customer') }}">Register</a></div>
+					<div><a class="btn btn-primary" href="{{ route('google.login') }}">Login With Google</a></div>
 				</div>
 			</div>
 		</div>

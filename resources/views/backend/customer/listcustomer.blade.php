@@ -65,7 +65,7 @@
 										<td>{{ $customer->phone }}</td>
 										<td>
 											<a href="{{ url('/admin/customer/edit/'. $customer->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-											<a onclick="return delCustomer('<?= $customer->full ?>')" href="{{ url('admin/customer/delete/'. $customer->id') }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+											<a onclick="return delCustomer('<?= $customer->full ?>')" href="{{ url('admin/customer/delete/'. $customer->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</td>
 									</tr>
 									@endforeach
