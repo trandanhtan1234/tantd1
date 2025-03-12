@@ -29,6 +29,9 @@ Route::post('/login-customer', [Frontend::class, 'postLoginCustomer'])->name('lo
 Route::get('/logout-customer', [Frontend::class, 'logoutCustomer']);
 Route::get('/register-customer', [Frontend::class, 'registerCustomer']);
 Route::post('/register-customer', [Frontend::class, 'postRegisterCustomer'])->name('registerCustomer');
+// Login - Google Account
+Route::get('auth/google', [Frontend::class, 'authGoogle'])->name('google.login');
+Route::get('auth/google/callback', [Frontend::class, 'authGoogleCallback']);
 
 Route::group(['prefix' => 'product'], function() {
     Route::get('/', [ProductFrontend::class, 'getListProducts']);
