@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         if (app()->environment('local')) {
             URL::forceRootUrl(request()->root());
-            URL::forceScheme('https');
+            \URL::forceScheme('http');
         }
     }
 }

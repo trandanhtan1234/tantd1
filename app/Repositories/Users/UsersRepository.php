@@ -65,7 +65,7 @@ class UsersRepository implements UsersRepositoryInterface
             $user->level = $params['level'];
             $user->save();
 
-            Mail::to($params['email'])->send(new RegisterUser($params));
+            Mail::to($params['email'])->send(new RegisterUser($params->all()));
             DB::commit();
 
             $result = [
