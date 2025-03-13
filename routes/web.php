@@ -67,7 +67,7 @@ Route::get('/login', [LoginController::class, 'getLogin'])->middleware('CheckLog
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 Route::get('/logout', [LoginController::class, 'getLogout']);
 
-Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['CheckLogin', 'SessionTimeout']], function() {
     Route::get('/', [IndexController::class, 'index']);
     
     Route::group(['prefix' => 'category'], function() {

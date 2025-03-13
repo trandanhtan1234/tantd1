@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Users extends Authenticatable
 {
-    use \Illuminate\Notifications\Notifiable, HasFactory;
+    use Notifiable, HasFactory, HasApiTokens;
     
     protected $table="users";
 

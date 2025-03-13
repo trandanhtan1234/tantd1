@@ -137,4 +137,23 @@ class UserRepo implements UserRepoInterface
             ],500);
         }
     }
+
+    public function login($params)
+    {
+        $checkUser = Users::where('email', $params->email)->first();
+
+        if (!$checkUser || !Hash::check($params->password, $checkUser->password)) {
+            return response()->json([
+                config('constparam.code') => 401,
+                config('constparam.msg') => 'Invalid credentials'
+            ],401);
+        }
+
+        $token = $checkUser->createToken('API Token')->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'token' => $token
+        ]);
+    }
 }
