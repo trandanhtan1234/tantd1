@@ -74,6 +74,10 @@
 				$(this).parents('.form-group').find('.hide-password').prop('type', 'password')
 			}
 		});
+		let timeout = 5 * 60 * 1000; // 5 minutes
+		setTimeout(() => {
+			window.location.href = "{{ route('login') }}";
+		}, timeout);
 	</script>
 </body>
 

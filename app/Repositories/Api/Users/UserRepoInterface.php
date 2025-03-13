@@ -13,4 +13,6 @@ interface UserRepoInterface
     public function updateUser($params, $id);
 
     public function destroy($id);
+
+    public function login($params);
 }

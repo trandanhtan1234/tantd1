@@ -15,7 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'CheckLogin' => \App\Http\Middleware\CheckLogin::class,
             'CheckLogout' => \App\Http\Middleware\CheckLogout::class,
-            'CustomerLogout' => \App\Http\Middleware\CustomerLogout::class
+            'CustomerLogout' => \App\Http\Middleware\CustomerLogout::class,
+            'SessionTimeout' => \App\Http\Middleware\SessionTimeout::class,
+            'apiauth' => \App\Http\Middleware\ApiAuthMiddleware::class,
+        ]);
+        $middleware->group('api', [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
