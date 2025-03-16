@@ -8,10 +8,13 @@ use App\Http\Controllers\Api\backend\ProductController;
 use App\Http\Controllers\Api\backend\OrderController;
 use App\Http\Controllers\Api\backend\CustomerController;
 use App\Http\Controllers\Api\backend\LoginController;
+use App\Http\Controllers\Api\frontend\LoginController as Frontend;
+
+Route::get('login-google', [Frontend::class, 'googleAuth']);
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::middleware(['auth:sanctum', 'apiauth'])->group(function() {
+Route::middleware(['apiauth'])->group(function() {
     Route::post('logout', [LoginController::class, 'logout']);
 
     Route::prefix('user')->group(function() {

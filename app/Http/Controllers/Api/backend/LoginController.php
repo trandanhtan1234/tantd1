@@ -8,6 +8,7 @@ use App\Http\Requests\api\UserLoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Api\Users\UserRepoInterface;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,17 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $token = $request->bearerToken();
+        $accessToken = PersonalAccessToken::findToken($token);
+
+        if (!$token || !$accessToken) {
+            return response()->json([
+                'error' => '401',
+                'message' => 'Token not provided'
+            ],401);
+        }
+
+        $accessToken->delete();
 
         return response()->json(['message' => 'Logged out successfully']);
     }

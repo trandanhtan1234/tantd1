@@ -18,7 +18,7 @@ class SessionTimeout
     {
         if (Auth::check()) {
             $loginTime = session('login_time');
-            if ($loginTime && now()->diffInMinutes($loginTime) > 1) {
+            if ($loginTime && $loginTime->diffInMinutes(now()) > 30) {
                 Auth::logout();
                 session()->flush();
                 return redirect('/login')->with('failed', 'Session expired. Please login again.');
