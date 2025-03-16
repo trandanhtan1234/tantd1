@@ -18,16 +18,14 @@ class ApiAuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $token = $request->bearerToken();
+        $accessToken = PersonalAccessToken::findToken($token);
 
-        if (!$token) {
+        if (!$token || !$accessToken) {
             return response()->json([
                 'error' => '401',
                 'message' => 'Token not provided'
             ],401);
         }
-
-        $accessToken = PersonalAccessToken::findToken($token);
-        dd($accessToken->tokenenable);
 
         return $next($request);
     }

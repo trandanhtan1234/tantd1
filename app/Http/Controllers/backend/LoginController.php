@@ -21,6 +21,7 @@ class LoginController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             session(['login_time' => now()]);
 
+            /** @var App\Models\models\Users $user */
             $user = Auth::user();
             $user->last_login = \Carbon\Carbon::now();
             $user->save();

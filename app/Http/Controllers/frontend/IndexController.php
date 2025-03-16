@@ -45,6 +45,7 @@ class IndexController extends Controller
         $credentials = $r->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($credentials)) {
+            /** @var App\Models\models\Customer $customer */
             $customer = Auth::guard('customer')->user();
             $customer->save();
             return redirect($r->previous_page);
