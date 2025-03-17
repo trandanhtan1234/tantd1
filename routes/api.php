@@ -12,10 +12,11 @@ use App\Http\Controllers\Api\frontend\LoginController as Frontend;
 
 Route::get('/auth/google', [Frontend::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [Frontend::class, 'handleGoogleCallback']);
+Route::post('/auth/logout', [Frontend::class, 'jwtLogout'])->middleware('jwt.auth');
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::middleware(['apiauth'])->group(function() {
+Route::middleware(['multipleAuthMiddleware'])->group(function() {
     Route::post('logout', [LoginController::class, 'logout']);
 
     Route::prefix('user')->group(function() {
