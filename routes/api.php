@@ -10,7 +10,8 @@ use App\Http\Controllers\Api\backend\CustomerController;
 use App\Http\Controllers\Api\backend\LoginController;
 use App\Http\Controllers\Api\frontend\LoginController as Frontend;
 
-Route::get('login-google', [Frontend::class, 'googleAuth']);
+Route::get('/auth/google', [Frontend::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [Frontend::class, 'handleGoogleCallback']);
 
 Route::post('login', [LoginController::class, 'login']);
 

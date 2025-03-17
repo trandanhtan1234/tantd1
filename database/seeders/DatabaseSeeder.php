@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             ValuesSeeder::class,
             ValueProductSeeder::class,
             VariantsSeeder::class,
-            VariantValueSeeder::class
+            VariantValueSeeder::class,
+            CustomerSeeder::class
         ]);
     }
 }
