@@ -11,6 +11,7 @@ use App\Models\models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config;
 
 class IndexController extends Controller
 {
@@ -78,11 +79,15 @@ class IndexController extends Controller
 
     public function authGoogle()
     {
+        Config::set('services.google.redirect', env('GOOGLE_REDIRECT_URI'));
+
         return Socialite::driver('google')->redirect();
     }
 
     public function authGoogleCallback()
     {
+        Config::set('services.google.redirect', env('GOOGLE_REDIRECT_URI'));
+        
         $googleUser = Socialite::driver('google')->user();
         
         $checkCustomer = Customer::where('email', 'like', '%' . $googleUser->getEmail() . '%')->first();

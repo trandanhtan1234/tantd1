@@ -16,6 +16,11 @@
 					<form action="{{ route('loginCustomer') }}" method="post">
                         @csrf
 						<input type="hidden" name="previous_page" value="{{ url()->previous() }}">
+						@if (session('failed'))
+							<div class="alert alert-danger">
+								<strong>{{ session('failed') }}</strong>
+							</div>
+						@endif
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label for="email">Email <span class="color-red">*</span></label>
