@@ -52,6 +52,21 @@ class LoginController extends Controller
             return response()->json(['error' => 'Failed to authenticate'], 500);
         }
     }
+    
+    public function jwtLogout(): JsonResponse
+    {
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+    
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to log out'
+            ], 500);
+        }
+    }
 
     
     /**

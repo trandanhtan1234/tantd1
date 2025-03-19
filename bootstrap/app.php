@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'CustomerLogout' => \App\Http\Middleware\CustomerLogout::class,
             'SessionTimeout' => \App\Http\Middleware\SessionTimeout::class,
             'apiauth' => \App\Http\Middleware\ApiAuthMiddleware::class,
+            'multipleAuthMiddleware' => \App\Http\Middleware\MultiAuthMiddleware::class
         ]);
         $middleware->group('api', [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
