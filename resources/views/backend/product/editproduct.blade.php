@@ -52,10 +52,6 @@
                                                 <option @if($product->status==0) selected @endif value="0">Out of Stock</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Quantity</label>
-                                            <input type="text" name="quantity" value="{{ old('quantity', $product->quantity) }}" class="form-control">
-                                        </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
