@@ -5,6 +5,8 @@ namespace App\Repositories\Cart;
 interface CartRepositoryInterface
 {
     public function addCart($params);
+
+    public function getVariant($params);
     
     public function getCart();
 

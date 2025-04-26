@@ -2107,3 +2107,11 @@ input[type="text"] {
 .mr-15 {
   margin-right: 15px;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.size.selected {
+  outline: 2px solid #c34000;
+}

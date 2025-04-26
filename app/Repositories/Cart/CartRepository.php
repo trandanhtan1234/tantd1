@@ -3,8 +3,8 @@
 namespace App\Repositories\Cart;
 
 use App\Repositories\Cart\CartRepositoryInterface;
-use Cart;
-use App\Models\models\{Product,Customer,Order,Orderdetail};
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\models\{Product,Customer,Order,Orderdetail,Variants};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -16,18 +16,75 @@ class CartRepository implements CartRepositoryInterface
 
     public function addCart($params)
     {
-        $prd = Product::find($params['product_id']);
+        // $prd = Product::find($params['product_id']);
+
+        // Cart::add([
+        //     'id' => $prd->id,
+        //     'name' => $prd->name,
+        //     'qty' => $params->quantity,
+        //     'price' => getPrice($prd,$params->attr),
+        //     'weight' => 0,
+        //     'options' => ['img' => $prd->img, 'attr' => $params->attr]
+        // ]);
+
+        $size = $params->size;
+        $color = $params->color;
+        $productId = $params->product_id;
+
+        $valueIds = [$size, $color];
+
+        $variant = DB::table('variant')
+            ->join('variant_value', 'variant.id', '=', 'variant_value.variant_id')
+            ->join('products', 'variant.product_id', '=', 'products.id')
+            ->where('variant.product_id', $productId)
+            ->whereIn('variant_value.value_id', $valueIds)
+            ->groupBy('variant.id')
+            ->havingRaw('COUNT(DISTINCT variant_value.value_id) = ?', [count($valueIds)])
+            ->select('*')
+            ->first();
+
+        $attr = DB::table('attributes')
+            ->join('values', 'attributes.id', '=', 'values.attr_id')
+            ->whereIn('values.id', $valueIds)
+            ->select('name','value')
+            ->get()
+            ->pluck('value', 'name')
+            ->toArray();
+
+            // dd($attr);
+        
+        
 
         Cart::add([
-            'id' => $prd->id,
-            'name' => $prd->name,
+            'id' => $variant->variant_id,
+            'name' => $variant->name,
             'qty' => $params->quantity,
-            'price' => getPrice($prd,$params->attr),
+            'price' => $variant->price,
             'weight' => 0,
-            'options' => ['img' => $prd->img, 'attr' => $params->attr]
+            'options' => ['img' => $variant->img, 'attr' => $attr, 'prd_id' => $productId]
         ]);
 
         return true;
+    }
+
+    public function getVariant($params)
+    {
+        $size = $params->input('size');
+        $color = $params->input('color');
+        $productId = $params->input('product_id');
+        
+        $valueIds = [$size, $color];
+
+        $variant = DB::table('variant')
+            ->join('variant_value', 'variant.id', '=', 'variant_value.variant_id')
+            ->where('variant.product_id', $productId)
+            ->whereIn('variant_value.value_id', $valueIds)
+            ->groupBy('variant.id')
+            ->havingRaw('COUNT(DISTINCT variant_value.value_id) = ?', [count($valueIds)])
+            ->select('variant.*')
+            ->first();
+
+        return $variant;
     }
 
     public function getCart()
@@ -92,7 +149,7 @@ class CartRepository implements CartRepositoryInterface
 
             foreach (Cart::content() as $prd) {
                 $orderDetail = new Orderdetail();
-                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
+                $orderDetail->code = Product::where('id', $prd->options->prd_id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -104,12 +161,21 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = Product::where('id', $prd->id)->first();
-                if (($product->quantity - $prd->qty) == 0) {
-                    $product->status = 0;
+                $variant = Variants::find($prd->id);
+                $productId = $variant->product_id;
+                $variant->quantity = $variant->quantity - $prd->qty;
+                $variant->save();
+
+                $totalQty = 0;
+                $quantities = Variants::where('product_id', $productId)->get();
+                foreach ($quantities as $key) {
+                    $totalQty += $key->quantity;
                 }
-                $product->quantity = $product->quantity - $prd->qty;
-                $product->save();
+                if ($totalQty == 0) {
+                    $product = Product::find($productId);
+                    $product->status = 0;
+                    $product->save();
+                }
             }
             Cart::destroy();
             DB::commit();
@@ -225,7 +291,7 @@ class CartRepository implements CartRepositoryInterface
 
             foreach (Cart::content() as $prd) {
                 $orderDetail = new Orderdetail();
-                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
+                $orderDetail->code = Product::where('id', $prd->options->prd_id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -237,12 +303,21 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = Product::where('id', $prd->id)->first();
-                if (($product->quantity - $prd->qty) == 0) {
-                    $product->status = 0;
+                $variant = Variants::find($prd->id);
+                $productId = $variant->product_id;
+                $variant->quantity = $variant->quantity - $prd->qty;
+                $variant->save();
+
+                $totalQty = 0;
+                $quantities = Variants::where('product_id', $productId)->get();
+                foreach ($quantities as $key) {
+                    $totalQty += $key->quantity;
                 }
-                $product->quantity = $product->quantity - $prd->qty;
-                $product->save();
+                if ($totalQty == 0) {
+                    $product = Product::find($productId);
+                    $product->status = 0;
+                    $product->save();
+                }
             }
             Cart::destroy();
             // End Save Data
@@ -337,7 +412,7 @@ class CartRepository implements CartRepositoryInterface
 
             foreach (Cart::content() as $prd) {
                 $orderDetail = new Orderdetail();
-                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
+                $orderDetail->code = Product::where('id', $prd->options->prd_id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -349,12 +424,21 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = Product::where('id', $prd->id)->first();
-                if (($product->quantity - $prd->qty) == 0) {
-                    $product->status = 0;
+                $variant = Variants::find($prd->id);
+                $productId = $variant->product_id;
+                $variant->quantity = $variant->quantity - $prd->qty;
+                $variant->save();
+
+                $totalQty = 0;
+                $quantities = Variants::where('product_id', $productId)->get();
+                foreach ($quantities as $key) {
+                    $totalQty += $key->quantity;
                 }
-                $product->quantity = $product->quantity - $prd->qty;
-                $product->save();
+                if ($totalQty == 0) {
+                    $product = Product::find($productId);
+                    $product->status = 0;
+                    $product->save();
+                }
             }
             Cart::destroy();
             // End Save Data
@@ -524,7 +608,7 @@ class CartRepository implements CartRepositoryInterface
 
             foreach (Cart::content() as $prd) {
                 $orderDetail = new Orderdetail();
-                $orderDetail->code = Product::where('id', $prd->id)->first()->code;
+                $orderDetail->code = Product::where('id', $prd->options->prd_id)->first()->code;
                 $attrs = [];
                 foreach ($prd->options->attr as $attr) {
                     $attrs[] = $attr;
@@ -536,12 +620,21 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
-                $product = Product::where('id', $prd->id)->first();
-                if (($product->quantity - $prd->qty) == 0) {
-                    $product->status = 0;
+                $variant = Variants::find($prd->id);
+                $productId = $variant->product_id;
+                $variant->quantity = $variant->quantity - $prd->qty;
+                $variant->save();
+
+                $totalQty = 0;
+                $quantities = Variants::where('product_id', $productId)->get();
+                foreach ($quantities as $key) {
+                    $totalQty += $key->quantity;
                 }
-                $product->quantity = $product->quantity - $prd->qty;
-                $product->save();
+                if ($totalQty == 0) {
+                    $product = Product::find($productId);
+                    $product->status = 0;
+                    $product->save();
+                }
             }
             Cart::destroy();
             // End Save Data
