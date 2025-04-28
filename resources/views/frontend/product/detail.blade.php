@@ -40,51 +40,42 @@
 									<div class="size-wrap">
 										<p class="size-desc">
 											{{ $values }}:
-											@foreach ($value as $name)
+											@foreach ($value as $val)
 												@if ($values != 'Color')
-													<span class="size">{{ $name }}</span>
+													<span class="size cursor-pointer" data-value="{{ $val['id'] }}">{{ $val['value'] }}</span>
 												@else
-													<span class="size" style="background-color: {{ $name }}">{{ $name }}</span>
+													<span class="size cursor-pointer" data-value="{{ $val['id'] }}" style="background-color: {{ $val['value'] }}">{{ $val['value'] }}</span>
 												@endif
 											@endforeach
 										</p>
 									</div>
 									@endforeach
+									<input type="hidden" name="size" id="selected-size">
+									<input type="hidden" name="color" id="selected-color">
 									<h4>Options</h4>
-									<div class="row">
-										@foreach (valueAttr($product->values) as $values => $value)
-										<div class="col-md-3">
-											<div class="form-group">
-												<label>{{ $values }}:</label>
-												<select class="form-control " name="attr[{{ $values }}]" id="">
-													@foreach ($value as $name)
-														<option value="{{ $name }}"> {{ $name }}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										@endforeach
-									</div>
 									<div class="row row-pb-sm">
 										<div class="col-md-4">
-											<div class="input-group">
+											<div class="input-group inStock hidden">
 												<span class="input-group-btn">
 													<button type="button" class="quantity-left-minus btn" onclick="minusOne()" data-type="minus" data-field="">
 														<i class="icon-minus2"></i>
 													</button>
 												</span>
 												<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-												<input type="hidden" id="max" value="{{ $product->quantity }}">
+												<input type="hidden" id="max" value="">
 												<span class="input-group-btn">
 													<button type="button" class="quantity-right-plus btn" onclick="plusOne()" data-type="plus" data-field="">
 														<i class="icon-plus2"></i>
 													</button>
 												</span>
 											</div>
+											<div class="outOfStock hidden">
+												<span>Out Of Stock</span>
+											</div>
 										</div>
 									</div>
 									<input type="hidden" name="product_id" value="{{ $product->id }}">
-									<p><button class="btn btn-primary btn-addtocart" type="submit">Add To Cart</button></p>
+									<p><button class="btn btn-primary btn-addtocart" type="submit" disabled>Add To Cart</button></p>
 								</div>
 							</form>
 						</div>
@@ -166,5 +157,54 @@
 			$('#quantity').val(curQuantity + 1);
 		}
 	}
+	$('.size-wrap .size').on('click', function() {
+		const clicked = $(this);
+		const groupLabel = clicked.closest('.size-desc').contents().get(0).nodeValue.trim().replace(':', '');
+
+		// Highlight the selected span
+		clicked.siblings().removeClass('selected');
+		clicked.addClass('selected');
+
+		const sizeVal = $('#selected-size');
+		const colorVal = $('#selected-color');
+		const productId = $('input[name="product_id"]').val();
+
+		// Update the hidden input
+		if (groupLabel === 'Size') {
+			$('#selected-size').val(clicked.attr('data-value'));
+		} else if (groupLabel === 'Color') {
+			$('#selected-color').val(clicked.attr('data-value'));
+		}
+
+		if (sizeVal.val() != '' && colorVal.val() != '') {
+			$.ajax({
+				url: '<?= route('getVariant') ?>',
+				type: 'POST',
+				data: {
+					size: sizeVal.val(),
+					color: colorVal.val(),
+					product_id: productId,
+					_token: '{{ csrf_token() }}'
+				},
+				success: function(response) {
+					if (response.variant.quantity > 0) {
+						$('.price span').html(response.variant.price.toLocaleString('vi-VN')+'  VNĐ');
+						$('.btn-addtocart').removeAttr('disabled');
+						$('.inStock').removeClass('hidden');
+						$('.outOfStock').addClass('hidden');
+					} else {
+						$('.price span').html(response.variant.price.toLocaleString('vi-VN')+'  VNĐ');
+						$('.btn-addtocart').attr('disabled', '');
+						$('.inStock').addClass('hidden');
+						$('.outOfStock').removeClass('hidden');
+					}
+					$('#max').val(response.variant.quantity);
+				},
+				error: function(xhr) {
+					alert('Something went wrong');
+				}
+			});
+		}
+	});
 </script>
 @endsection

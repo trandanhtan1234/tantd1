@@ -46,8 +46,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
             $product->featured = $params['featured'];
-            $product->status = ($params['quantity']>0||$params['quantity']!=''?$params['status']:0);
-            $product->quantity = $params['quantity'];
+            $product->status = $params['status'];
             $product->description = $params['description'];
             // img
             if ($params->hasFile('img')) {
@@ -114,8 +113,7 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->slug = Str::slug($params['name'], '-');
             $product->price = $params['price'];
             $product->featured = $params['featured'];
-            $product->status = ($params['quantity']>0||$params['quantity']!=''?$params['status']:0);
-            $product->quantity = $params['quantity'];
+            $product->status = $params['status'];
             $product->description = $params['description'];
             // img
             if ($params->hasFile('img')) {
@@ -383,9 +381,17 @@ class ProductsRepository implements ProductsRepositoryInterface
     {
         try {
             DB::beginTransaction();
+            // price
             foreach ($params['var_price'] as $key => $value) {
                 $variant = Variants::find($key);
                 $variant->price = $value;
+                $variant->save();
+            }
+
+            // quantity
+            foreach ($params['var_qty'] as $key => $value) {
+                $variant = Variants::find($key);
+                $variant->quantity = $value;
                 $variant->save();
             }
             DB::commit();

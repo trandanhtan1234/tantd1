@@ -150,7 +150,10 @@ function valueAttr($values) {
     $array = [];
     foreach ($values as $value) {
         $attr = $value->attribute->name;
-        $array[$attr][] = $value->value;
+        $array[$attr][] = [
+            'id' => $value->id,
+            'value' => $value->value
+        ];
     }
     
     return $array;

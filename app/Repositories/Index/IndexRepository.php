@@ -12,11 +12,11 @@ class IndexRepository implements IndexRepositoryInterface
     {
         $dayN = Carbon::now()->format('d');
         $monthN = Carbon::now()->format('m');
-        $yearN = Carbon::now()->format('y');
+        $yearN = Carbon::now()->format('Y');
 
         $countMonthRevenue = Order::whereMonth('updated_at', $monthN)->whereYear('updated_at', $yearN)->count();
 
-        $monthRevenue = $countMonthRevenue ? Order::whereMonth('updated_at', $monthN)->whereYear('updated_at', $yearN)->sum('total') : 0;
+        $monthRevenue = $countMonthRevenue ? Order::where('status', 1)->whereMonth('updated_at', $monthN)->whereYear('updated_at', $yearN)->sum('total') : 0;
         $dayRevenue = Order::where('status', 1)->whereDay('updated_at', $dayN)->whereMonth('updated_at', $monthN)->whereYear('updated_at', $yearN)->sum('total');
 
         $orders = Order::where('status', 1)->whereMonth('updated_at', $monthN)->whereYear('updated_at', $yearN)->count();

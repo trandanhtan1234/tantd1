@@ -27,6 +27,23 @@ class CartController extends Controller
         }
     }
 
+    public function getVariant(Request $r)
+    {
+        $getVariant = $this->cartRepo->getVariant($r);
+
+        if ($getVariant) {
+            return response()->json([
+                'success' => true,
+                'variant' => $getVariant,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No matching variant found.',
+            ]);
+        }
+    }
+
     public function getCart()
     {
         $data = $this->cartRepo->getCart();
@@ -34,9 +51,11 @@ class CartController extends Controller
         return view('frontend.cart.cart', $data);
     }
 
-    public function updateCart($rowId,$qty)
+    public function updateCart(Request $r)
     {
-        $update = $this->cartRepo->updateCart($rowId,$qty);
+        $update = $this->cartRepo->updateCart($r);
+
+        return $update;
     }
 
     public function removeProduct($id)

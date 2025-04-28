@@ -31,6 +31,7 @@
                             <tr>
                                 <th width='33%'>Variant</th>
                                 <th width='33%'>Price (Nullable)</th>
+                                <th width='33%'>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,11 @@
                                 <td>
                                     <div>
                                         <input type="number" name="var_price[{{ $row->id }}]" class="form-control" placeholder="Variant Price" value="{{ old('var_price', $row->price) }}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <input type="number" name="var_qty[{{ $row->id }}]" class="form-control" placeholder="Variant Price" value="{{ old('var_qty', $row->quantity) }}">
                                     </div>
                                 </td>
                             </tr>

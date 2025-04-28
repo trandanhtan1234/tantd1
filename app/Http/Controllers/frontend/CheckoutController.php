@@ -25,6 +25,7 @@ class CheckoutController extends Controller
     public function postCheckout(CheckoutRequest $r)
     {
         if ($r->payment_method == 0) {
+            // Cash
             $postCheckout = $this->cartRepo->postCheckout($r);
             if ($postCheckout['code'] == 200) {
                 return redirect('/checkout/complete')->with('success', $postCheckout['msg']);
@@ -32,6 +33,7 @@ class CheckoutController extends Controller
                 return redirect()->back()->with('failed', $postCheckout['msg']);
             }
         } elseif ($r->payment_method == 1) {
+            // Momo
             $momoPay = $this->cartRepo->momoPay($r);
 
             if ($momoPay['code'] == 200) {
@@ -40,6 +42,7 @@ class CheckoutController extends Controller
                 return redirect()->back()->with('failed', $momoPay['msg']);
             }
         } elseif ($r->payment_method == 2) {
+            // VNPay
             $vnPay = $this->cartRepo->vnPay($r);
 
             if ($vnPay['code'] == 200) {
@@ -48,6 +51,7 @@ class CheckoutController extends Controller
                 return redirect()->back()->with('failed', $vnPay['msg']);
             }
         } else {
+            // ONEPay
             $onePay = $this->cartRepo->onePay($r);
 
             if ($onePay['code'] == 200) {
@@ -56,5 +60,10 @@ class CheckoutController extends Controller
                 return redirect()->back()->with('failed', $onePay['msg']);
             }
         }
+    }
+
+    public function getComplete()
+    {
+        return view('frontend.checkout.complete');
     }
 }

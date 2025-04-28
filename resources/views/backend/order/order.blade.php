@@ -19,7 +19,17 @@
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
-							<a href="orderinfo.html" class="btn btn-success">Approved Orders</a>
+							@if (session('success'))
+							<div class="alert alert-success">
+								<strong>{{ session('success') }}</strong>
+							</div>
+							@endif
+							@if (session('failed'))
+							<div class="alert alert-danger">
+								<strong>{{ session('success') }}</strong>
+							</div>
+							@endif
+							<a href="{{ url('admin/order/approved') }}" class="btn btn-success">Approved Orders</a>
 							<table class="table table-bordered" style="margin-top:20px;">
 								<thead>
 									<tr class="bg-primary">
@@ -38,7 +48,7 @@
 										<td>{{ $order->customer->phone }}</td>
 										<td>{{ $order->address }}</td>
 										<td>
-											<a href="{{ url('admin/detailorder/'.$order->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Details</a>
+											<a href="{{ url('admin/order/detail/'.$order->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Details</a>
 										</td>
 									</tr>
 									@endforeach

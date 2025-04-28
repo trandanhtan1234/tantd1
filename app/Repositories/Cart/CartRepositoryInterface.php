@@ -5,10 +5,12 @@ namespace App\Repositories\Cart;
 interface CartRepositoryInterface
 {
     public function addCart($params);
+
+    public function getVariant($params);
     
     public function getCart();
 
-    public function updateCart($rowId,$qty);
+    public function updateCart($params);
 
     public function postCheckout($params);
 
