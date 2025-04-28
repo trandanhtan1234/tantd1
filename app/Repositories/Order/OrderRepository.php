@@ -3,7 +3,7 @@
 namespace App\Repositories\Order;
 
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Models\models\{Order,Orderdetail,Product,Customer};
+use App\Models\models\{Order,Orderdetail,Product,Customer,Variants};
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -22,8 +22,12 @@ class OrderRepository implements OrderRepositoryInterface
     public function detailOrder($id)
     {
         $order = Order::find($id);
+        $details = Orderdetail::where('order_id',$id)->get();
 
-        return $order;
+        return [
+            'order' => $order,
+            'details' => $details
+        ];
     }
 
     public function approveOrder($params,$id)
@@ -33,8 +37,14 @@ class OrderRepository implements OrderRepositoryInterface
             if ($params['status'] == 2) {
                 $detailOrder = Orderdetail::where('order_id', $id)->get();
                 foreach ($detailOrder as $prd) {
-                    $product = Product::where('code', $prd['code'])->first();
-                    $product->quantity = $product->quantity + $detailOrder->quantity;
+                    $variant = Variants::find($prd->var_id);
+                    $variant->quantity = $variant->quantity + $prd->quantity;
+                    $productId = $variant->product_id;
+                    $variant->save();
+
+                    // Update product status to In Stock if product is refunded
+                    $product = Product::find($productId);
+                    $product->status = 1;
                     $product->save();
                 }
             }

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PlaceOrder;
 
 class CartRepository implements CartRepositoryInterface
 {
@@ -16,17 +18,6 @@ class CartRepository implements CartRepositoryInterface
 
     public function addCart($params)
     {
-        // $prd = Product::find($params['product_id']);
-
-        // Cart::add([
-        //     'id' => $prd->id,
-        //     'name' => $prd->name,
-        //     'qty' => $params->quantity,
-        //     'price' => getPrice($prd,$params->attr),
-        //     'weight' => 0,
-        //     'options' => ['img' => $prd->img, 'attr' => $params->attr]
-        // ]);
-
         $size = $params->size;
         $color = $params->color;
         $productId = $params->product_id;
@@ -40,7 +31,7 @@ class CartRepository implements CartRepositoryInterface
             ->whereIn('variant_value.value_id', $valueIds)
             ->groupBy('variant.id')
             ->havingRaw('COUNT(DISTINCT variant_value.value_id) = ?', [count($valueIds)])
-            ->select('*')
+            ->select('variant.price as variant_price','*')
             ->first();
 
         $attr = DB::table('attributes')
@@ -51,17 +42,13 @@ class CartRepository implements CartRepositoryInterface
             ->pluck('value', 'name')
             ->toArray();
 
-            // dd($attr);
-        
-        
-
         Cart::add([
             'id' => $variant->variant_id,
             'name' => $variant->name,
             'qty' => $params->quantity,
-            'price' => $variant->price,
+            'price' => $variant->variant_price,
             'weight' => 0,
-            'options' => ['img' => $variant->img, 'attr' => $attr, 'prd_id' => $productId]
+            'options' => ['img' => $variant->img, 'attr' => $attr, 'prd_id' => $productId, 'max' => $variant->quantity]
         ]);
 
         return true;
@@ -96,15 +83,20 @@ class CartRepository implements CartRepositoryInterface
         return $data;
     }
 
-    public function updateCart($rowId,$qty)
+    public function updateCart($params)
     {
         try {
             DB::beginTransaction();
+            $rowId = $params->input('rowId');
+            $qty = $params->input('qty');
             $update = Cart::update($rowId,$qty);
+            $cartTotal = Cart::total();
             DB::commit();
 
             $result = [
                 'code' => 200,
+                'data' => $update,
+                'cartTotal' => $cartTotal,
                 'msg' => 'Update quantity successfully!'
             ];
             return $result;
@@ -158,6 +150,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->price = $prd->price;
                 $orderDetail->quantity = $prd->qty;
                 $orderDetail->img = $prd->options->img;
+                $orderDetail->var_id = $prd->id;
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
@@ -177,6 +170,10 @@ class CartRepository implements CartRepositoryInterface
                     $product->save();
                 }
             }
+
+            $data['cart'] = Cart::content();
+            $data['full'] = $params['fname'];
+            Mail::to($params['email'])->send(new PlaceOrder($data));
             Cart::destroy();
             DB::commit();
 
@@ -240,8 +237,7 @@ class CartRepository implements CartRepositoryInterface
             if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
                 $inputData['vnp_Bill_State'] = $vnp_Bill_State;
             }
-    
-            //var_dump($inputData);
+
             ksort($inputData);
             $query = "";
             $i = 0;
@@ -300,6 +296,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->price = $prd->price;
                 $orderDetail->quantity = $prd->qty;
                 $orderDetail->img = $prd->options->img;
+                $orderDetail->img = $prd->options->img;
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
 
@@ -329,11 +326,6 @@ class CartRepository implements CartRepositoryInterface
             } else {
                 echo json_encode($returnData);
             }
-            // $result = [
-            //     'code' => 200,
-            //     'msg' => 'Checkout completed!'
-            // ];
-            // return $result;
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e->getMessage());
@@ -420,6 +412,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->name = $prd->name.'-'.implode('-',$attrs);
                 $orderDetail->price = $prd->price;
                 $orderDetail->quantity = $prd->qty;
+                $orderDetail->img = $prd->options->img;
                 $orderDetail->img = $prd->options->img;
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
@@ -616,6 +609,7 @@ class CartRepository implements CartRepositoryInterface
                 $orderDetail->name = $prd->name.'-'.implode('-',$attrs);
                 $orderDetail->price = $prd->price;
                 $orderDetail->quantity = $prd->qty;
+                $orderDetail->img = $prd->options->img;
                 $orderDetail->img = $prd->options->img;
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();

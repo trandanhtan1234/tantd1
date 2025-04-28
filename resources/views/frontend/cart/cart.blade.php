@@ -70,12 +70,12 @@
 						</div>
 						<div class="one-eight text-center">
 							<div class="display-tc">
-								<input onchange="updateQty('{{ $prd->rowId }}',this.value)" type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="{{ $prd->qty }}">
+								<input onchange="updateQty('{{ $prd->rowId }}',this)" type="number" id="quantity" name="quantity" class="form-control input-number text-center" max="{{ $prd->options->max }}" value="{{ $prd->qty }}">
 							</div>
 						</div>
 						<div class="one-eight text-center">
 							<div class="display-tc">
-								<span class="price">₫ {{ number_format($prd->price * $prd->qty,0,'','.') }}</span>
+								<span class="prd-total">₫ {{ number_format($prd->price * $prd->qty,0,'','.') }}</span>
 							</div>
 						</div>
 						<div class="one-eight text-center">
@@ -94,19 +94,9 @@
 						<div class="col-md-8">
 						</div>
 						<div class="col-md-3 col-md-push-1 text-center flex">
-							<!-- <div class="total">
-								<div class="grand-total">
-									<form action="{{ route('postOnepay') }}" method="post">
-										@csrf
-										<input type="hidden" name="onepay_method" value="{{ str_replace('.','',$total) }}">
-										<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
-										<button type="submit" class="btn btn-primary">Onepay Method</button>
-									</form>
-								</div>
-							</div> -->
 							<div class="total">
 								<div class="grand-total">
-									<p><span><strong>Total:</strong></span> <span>₫ {{ $total }}</span></p>
+									<p><span><strong>Total:</strong></span> <span class="cart-total">₫ {{ $total }}</span></p>
 									<a href="{{ url('checkout') }}" class="btn btn-primary">Checkout <i class="icon-arrow-right-circle"></i></a>
 								</div>
 							</div>
@@ -130,9 +120,33 @@
 		return confirm('Remove '+name+' from Cart?');
 	}
 
-	function updateQty(rowId,qty) {
-		$.get('/cart/update-cart/'+rowId+'/'+qty, function() {
-			window.location.reload();
+	function updateQty(rowId,elem) {
+		let qty = parseInt(elem.value);
+		const max = parseInt(elem.max);
+		if (qty > max) {
+			alert("Only "+max+" of this product are left.");
+			elem.value = max;
+			return false;
+		}
+		
+		$.ajax({
+			url: '<?= route('updateCart') ?>',
+			type: 'POST',
+			data: {
+				rowId: rowId,
+				qty: qty,
+				_token: '{{ csrf_token() }}'
+			},
+			success: function(response) {
+				const total = parseInt(response.data.price) * parseInt(response.data.qty);
+				$(elem).closest('.product-cart').find('.display-tc .prd-total').html('₫ ' + total.toLocaleString('vi-VN'));
+				$('.cart-total').html('₫ ' + response.cartTotal);
+				
+			},
+			error: function(xhr) {
+				alert('Something went wrong');
+			}
+			
 		});
 	}
 </script>

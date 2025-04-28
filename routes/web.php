@@ -42,7 +42,7 @@ Route::group(['prefix' => 'cart'], function() {
     Route::get('/', [CartController::class, 'getCart']);
     Route::get('/add-cart', [CartController::class, 'addCart'])->name('addCart');
     Route::post('/get-variant', [CartController::class, 'getVariant'])->name('getVariant');
-    Route::get('/update-cart/{rowId}/{qty}', [CartController::class, 'updateCart']);
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart');
     Route::get('/remove/{id}', [CartController::class, 'removeProduct'])->name('removeProduct');
 });
 

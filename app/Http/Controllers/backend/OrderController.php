@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function getDetail($id)
     {
-        $data['order'] = $this->orderRepo->detailOrder($id);
+        $data = $this->orderRepo->detailOrder($id);
 
         return view('backend.order.detailorder', $data);
     }

@@ -51,9 +51,11 @@ class CartController extends Controller
         return view('frontend.cart.cart', $data);
     }
 
-    public function updateCart($rowId,$qty)
+    public function updateCart(Request $r)
     {
-        $update = $this->cartRepo->updateCart($rowId,$qty);
+        $update = $this->cartRepo->updateCart($r);
+
+        return $update;
     }
 
     public function removeProduct($id)

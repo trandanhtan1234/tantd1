@@ -188,10 +188,12 @@
 				},
 				success: function(response) {
 					if (response.variant.quantity > 0) {
+						$('.price span').html(response.variant.price.toLocaleString('vi-VN')+'  VNĐ');
 						$('.btn-addtocart').removeAttr('disabled');
 						$('.inStock').removeClass('hidden');
 						$('.outOfStock').addClass('hidden');
 					} else {
+						$('.price span').html(response.variant.price.toLocaleString('vi-VN')+'  VNĐ');
 						$('.btn-addtocart').attr('disabled', '');
 						$('.inStock').addClass('hidden');
 						$('.outOfStock').removeClass('hidden');

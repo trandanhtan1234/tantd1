@@ -19,7 +19,7 @@
 				<div class="panel-body">
 					<div class="bootstrap-table">
 						<div class="table-responsive">
-							<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Pending Products</a>
+							<a href="{{ url('admin/order') }}" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Pending Products</a>
 							<table class="table table-bordered" style="margin-top:20px;">				
 								<thead>
 									<tr class="bg-primary">
@@ -41,7 +41,7 @@
 											<td>{{ $order->address }}</td>
 											<td>{{ $order->created_at }}</td>
 										</tr>
-									$endforeach
+									@endforeach
 								</tbody>
 							</table>
 							<div align='right'>
