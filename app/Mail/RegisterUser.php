@@ -37,9 +37,15 @@ class RegisterUser extends Mailable
      */
     public function content(): Content
     {
+        $data = $this->data;
         return new Content(
             view: 'backend.user.email.register_user',
-            with: $this->data
+            with: [
+                'full' => $data->full,
+                'level' => $data->level,
+                'email' => $data->email,
+                'address' => $data->address
+            ]
         );
     }
 

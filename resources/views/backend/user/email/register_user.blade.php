@@ -11,7 +11,6 @@
     <p>Here's your information:</p>
     <ul>
         <li>Email: {{ $email }}</li>
-        <li>Password: {{ $password }}</li>
         <li>Full: {{ $full }}</li>
         <li>Address: {{ $address }}</li>
     </ul>

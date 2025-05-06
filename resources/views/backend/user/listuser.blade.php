@@ -103,7 +103,7 @@
 @endsection
 
 @section('user')
-<script src="{{  asset('js/user.js')  }}"></script>
+<script src="{{  asset('/backend/js/user.js')  }}"></script>
 @endsection
 
 @section('active')

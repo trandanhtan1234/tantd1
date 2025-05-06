@@ -43,7 +43,6 @@ class CustomerRegister extends Mailable
             with: [
                 'full' => $this->data['full'],
                 'email' => $this->data['email'],
-                'password' => $this->data['password'],
                 'address' => $this->data['address'],
                 'phone' => $this->data['phone']
             ]
