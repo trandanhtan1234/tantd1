@@ -30,6 +30,7 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function addCustomer($params)
     {
+        dd(312);
         try {
             DB::beginTransaction();
             $customer = new Customer();
