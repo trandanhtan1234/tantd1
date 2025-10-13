@@ -60,7 +60,7 @@
 								<div class="row">
 									<div class="col-md-12 col-md-offset-0">
 										<div class="form-group">
-											<input type="text" class="form-control" id="email" placeholder="Nhập email của bạn">
+											<input type="text" class="form-control" id="your-email" placeholder="Enter your email">
 											<button type="submit" class="btn btn-primary">Subscribe</button>
 										</div>
 									</div>

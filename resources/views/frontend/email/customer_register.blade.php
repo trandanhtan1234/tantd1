@@ -12,7 +12,6 @@
     <ul>
         <li>Full: {{ $full }}</li>
         <li>Email: {{ $email }}</li>
-        <li>Password: {{ $password }}</li>
         <li>Address: {{ $address }}</li>
         <li>Phone: {{ $phone }}</li>
     </ul>
