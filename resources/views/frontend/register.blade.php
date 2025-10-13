@@ -66,7 +66,7 @@
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label for="password">Password <span class="color-red">*</span></label>
-								<input type="text" name="password" id="password" class="form-control" placeholder="Enter Password">
+								<input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
                                 @if ($errors->has('password'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -78,7 +78,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="confirm_password">Confirm Password <span class="color-red">*</span></label>
-                                <input type="text" name="confirm_password" id="confirm_password" class="form-control" placeholder="Enter Confirm Password">
+                                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Enter Confirm Password">
                                 @if ($errors->has('confirm_password'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('confirm_password') }}</strong>
