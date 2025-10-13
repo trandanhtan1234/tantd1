@@ -37,6 +37,7 @@ class ProductsRepository implements ProductsRepositoryInterface
 
     public function addProduct($params)
     {
+        dd(123);
         try {
             DB::beginTransaction();
             // Save Product
