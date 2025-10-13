@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\CustomerRegister;
+use App\Events\CustomerRegistered;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
@@ -41,7 +40,8 @@ class CustomerRepository implements CustomerRepositoryInterface
             $customer->phone = $params['phone'];
             $customer->save();
 
-            Mail::to($params['email'])->send(new CustomerRegister($params));
+            event(new CustomerRegistered($customer));
+
             DB::commit();
 
             $result = [

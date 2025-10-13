@@ -8,9 +8,8 @@ use App\Models\models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Exception;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\RegisterUser;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Events\UserRegistered;
 
 class UsersRepository implements UsersRepositoryInterface
 {
@@ -65,7 +64,8 @@ class UsersRepository implements UsersRepositoryInterface
             $user->level = $params['level'];
             $user->save();
 
-            Mail::to($params['email'])->send(new RegisterUser($params->all()));
+            event(new UserRegistered($user));
+            
             DB::commit();
 
             $result = [
