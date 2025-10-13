@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function getLogin()
     {
-        return view('backend.login.login');
+        return view('backend.login.login-livewire');
     }
 
     public function postLogin(LoginRequest $r)

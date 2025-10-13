@@ -50,6 +50,7 @@ class ProductController extends Controller
         if ($addPrd['code'] == 200) {
             return redirect('admin/product/add-variant/'.$addPrd['prdId'])->with('success', $addPrd['msg']);
         } else {
+            dd($addPrd);
             return redirect('admin/product')->with('failed', $addPrd['msg']);
         }
     }

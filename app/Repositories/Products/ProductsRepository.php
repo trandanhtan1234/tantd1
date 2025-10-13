@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\models\{Product,Attributes,Values,Variants};
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsRepository implements ProductsRepositoryInterface
 {
@@ -50,16 +51,26 @@ class ProductsRepository implements ProductsRepositoryInterface
             $product->description = $params['description'];
             // img
             if ($params->hasFile('img')) {
-                $name = convertCharacters($params['name']);
-                $letters = substr($name,0,2);
-                $folder = str_split($letters);
-                $path = 'base/img/'.$folder[0].'/'.$folder[1];
-                $file = $params['img'];
-                $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
-                $file->move($path,$fileName);
-                $product->img = $path.'/'.$fileName;
+                // $name = convertCharacters($params['name']);
+                // $letters = substr($name,0,2);
+                // $folder = str_split($letters);
+                // $path = 'base/img/'.$folder[0].'/'.$folder[1];
+                // $file = $params['img'];
+                // $fileName = Str::slug($params['name'], '-').'.'.$file->getClientOriginalExtension();
+                // $file->move($path,$fileName);
+                // $product->img = $path.'/'.$fileName;
+                $extension = $params->file('img')->getClientOriginalExtension();
+                $baseFileName = Str::slug($params['name'], '-');
+                $path = 'products/' . $baseFileName . '-' . time() . '.' . $extension;
+                $path = Storage::disk('s3')->putFileAs(
+                    'products',
+                    $params->file('img'),
+                    $baseFileName . '.' . $extension,
+                    'public'
+                );
+                $product->img = Storage::disk('s3')->url($path);
             } else {
-                $product->img = 'no-img.jpg';
+                $product->img = Storage::disk('s3')->url('no-img.jpg');
             }
             $product->category_id = $params['category'];
             $product->save();
