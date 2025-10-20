@@ -119,6 +119,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLogin', 'SessionTimeou
         Route::post('/edit/{id}', [UserController::class, 'postEditUser'])->name('user.editUser');
         Route::get('/delete/{id}', [UserController::class, 'getDeleteUser']);
         Route::get('/export-users', [UserController::class, 'exportUsers']);
+        Route::get('/vue-user', [UserController::class, 'vueUser']);
     });
 
     Route::group(['prefix' => 'customer'], function() {

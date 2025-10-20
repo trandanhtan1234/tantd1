@@ -15,7 +15,7 @@
 	<!--/.row-->
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">List Users</h1>
+			<h1 class="page-header">List Users (Vue)</h1>
 		</div>
 	</div>
 	<!--/.row-->
@@ -68,32 +68,10 @@
 										<th width='18%'>Options</th>
 									</tr>
 								</thead>
-								<tbody>
-									@foreach ($users as $user)
-									<tr>
-										<td>{{ $user->id }}</td>
-										<td>{{ $user->email }}</td>
-										<td>{{ $user->full }}</td>
-										<td>{{ $user->address }}</td>
-										<td>{{ $user->phone }}</td>
-										<td>
-											<span class="{{ $user->level==1?'label label-dange':'label label-warning' }}">
-												{{ $user->level==1?'Manager':'Staff' }}
-											</span>
-										</td>
-										<td>
-											<a href="{{ url('admin/user/edit/'. $user->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-											<a onclick="return delUser('<?= $user->full ?>')" href="{{ url('admin/user/delete/'. $user->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
-										</td>
-									</tr>
-									@endforeach
+								<tbody id="user-list-app">
+									
 								</tbody>
 							</table>
-							@if ($users)
-							<div align='right'>
-								{{ $users->onEachSide(3)->links() }}
-							</div>
-							@endif
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -107,7 +85,10 @@
 @endsection
 
 @section('user')
+<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
 <script src="{{  asset('/backend/js/user.js')  }}"></script>
+<div id="initial-data" data-users='@json($users)'></div>
+<script type="module" src="{{ asset('backend/js/vue-user-app.js') }}"></script>
 @endsection
 
 @section('active')

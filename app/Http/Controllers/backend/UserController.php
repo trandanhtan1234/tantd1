@@ -77,4 +77,11 @@ class UserController extends Controller
         
         return Excel::download(new UsersExport($users), 'users.xlsx');
     }
+
+    public function vueUser()
+    {
+        $data['users'] = $this->userRepo->vueUser();
+        
+        return view('backend.user.vue-user', $data);
+    }
 }

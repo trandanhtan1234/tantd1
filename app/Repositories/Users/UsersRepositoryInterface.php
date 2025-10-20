@@ -15,4 +15,6 @@ interface UsersRepositoryInterface
     public function editUser($id, $params);
 
     public function delUser($id);
+    
+    public function vueUser();
 }

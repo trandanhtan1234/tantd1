@@ -18,18 +18,14 @@ class UsersRepository implements UsersRepositoryInterface
     public function getList($params)
     {
         $filters = $params->only(['full','email']);
-        $filters = array_filter($filters);
-
-        if ($filters != $params->query()) {
-            return redirect()->route('user', $filters);
-        }
+        $queryFilters = array_filter($filters);
 
         $query = Users::query();
-        if (!empty($filters['full'])) {
-            $query->where('full','like','%'.$filters['full'].'%');
+        if (!empty($queryFilters['full'])) {
+            $query->where('full','like','%'.$queryFilters['full'].'%');
         }
-        if (!empty($filters['email'])) {
-            $query->where('email','like','%'.$filters['email'].'%');
+        if (!empty($queryFilters['email'])) {
+            $query->where('email','like','%'.$queryFilters['email'].'%');
         }
         
         return view('backend.user.listuser', [
@@ -138,5 +134,12 @@ class UsersRepository implements UsersRepositoryInterface
 
             return $result;
         }
+    }
+    
+    public function vueUser()
+    {
+        $users = Users::get();
+
+        return $users;
     }
 }
